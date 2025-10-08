@@ -15,7 +15,7 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ? 'carbon_credit_app' : null,
+      package: _isInPackage ? 'thb_mini' : null,
     );
   }
 
@@ -30,7 +30,7 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ? 'carbon_credit_app' : null,
+      package: _isInPackage ? 'thb_mini' : null,
     );
   }
 

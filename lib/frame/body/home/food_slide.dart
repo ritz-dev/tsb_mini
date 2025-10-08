@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
@@ -66,10 +67,10 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Food',
-                  //   widget.title != null
-                  //       ? AppLocalizations.of(context)!.translate(widget.title!)
-                  //       : '',
+                  // 'Food',
+                    widget.title != null
+                        ? AppLocalizations.of(context)!.translate(widget.title!)
+                        : '',
                   style: GoogleFonts.inter(
                     color: const Color(0XFF000000),
                     fontSize: 16,
@@ -86,8 +87,8 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
                     // );
                   },
                   child: Text(
-                    'See more',
-                    // AppLocalizations.of(context)!.translate('see_more'),
+                    // 'See more',
+                    AppLocalizations.of(context)!.translate('see_more'),
                     style: GoogleFonts.inter(
                       color: const Color(0XFF1F258D),
                       fontSize: 14,
@@ -168,10 +169,10 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        cardImages[index]["message"] ?? "",
-                                        // AppLocalizations.of(context)!.translate(
-                                        //   cardImages[index]["message"] ?? "",
-                                        // ),
+                                        // cardImages[index]["message"] ?? "",
+                                        AppLocalizations.of(context)!.translate(
+                                          cardImages[index]["message"] ?? "",
+                                        ),
                                         style: GoogleFonts.inter(
                                           color: const Color(0xFF083F8B),
                                           fontSize: 14,
@@ -197,8 +198,8 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
                                               vertical: 6,
                                             ),
                                             child: Text(
-                                              "${cardImages[index]["point"]} points",
-                                              // "${cardImages[index]["point"]} ${AppLocalizations.of(context)!.translate('points')}",
+                                              // "${cardImages[index]["point"]} points",
+                                              "${cardImages[index]["point"]} ${AppLocalizations.of(context)!.translate('points')}",
                                               style: GoogleFonts.inter(
                                                 color: const Color(0xFF083F8B),
                                                 fontSize: 11,

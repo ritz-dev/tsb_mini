@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
 class QuickActionMenu extends StatelessWidget {
@@ -14,8 +15,8 @@ class QuickActionMenu extends StatelessWidget {
         children: [
           _QuickActionCard(
             icon: AppIcons.ticketPngIcon(size: 20, color: Color(0XFF083F8C)),
-            label: 'My Coupons',
-            // label: AppLocalizations.of(context)!.translate('my_coupon'),
+            // label: 'My Coupons',
+            label: AppLocalizations.of(context)!.translate('my_coupon'),
             onTap: () {
               //My reward page or coupons page
               // Navigator.push(
@@ -26,8 +27,8 @@ class QuickActionMenu extends StatelessWidget {
           ),
           _QuickActionCard(
             icon: AppIcons.tierPngIcon(size: 20, color: Color(0XFF083F8C)),
-            label: 'Tier',
-            // label: AppLocalizations.of(context)!.translate('tier'),
+            // label: 'Tier',
+            label: AppLocalizations.of(context)!.translate('tier'),
             onTap: () {
               //Tire page
               // Navigator.push(
@@ -40,8 +41,8 @@ class QuickActionMenu extends StatelessWidget {
           ),
           _QuickActionCard(
             icon: AppIcons.transferSvgIcon(size: 20, color: Color(0XFF083F8C)),
-            label: 'Transfer',
-            // label: AppLocalizations.of(context)!.translate('transfer'),
+            // label: 'Transfer',
+            label: AppLocalizations.of(context)!.translate('transfer'),
             onTap: () {
               //Tire page
               // Navigator.push(
@@ -52,8 +53,8 @@ class QuickActionMenu extends StatelessWidget {
           ),
           _QuickActionCard(
             icon: AppIcons.logSvgIcon(size: 20, color: Color(0XFF083F8C)),
-            label: 'History',
-            // label: AppLocalizations.of(context)!.translate('history'),
+            // label: 'History',
+            label: AppLocalizations.of(context)!.translate('history'),
             onTap: () {
               //Tire page
               // Navigator.push(

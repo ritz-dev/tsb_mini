@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
+import 'package:tsb_main/screen/pass_main.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/app_bar/reward_sliver_app_bar.dart';
@@ -42,14 +43,14 @@ class _RewardPageState extends State<RewardPage> {
         enableBack: true,
         enableHeart: true,
         onTapBack: () {
-          // Navigator.pushReplacement(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => CarbonPassingPage(
-          //       // localize: localize
-          //       ),
-          //   ),
-          // );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CarbonPassingPage(
+                localize: localize
+                ),
+            ),
+          );
         },
       ),
       body: SafeArea(

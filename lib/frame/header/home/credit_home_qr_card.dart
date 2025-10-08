@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/body/home/qr_home.dart';
 import 'package:tsb_mini/package_mode.dart';
 
@@ -57,10 +58,10 @@ class CreditHomeQrCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Mr. John Doe',
-                            // AppLocalizations.of(
-                            //   context,
-                            // )!.translate('user_name'),
+                            // 'Mr. John Doe',
+                            AppLocalizations.of(
+                              context,
+                            )!.translate('user_name'),
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               color: Colors.white,
@@ -69,10 +70,10 @@ class CreditHomeQrCard extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            'Gold',
-                            // AppLocalizations.of(
-                            //   context,
-                            // )!.translate('user_level'),
+                            // 'Gold',
+                            AppLocalizations.of(
+                              context,
+                            )!.translate('user_level'),
                             style: GoogleFonts.inter(
                               fontSize: 20,
                               color: Colors.white,
@@ -87,10 +88,10 @@ class CreditHomeQrCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            'My Carbon Credit',
-                            // AppLocalizations.of(
-                            //   context,
-                            // )!.translate('my_carbon_credit'),
+                            // 'My Carbon Credit',
+                            AppLocalizations.of(
+                              context,
+                            )!.translate('my_carbon_credit'),
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               color: Colors.white,
@@ -137,10 +138,10 @@ class CreditHomeQrCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Total 14,550 Points',
-                            // AppLocalizations.of(
-                            //   context,
-                            // )!.translate('total_points'),
+                            // 'Total 14,550 Points',
+                            AppLocalizations.of(
+                              context,
+                            )!.translate('total_points'),
                             style: GoogleFonts.inter(
                               fontSize: 14,
                               color: Colors.white,
@@ -149,10 +150,10 @@ class CreditHomeQrCard extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Get 425 points to Diamond"',
-                            // AppLocalizations.of(
-                            //   context,
-                            // )!.translate('points_to_diamond'),
+                            // 'Get 425 points to Diamond"',
+                            AppLocalizations.of(
+                              context,
+                            )!.translate('points_to_diamond'),
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               color: Colors.white70,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/body/home/home_quick_action.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
@@ -147,10 +148,10 @@ class _CategorySelectorState extends State<_CategorySelector> {
                     ),
                     Flexible(
                       child: Text(
-                        'category["name"]',
-                        // AppLocalizations.of(
-                        //   context,
-                        // )!.translate(category["name"] ?? ''),
+                        // 'category["name"]',
+                        AppLocalizations.of(
+                          context,
+                        )!.translate(category["name"] ?? ''),
                         style: GoogleFonts.inter(
                           fontSize: 13,
                           color: isSelected

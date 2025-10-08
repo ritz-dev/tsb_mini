@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/package_mode.dart';
 
 class FamousMerchant extends StatefulWidget {
@@ -35,8 +36,8 @@ class _FamousMerchantState extends State<FamousMerchant> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Famous Merchants',
-                // AppLocalizations.of(context)!.translate('famous_merchants'),
+                // 'Famous Merchants',
+                AppLocalizations.of(context)!.translate('famous_merchants'),
                 style: GoogleFonts.inter(
                   color: const Color(0XFF000000),
                   fontSize: 16,
@@ -53,8 +54,8 @@ class _FamousMerchantState extends State<FamousMerchant> {
                   // );
                 },
                 child: Text(
-                  'See more',
-                  // AppLocalizations.of(context)!.translate('see_more'),
+                  // 'See more',
+                  AppLocalizations.of(context)!.translate('see_more'),
                   style: GoogleFonts.inter(
                     color: const Color(0XFF1F258D),
                     fontSize: 14,
