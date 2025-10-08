@@ -37,6 +37,6 @@ class PackageAssets {
   // Simple toggle for dev vs package usage
   static const bool _isInPackage = bool.fromEnvironment(
     'PACKAGE_MODE',
-    defaultValue: true, // set to false when running sub project standalone
+    defaultValue: false, // set to false when running sub project standalone
   );
 }
