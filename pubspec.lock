@@ -491,6 +491,15 @@ packages:
       url: "https://github.com/ritz-dev/tree_circle_progress.git"
     source: git
     version: "1.0.0"
+  tsb_main:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: staging
+      resolved-ref: "167d9634b6c84bf4b9bfd8e55b88757d9667f388"
+      url: "https://github.com/ritz-dev/tsb_main.git"
+    source: git
+    version: "1.0.0+1"
   typed_data:
     dependency: transitive
     description:

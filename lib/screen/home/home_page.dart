@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/app_bar/reward_sliver_app_bar.dart';
 import 'package:tsb_mini/frame/body/home/famous_merchant.dart';
@@ -8,10 +10,10 @@ import 'package:tsb_mini/frame/header/home/credit_reward_filter_header.dart';
 
 class RewardPage extends StatefulWidget {
   const RewardPage({super.key,
-  //  required this.localize
+   required this.localize
    });
   // #############################
-  // final AppLocalizations localize;
+  final AppLocalizations localize;
 
   @override
   State<RewardPage> createState() => _RewardPageState();
@@ -30,7 +32,7 @@ class _RewardPageState extends State<RewardPage> {
   Widget build(BuildContext context) {
     // USE THE PASSED localize FROM WIDGET
     //###################################
-    // final localize = widget.localize;
+    final localize = widget.localize;
 
     return Scaffold(
       backgroundColor: const Color(0xFF0A4DA2),
@@ -98,13 +100,13 @@ class _RewardPageState extends State<RewardPage> {
           ),
         ),
       ),
-      // bottomNavigationBar: SafeArea(
-      //   child: BottomNavigationFrame(
-      //     selectedIndex: _selectedIndex,
-      //     onItemTapped: _onItemTapped,
-      //     localize: widget.localize,
-      //   ),
-      // ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: widget.localize,
+        ),
+      ),
     );
   }
 }

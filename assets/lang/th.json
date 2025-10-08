@@ -1,0 +1,31 @@
+{
+  "all": "ทั้งหมด",
+  "drink": "เครื่องดื่ม",
+  "food": "อาหาร",
+  "shopping": "ช้อปปิ้ง",
+  "fashion": "แฟชั่น",
+
+  "rewards": "รางวัล",
+  "latest_rewards": "รางวัลล่าสุด",
+  "famous_merchants": "ร้านค้ายอดนิยม",
+  "see_more": "ดูเพิ่มเติม",
+  "user_name": "นายจอห์น โด",
+  "user_level": "ทอง",
+  "my_carbon_credit": "คาร์บอนเครดิตของฉัน",
+  "total_points": "รวม 14,550 คะแนน",
+  "points_to_diamond": "รับอีก 425 คะแนนเพื่อเป็นเพชร",
+  "points_more": "คะแนนเพิ่มเติม",
+  "trees_planted": "ปลูกต้นไม้แล้ว",
+
+  "my_coupon": "คูปองของฉัน",
+  "tier": "ระดับ",
+  "transfer": "โอน",
+  "history": "ประวัติ",
+
+  "points": "คะแนน",
+  "free_bucket": "ฟรีบัคเก็ตจากเรา",
+  "free_drink": "เครื่องดื่มแฮนด์คราฟต์ฟรี",
+  "buy_one_get_one": "ซื้อ 1 แถม 1",
+  "buy_9_get_1": "ซื้อ 9 แก้ว แถม 1 แก้ว",
+  "sixty_percent_off": "ลด 60% ครั้งเดียว"
+}

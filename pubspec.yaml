@@ -27,6 +27,13 @@ dependencies:
       url: https://github.com/ritz-dev/tree_circle_progress.git
       ref: tree_circle_progress
 
+  tsb_main:
+    git:
+      url: https://github.com/ritz-dev/tsb_main.git
+      ref: staging
+
+
+
 
 dev_dependencies:
   flutter_test:
@@ -35,7 +42,6 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter:
-
   uses-material-design: true
   assets:
     - assets/home_images/
@@ -44,4 +50,5 @@ flutter:
     - assets/logo/
     - assets/reward/
     - assets/tier/
+    - assets/lang/
 

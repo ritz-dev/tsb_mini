@@ -1,0 +1,31 @@
+{
+  "all": "All",
+  "drink": "Drink",
+  "food": "Food",
+  "shopping": "Shopping",
+  "fashion": "Fashion",
+
+  "rewards": "Rewards",
+  "latest_rewards": "Latest Rewards",
+  "famous_merchants": "Famous Merchants",
+  "see_more": "See More",
+  "user_name": "Mr. John Doe",
+  "user_level": "Gold",
+  "my_carbon_credit": "My Carbon Credit",
+  "total_points": "Total 14,550 Points",
+  "points_to_diamond": "Get 425 points to Diamond",
+  "points_more": "points more",
+  "trees_planted": "Trees Planted"  ,
+
+  "my_coupon": "My Coupon",
+  "tier": "Tier",
+  "transfer": "Transfer",
+  "history": "History",
+
+  "points": "Points",
+  "free_bucket": "Free Bucket On Us",
+  "free_drink": "Free Handcrafted Drink",
+  "buy_one_get_one": "Buy One Get One Free",
+  "buy_9_get_1": "Buy 9 Cups, Get 1 Free",
+  "sixty_percent_off": "60% Off One Time"
+}   
