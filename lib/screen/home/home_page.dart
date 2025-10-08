@@ -38,8 +38,8 @@ class _RewardPageState extends State<RewardPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF0A4DA2),
       appBar: CreditHomeAppBar(
-        // title: localize.translate('rewards'),
-        title: 'Rewards',
+        title: localize.translate('rewards'),
+        // title: 'Rewards',
         enableBack: true,
         enableHeart: true,
         onTapBack: () {
@@ -82,15 +82,12 @@ class _RewardPageState extends State<RewardPage> {
                       children: [
                         const SizedBox(height: 12),
                         LatestRewardCard(
-                          title: 'Latest Rewards',
-                          // title: localize.translate('latest_rewards'),
+                          title: localize.translate('latest_rewards'),
                         ),
                         const FamousMerchant(),
                         const SizedBox(height: 16),
                         FoodSlideCard(
-                          title: 'Food',
-                          // title: localize.translate('food')),
-                        ),
+                          title: localize.translate('food')),
                         const SizedBox(height: 24),
                       ],
                     ),
