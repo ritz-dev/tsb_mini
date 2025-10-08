@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tsb_mini/screen/home/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,17 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter Demo Home Page'),
-        ),
-        body: const Center(
-          child: Text('Hello, world!'),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: RewardPage(),
     );
   }
 }
