@@ -25,13 +25,14 @@ pipeline {
                     // Fetch all branches and tags
                     checkout([
                         $class: 'GitSCM',
-                        branches: [[name: '**']],
-                        doGenerateSubmoduleConfigurations: false,
-                        extensions: [[$class: 'CloneOption', noTags: false, shallow: false]],
+                        branches: [[name: "refs/tags/*"]], // Important for tag builds
                         userRemoteConfigs: [[
                             url: 'https://github.com/ritz-dev/tsb_mini.git',
-                            credentialsId: "${GIT_CREDENTIALS}"
-                        ]]
+                            credentialsId: 'github-credentials'
+                        ]],
+                        extensions: [
+                            [$class: 'CloneOption', noTags: false, shallow: false]
+                        ]
                     ])
 
                     // Ensure pipeline is triggered by a tag
