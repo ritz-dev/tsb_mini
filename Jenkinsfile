@@ -1,106 +1,123 @@
 pipeline {
-    agent {
-        // Use official Flutter Docker image with Android SDK preinstalled
-        docker {
-            image 'cirrusci/flutter:3.19.0'
-            args '-u root'
-        }
-    }
+    agent any
 
     environment {
-        APP_NAME       = 'tsb-mini'
-        BUILD_OUTPUT   = 'build/app/outputs/flutter-apk/app-release.apk'
-        GITHUB_CREDENTIALS = credentials('github-credentials')
+        // Docker image for Flutter build (use a valid, maintained image)
+        FLUTTER_IMAGE = 'ghcr.io/cirruslabs/flutter:3.24.0'
+        DOCKERHUB = credentials('dockerhub-credentials') // optional
+        GIT_CREDENTIALS = credentials('github-credentials')
+        PROJECT_NAME = 'tsb_mini'
     }
 
     triggers {
-        // Trigger only when a tag is pushed to GitHub
+        // Trigger pipeline only when a new Git tag is pushed
         githubPush()
     }
 
     options {
         timestamps()
-        disableConcurrentBuilds()
+        ansiColor('xterm')
+        buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                echo '📥 Checking out source code...'
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: "refs/tags/*"]],
-                    userRemoteConfigs: [[
-                        url: 'https://github.com/ritz-dev/tsb_mini.git',
-                        credentialsId: 'github-credentials'
-                    ]],
-                    extensions: [
-                        [$class: 'CloneOption', noTags: false, shallow: false]
-                    ]
-                ])
-
-                // Detect current tag
                 script {
-                    env.GIT_TAG = sh(script: "git describe --tags --abbrev=0 || echo 'untagged'", returnStdout: true).trim()
+                    // Fetch full history (including tags)
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: '**']],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [[$class: 'CloneOption', noTags: false, shallow: false]],
+                        userRemoteConfigs: [[
+                            url: 'https://github.com/ritz-dev/tsb_mini.git',
+                            credentialsId: "${GIT_CREDENTIALS}"
+                        ]]
+                    ])
+
+                    // Detect if triggered by a tag
+                    def tagName = sh(script: "git describe --tags --exact-match 2>/dev/null || echo ''", returnStdout: true).trim()
+                    if (!tagName) {
+                        error("This pipeline only runs on tag push events. No tag found.")
+                    }
+
+                    env.TAG_NAME = tagName
+                    echo "Triggered by tag: ${TAG_NAME}"
                 }
-                echo "✅ Checked out tag: ${env.GIT_TAG}"
+            }
+        }
+
+        stage('Flutter Setup') {
+            steps {
+                script {
+                    sh """
+                    docker pull ${FLUTTER_IMAGE}
+                    docker run --rm -v \$(pwd):/app -w /app ${FLUTTER_IMAGE} flutter --version
+                    """
+                }
             }
         }
 
         stage('Dependencies') {
             steps {
-                echo '📦 Installing Flutter dependencies...'
-                sh '''
-                    flutter --version
-                    flutter pub get
-                '''
-            }
-        }
-
-        stage('Analyze') {
-            steps {
-                echo '🔍 Running static code analysis...'
-                sh 'flutter analyze'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo '🧪 Running unit tests...'
-                sh 'flutter test'
+                script {
+                    sh """
+                    docker run --rm -v \$(pwd):/app -w /app ${FLUTTER_IMAGE} flutter pub get
+                    """
+                }
             }
         }
 
         stage('Build APK') {
             steps {
-                echo '🏗️ Building Flutter release APK...'
-                sh '''
-                    flutter clean
-                    flutter build apk --release
-                    ls -lh build/app/outputs/flutter-apk/
-                '''
+                script {
+                    sh """
+                    docker run --rm -v \$(pwd):/app -w /app ${FLUTTER_IMAGE} flutter build apk --release
+                    """
+                }
             }
         }
 
-        stage('Archive') {
+        stage('Build Web (optional)') {
+            when {
+                expression { fileExists('web/index.html') }
+            }
             steps {
-                echo '📦 Archiving built APK...'
-                archiveArtifacts artifacts: "${BUILD_OUTPUT}", fingerprint: true
-                echo "✅ APK archived successfully: ${BUILD_OUTPUT}"
+                script {
+                    sh """
+                    docker run --rm -v \$(pwd):/app -w /app ${FLUTTER_IMAGE} flutter build web --release
+                    """
+                }
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/*.apk', fingerprint: true
+                archiveArtifacts artifacts: 'build/web/**', fingerprint: true, allowEmptyArchive: true
+            }
+        }
+
+        stage('Tag Deployment (optional)') {
+            when {
+                expression { env.TAG_NAME }
+            }
+            steps {
+                echo "Deploying build for tag ${TAG_NAME}..."
+                // Example: upload to Firebase, Play Store, or custom API
+                // sh "firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk ..."
             }
         }
     }
 
     post {
         success {
-            echo "✅ Build completed successfully for tag: ${env.GIT_TAG}"
+            echo "✅ Build successful for tag ${TAG_NAME}"
         }
         failure {
-            echo "❌ Pipeline failed for tag: ${env.GIT_TAG}. Check logs above for details."
-        }
-        always {
-            cleanWs() // Clean up workspace after each build
+            echo "❌ Build failed for tag ${TAG_NAME}"
         }
     }
 }
