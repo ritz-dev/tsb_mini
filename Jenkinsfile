@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        FLUTTER_IMAGE = 'ghcr.io/cirruslabs/flutter:3.24.0'
+        FLUTTER_IMAGE = 'ghcr.io/cirruslabs/flutter:3.37.0'
         GIT_CREDENTIALS = credentials('github-credentials')
         PROJECT_NAME = 'tsb_mini'
     }
