@@ -3,60 +3,74 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'akayti/finance'
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+        DOCKERHUB = credentials('dockerhub-credentials')
         GITHUB_CREDENTIALS = credentials('github-credentials')
-        KUBE_CONFIG = 'kubeconfig'
+    }
+
+    triggers {
+        // Trigger only on Git tag push
+        githubPush()
     }
 
     stages {
-        stage ('Checkout') {
+
+        stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/ritz-dev/finance.git',
-                    credentialsId: 'github-credentials'
+                // Checkout all tags and branches
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "refs/tags/*"]], // Important for tag builds
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/ritz-dev/tsb_mini.git',
+                        credentialsId: 'github-credentials'
+                    ]],
+                    extensions: [
+                        [$class: 'CloneOption', noTags: false, shallow: false]
+                    ]
+                ])
             }
         }
 
-        stage ('Build Docker Image') {
+        stage('Dependencies') {
             steps {
-                script {
-                    sh 'docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
-                }
+                sh 'flutter pub get'
             }
         }
 
-        stage ('Push To Docker Hub') {
+        stage('Analyze') {
             steps {
-                script {
-                    sh """
-                        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                        docker push $DOCKER_IMAGE:$BUILD_NUMBER
-                    """
-                }
+                sh 'flutter analyze'
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Test') {
             steps {
-                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
-                   script {
-                        sh """
-                            export KUBECONFIG=$KUBECONFIG_FILE
-                            kubectl set image deployment/finance-deployment finance-container=$DOCKER_IMAGE:$BUILD_NUMBER -n sms-app
-                            kubectl rollout status deployment/finance-deployment -n sms-app
-                        """
-                   }
-                }
+                sh 'flutter test'
+            }
+        }
+
+        stage('Build APK') {
+            steps {
+                sh 'flutter build apk --release'
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/app-release.apk'
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo "✅ Deployment from tag ${env.GIT_TAG} completed successfully!"
         }
         failure {
-            echo 'Pipeline failed. Please check the logs.'
+            echo "❌ Pipeline failed for tag ${env.GIT_TAG}. Check logs."
         }
     }
 }
+
+
+
