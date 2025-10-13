@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
+import 'package:tsb_mini/screen/history/history_page.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
 class QuickActionMenu extends StatelessWidget {
@@ -56,11 +57,11 @@ class QuickActionMenu extends StatelessWidget {
             // label: 'History',
             label: AppLocalizations.of(context)!.translate('history'),
             onTap: () {
-              //Tire page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => CarbonHistoryPage()),
-              // );
+              //History Page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CarbonHistoryPage()),
+              );
             },
           ),
         ],

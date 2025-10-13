@@ -12,8 +12,8 @@ class FrostedHeartButton extends StatelessWidget {
       // onTap: onNavigate ?? () => Navigator.of(context).pop(),
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        width: 40,
-        height: 40,
+        width: 45,
+        height: 45,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(
             0.15,
@@ -34,7 +34,7 @@ class FrostedHeartButton extends StatelessWidget {
         ),
         child: IconButton(
           icon: AppIcons.heartSvgIcon(
-            size: 16,
+            size: 18,
             color: Color.fromARGB(255, 240, 240, 240),
           ),
           onPressed: () {

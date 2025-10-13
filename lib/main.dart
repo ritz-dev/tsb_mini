@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<LanguageBloc, LanguageState>(
       builder: (context, state) {
         return MaterialApp(
-          debugShowCheckedModeBanner: true,
+          debugShowCheckedModeBanner: false,
           title: 'Carbon Credit App V2',
           locale: Locale(state.locale),
           supportedLocales: const [Locale('en'), Locale('th')],
