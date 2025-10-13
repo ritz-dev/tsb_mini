@@ -98,13 +98,13 @@
             ),
           ),
         ),
-        // bottomNavigationBar: SafeArea(
-        //   child: BottomNavigationFrame(
-        //     selectedIndex: _selectedIndex,
-        //     onItemTapped: _onItemTapped,
-        //     localize: widget.localize,
-        //   ),
-        // ),
+        bottomNavigationBar: SafeArea(
+          child: BottomNavigationFrame(
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+            localize: widget.localize,
+          ),
+        ),
       );
     }
   }

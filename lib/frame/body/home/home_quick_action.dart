@@ -103,12 +103,12 @@ class _QuickActionCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
-                blurRadius: 3,
+                blurRadius: 1,
                 offset: const Offset(1, 1),
               ),
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
-                blurRadius: 3,
+                blurRadius: 1,
                 offset: const Offset(-2, -2),
                 spreadRadius: 0,
               ),
