@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
+import 'package:tsb_mini/screen/coupon/my_rewards.dart';
 import 'package:tsb_mini/screen/history/history_page.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
@@ -20,10 +21,10 @@ class QuickActionMenu extends StatelessWidget {
             label: AppLocalizations.of(context)!.translate('my_coupon'),
             onTap: () {
               //My reward page or coupons page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) =>  MyRewardPage()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  MyRewardPage()),
+              );
             },
           ),
           _QuickActionCard(

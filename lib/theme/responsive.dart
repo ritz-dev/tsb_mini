@@ -10,9 +10,7 @@ class Responsive {
 
   Responsive(this.context) {
     // Use MediaQuery with fixed text scale factor to ensure consistency
-    _mediaQuery = MediaQuery.of(
-      context,
-    ).copyWith(textScaler: TextScaler.linear(1.0));
+    _mediaQuery = MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0));
     _screenSize = _mediaQuery.size;
     _width = _screenSize.width;
     _height = _screenSize.height;

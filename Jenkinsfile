@@ -1,62 +1,106 @@
 pipeline {
-    agent any
+    agent {
+        // Use official Flutter Docker image with Android SDK preinstalled
+        docker {
+            image 'cirrusci/flutter:3.19.0'
+            args '-u root'
+        }
+    }
 
     environment {
-        DOCKER_IMAGE = 'akayti/finance'
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+        APP_NAME       = 'tsb-mini'
+        BUILD_OUTPUT   = 'build/app/outputs/flutter-apk/app-release.apk'
         GITHUB_CREDENTIALS = credentials('github-credentials')
-        KUBE_CONFIG = 'kubeconfig'
+    }
+
+    triggers {
+        // Trigger only when a tag is pushed to GitHub
+        githubPush()
+    }
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
     }
 
     stages {
-        stage ('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/ritz-dev/finance.git',
-                    credentialsId: 'github-credentials'
-            }
-        }
 
-        stage ('Build Docker Image') {
+        stage('Checkout') {
             steps {
+                echo '📥 Checking out source code...'
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "refs/tags/*"]],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/ritz-dev/tsb_mini.git',
+                        credentialsId: 'github-credentials'
+                    ]],
+                    extensions: [
+                        [$class: 'CloneOption', noTags: false, shallow: false]
+                    ]
+                ])
+
+                // Detect current tag
                 script {
-                    sh 'docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
+                    env.GIT_TAG = sh(script: "git describe --tags --abbrev=0 || echo 'untagged'", returnStdout: true).trim()
                 }
+                echo "✅ Checked out tag: ${env.GIT_TAG}"
             }
         }
 
-        stage ('Push To Docker Hub') {
+        stage('Dependencies') {
             steps {
-                script {
-                    sh """
-                        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                        docker push $DOCKER_IMAGE:$BUILD_NUMBER
-                    """
-                }
+                echo '📦 Installing Flutter dependencies...'
+                sh '''
+                    flutter --version
+                    flutter pub get
+                '''
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Analyze') {
             steps {
-                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
-                   script {
-                        sh """
-                            export KUBECONFIG=$KUBECONFIG_FILE
-                            kubectl set image deployment/finance-deployment finance-container=$DOCKER_IMAGE:$BUILD_NUMBER -n sms-app
-                            kubectl rollout status deployment/finance-deployment -n sms-app
-                        """
-                   }
-                }
+                echo '🔍 Running static code analysis...'
+                sh 'flutter analyze'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo '🧪 Running unit tests...'
+                sh 'flutter test'
+            }
+        }
+
+        stage('Build APK') {
+            steps {
+                echo '🏗️ Building Flutter release APK...'
+                sh '''
+                    flutter clean
+                    flutter build apk --release
+                    ls -lh build/app/outputs/flutter-apk/
+                '''
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                echo '📦 Archiving built APK...'
+                archiveArtifacts artifacts: "${BUILD_OUTPUT}", fingerprint: true
+                echo "✅ APK archived successfully: ${BUILD_OUTPUT}"
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo "✅ Build completed successfully for tag: ${env.GIT_TAG}"
         }
         failure {
-            echo 'Pipeline failed. Please check the logs.'
+            echo "❌ Pipeline failed for tag: ${env.GIT_TAG}. Check logs above for details."
+        }
+        always {
+            cleanWs() // Clean up workspace after each build
         }
     }
 }

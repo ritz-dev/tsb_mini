@@ -4,9 +4,11 @@ import 'package:tsb_mini/frame/button/back_button.dart';
 import 'package:tsb_mini/frame/button/filter_btn_button.dart';
 import 'package:tsb_mini/frame/button/filter_button.dart';
 import 'package:tsb_mini/frame/button/heart_button.dart';
+import 'package:tsb_mini/frame/button/qr_scan_button.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
-class CreditHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CreditHomeAppBar extends StatelessWidget
+  implements PreferredSizeWidget {
   final String title;
 
   // Button actions
@@ -53,7 +55,7 @@ class CreditHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ], // Light blue to dark blue
           begin: Alignment.topLeft,
           end: Alignment.topRight,
-        ), // Deep blue
+        ) // Deep blue
       ),
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
@@ -62,9 +64,7 @@ class CreditHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             // Back button (left side)
             if (enableBack)
-              FrostedBackButton(
-                onBack: onTapBack,
-              ), // placeholder to keep spacing
+              FrostedBackButton(onBack: onTapBack), // placeholder to keep spacing
             // Title (centered)
             Expanded(
               child: Text(
@@ -83,13 +83,12 @@ class CreditHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               FrostedHeartButton(onNavigate: onTapHeart)
             else if (enableFilter)
               FilterButton(onFilter: onTapFilter) // placeholder for symmetry
-            // else if (enableScan)
-              // ScanButton(onScan: onTapScan)
+            else if (enableScan)
+              ScanButton(onScan: onTapScan)
             else if (enableFilterPoint)
               FrostedFilterButton(onFilterPoint: onTapFilterPoint)
             else
               const SizedBox(width: 40),
-            // placeholder for symmetry
           ],
         ),
       ),
