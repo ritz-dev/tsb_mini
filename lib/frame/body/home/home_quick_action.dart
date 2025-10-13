@@ -96,22 +96,16 @@ class _QuickActionCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: Color.fromARGB(130, 207, 207, 207),
-              width: 1,
-            ),
+            // border: Border.all(
+            //   color: Color.fromARGB(130, 236, 236, 236),
+            //   width: 1,
+            // ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 1,
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 2,
                 offset: const Offset(1, 1),
-              ),
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 1,
-                offset: const Offset(-2, -2),
-                spreadRadius: 0,
-              ),
+              ),    
             ],
           ),
           child: Column(

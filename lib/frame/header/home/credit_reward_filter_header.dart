@@ -130,11 +130,11 @@ class _CategorySelectorState extends State<_CategorySelector> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
-                          begin: Alignment.topLeft,
+                          begin: Alignment.centerLeft,
                           end: Alignment.topRight,
                           colors: [
                             AppColors.filterButtonBackground,
-                            const Color.fromARGB(255, 53, 115, 202),
+                            const Color.fromARGB(255, 64, 135, 234),
                           ],
                         ),
                       ),
