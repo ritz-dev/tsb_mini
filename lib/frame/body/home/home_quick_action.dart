@@ -4,6 +4,7 @@ import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/screen/coupon/my_rewards.dart';
 import 'package:tsb_mini/screen/history/history_page.dart';
 import 'package:tsb_mini/screen/tier/credit_tier.dart';
+import 'package:tsb_mini/screen/transfer/credit_transfer.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
 class QuickActionMenu extends StatelessWidget {
@@ -47,11 +48,11 @@ class QuickActionMenu extends StatelessWidget {
             // label: 'Transfer',
             label: AppLocalizations.of(context)!.translate('transfer'),
             onTap: () {
-              //Tire page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => CreditTransferPage()),
-              // );
+              //Transfer page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreditTransferPage()),
+              );
             },
           ),
           _QuickActionCard(
