@@ -1,17 +1,18 @@
-import 'package:tsb_mini/theme/icon_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:tsb_mini/screen/favourite/favourite.dart';
+import 'package:tsb_mini/theme/icon_theme.dart';
 
 class FrostedHeartButton extends StatelessWidget {
   final VoidCallback? onNavigate;
 
-  const FrostedHeartButton({super.key, this.onNavigate});
+  const FrostedHeartButton ({super.key, this.onNavigate});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       // onTap: onNavigate ?? () => Navigator.of(context).pop(),
       borderRadius: BorderRadius.circular(30),
-      child: Container(
+      child: Container( 
         width: 40,
         height: 40,
         decoration: BoxDecoration(
@@ -38,14 +39,15 @@ class FrostedHeartButton extends StatelessWidget {
             color: Color.fromARGB(255, 240, 240, 240),
           ),
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => Favourite()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Favourite()),
+            );
           },
           padding: EdgeInsets.zero, // removes default padding
           constraints: const BoxConstraints(), // removes min size
         ),
+
       ),
     );
   }
