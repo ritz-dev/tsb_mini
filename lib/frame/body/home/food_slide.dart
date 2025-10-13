@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/package_mode.dart';
+import 'package:tsb_mini/screen/merchant/reward_merchant.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class FoodSlideCard extends StatefulWidget {
@@ -79,12 +80,12 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
                 ),
                 InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const RewardMarchant(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RewardMarchant(),
+                      ),
+                    );
                   },
                   child: Text(
                     // 'See more',
