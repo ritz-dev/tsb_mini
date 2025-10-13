@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/screen/coupon/my_rewards.dart';
 import 'package:tsb_mini/screen/history/history_page.dart';
+import 'package:tsb_mini/screen/tier/credit_tier.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
 class QuickActionMenu extends StatelessWidget {
@@ -33,12 +34,12 @@ class QuickActionMenu extends StatelessWidget {
             label: AppLocalizations.of(context)!.translate('tier'),
             onTap: () {
               //Tire page
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => CarbonTierStateCard(userPoints: 6000),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CarbonTierStateCard(userPoints: 6000),
+                ),
+              );
             },
           ),
           _QuickActionCard(
