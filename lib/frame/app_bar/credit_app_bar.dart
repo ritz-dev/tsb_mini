@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/button/back_button.dart';
 import 'package:tsb_mini/frame/button/filter_btn_button.dart';
-import 'package:tsb_mini/frame/button/filter_button.dart';
+import 'package:tsb_mini/frame/button/frosted_filter_button.dart';
 import 'package:tsb_mini/frame/button/heart_button.dart';
 import 'package:tsb_mini/frame/button/qr_scan_button.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
