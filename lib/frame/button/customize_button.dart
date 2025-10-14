@@ -1,10 +1,11 @@
-import 'package:tsb_mini/theme/icon_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:tsb_mini/theme/color_theme.dart';
+import 'package:tsb_mini/theme/icon_theme.dart';
 
-class FrostedBackButton extends StatelessWidget {
+class FrostedBackButtonBlack extends StatelessWidget {
   final VoidCallback? onBack;
 
-  const FrostedBackButton({super.key, this.onBack});
+  const FrostedBackButtonBlack({super.key, this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +17,26 @@ class FrostedBackButton extends StatelessWidget {
         height: 45,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(
-            0.15,
+            0.25,
           ), // Semi-transparent for glass effect
           shape: BoxShape.circle,
-          // border: Border.all(
-          //   color: Colors.white.withOpacity(0.2), // Light border for depth
-          //   width: 1.5,
-          // ),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.2), // Light border for depth
+            width: 1.5,
+          ),
           boxShadow: [
             BoxShadow(
-              color: Color(0XFF4069A2).withOpacity(0.01),
+              color: Color(0XFF4069A2).withOpacity(0.05),
               offset: const Offset(2, 4),
-              blurRadius: 2,
+              blurRadius: 8,
             ),
           ],
+          backgroundBlendMode: BlendMode.overlay,
         ),
         child: Center(
           child: AppIcons.backButtonIcon(
-            color: Color.fromARGB(255, 240, 240, 240),
+            color: AppColors
+                .iconBottomNav, // White icon for visibility on dark backgrounds
             size: 24,
           ),
         ),
