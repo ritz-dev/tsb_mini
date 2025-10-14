@@ -79,50 +79,6 @@ class _CreditListState extends State<CreditList> {
       'point': 124,
       'date': '5 Aug, 2025',
     },
-    {
-      'icon': AppIcons.exchangeSvgIcon(
-        color: AppColors.listIconColor,
-        size: 25,
-      ),
-      'title': 'Reward Exchange',
-      'from_name': 'Drink',
-      'status': 'decrease',
-      'point': 124,
-      'date': '5 Aug, 2025',
-    },
-    {
-      'icon': AppIcons.exchangeSvgIcon(
-        color: AppColors.listIconColor,
-        size: 25,
-      ),
-      'title': 'Reward Exchange',
-      'from_name': 'Drink',
-      'status': 'decrease',
-      'point': 124,
-      'date': '5 Aug, 2025',
-    },
-    {
-      'icon': AppIcons.exchangeSvgIcon(
-        color: AppColors.listIconColor,
-        size: 25,
-      ),
-      'title': 'Reward Exchange',
-      'from_name': 'Drink',
-      'status': 'decrease',
-      'point': 124,
-      'date': '5 Aug, 2025',
-    },
-    {
-      'icon': AppIcons.exchangeSvgIcon(
-        color: AppColors.listIconColor,
-        size: 25,
-      ),
-      'title': 'Reward Exchange',
-      'from_name': 'Drink',
-      'status': 'decrease',
-      'point': 124,
-      'date': '5 Aug, 2025',
-    },
   ];
 
   late List<Map<String, dynamic>> filteredItems;
