@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:heroicons/heroicons.dart';
 import 'package:tsb_mini/frame/button/custom_elevated_button.dart';
 import 'package:tsb_mini/frame/form/credit_history/calendar.dart';
 import 'package:tsb_mini/frame/form/credit_history/checkbox_circle.dart';
@@ -19,6 +20,18 @@ class FilterButton extends StatefulWidget {
 class _FrostedFilterButtonState extends State<FilterButton> {
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
+
+  // add search controller and checkbox key
+  final TextEditingController _searchController = TextEditingController();
+  final GlobalKey<CheckboxCircleState> _checkboxKey = GlobalKey<CheckboxCircleState>();
+
+  @override
+  void dispose() {
+    _startDateController.dispose();
+    _endDateController.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,16 +114,62 @@ class _FrostedFilterButtonState extends State<FilterButton> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(height: 30),
+              // Search Field
+              const SizedBox(height: 20),
               _searchTextField(),
               const SizedBox(height: 20),
-              const CheckboxCircle(),
-              SizedBox(height: 20),
+              // Type Selection
+              Text(
+                'Transcation Type',
+                style: GoogleFonts.inter(
+                  fontSize: 14,
+                  color: AppColors.textBlack,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 14),
+              // pass the GlobalKey so we can clear selection from parent
+              CheckboxCircle(key: _checkboxKey),
+              
+              //Date Selection
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'From',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          color: AppColors.textBlack,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12), // small gap between labels
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'To',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          color: AppColors.textBlack,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
               Calendar(
                 startDateController: _startDateController,
                 endDateController: _endDateController,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 22),
               _actionButtons(),
               const SizedBox(height: 20),
             ],
@@ -127,26 +186,37 @@ class _FrostedFilterButtonState extends State<FilterButton> {
         borderRadius: BorderRadius.circular(43),
       ),
       child: TextField(
+        controller: _searchController, // <- wired controller
         decoration: InputDecoration(
-          labelText: "Search . . .",
+          labelText: "Search...",
+          labelStyle: GoogleFonts.inter(
+            fontSize: 14,
+            color: AppColors.textGrey,
+            fontWeight: FontWeight.w600,
+          ),
           contentPadding: const EdgeInsets.symmetric(
-            vertical: 16,
+            vertical: 10,
             horizontal: 22,
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(43),
             borderSide: BorderSide(
-              color: const Color(0xFF83848B).withOpacity(0.2),
+              color: const Color(0xFF959595).withOpacity(0.5),
               width: 1.5,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(43),
             borderSide: BorderSide(
-              color: const Color(0xFF83848B).withOpacity(0.2),
+              color: const Color(0xFF959595).withOpacity(0.5),
               width: 2,
             ),
           ),
+        ),
+        style: GoogleFonts.inter(
+          fontSize: 14,
+          color: AppColors.textBlack,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );
@@ -178,13 +248,18 @@ class _FrostedFilterButtonState extends State<FilterButton> {
           },
         ),
 
-        SizedBox(height: 19),
+        SizedBox(height: 10),
 
         CustomElevatedButton(
           buttonColor: AppColors.clearTextBtn,
           textColor: AppColors.clearBtn,
           buttonTitle: 'Clear',
-          onPressed: () => print('Button Clear pressed'),
+          onPressed: () {
+            // clear search text
+            _searchController.clear();
+            // clear checkbox selection if available
+            _checkboxKey.currentState?.clearSelection();
+          },
         ),
       ],
     );

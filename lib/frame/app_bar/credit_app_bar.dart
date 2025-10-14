@@ -67,7 +67,7 @@ class CreditHomeAppBar extends StatelessWidget
                 title,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: AppColors.textWhite,
                 ),
@@ -78,6 +78,7 @@ class CreditHomeAppBar extends StatelessWidget
             if (enableHeart)
               FrostedHeartButton(onNavigate: onTapHeart)
             else if (enableFilter)
+              // for history page
               FilterButton(onFilter: onTapFilter) // placeholder for symmetry
             else if (enableScan)
               ScanButton(onScan: onTapScan)

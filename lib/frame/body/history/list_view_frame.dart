@@ -29,25 +29,25 @@ class ListViewFrame extends StatelessWidget {
     }
     return ListView.builder(
       itemCount: items.length,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(20,10,20,10),
       itemBuilder: (context, index) {
         return Container(
-          margin: const EdgeInsets.only(bottom: 18),
+          margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
             color: Color(0xFFFFFFFF),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: Color.fromRGBO(231, 230, 230, 1),
-              width: 1,
+              width: 0.5,
             ),
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: Color(0xFF000000).withOpacity(0.07), // shadow color
-            //     blurRadius: 20, // how soft/blurred the shadow is
-            //     spreadRadius: 2, // how wide it spreads
-            //     offset: Offset(0, 6), // x=0 → centered, y=6 → shadow at bottom
-            //   ),
-            // ],
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xFF000000).withOpacity(0.07), // shadow color
+                blurRadius: 8, // how soft/blurred the shadow is
+                spreadRadius: 0, // how wide it spreads
+                offset: Offset( 0 , 4), // x and y
+              ),
+            ],
           ),
           child: ListTile(
             leading: items[index]['icon'] as Widget,
@@ -56,21 +56,21 @@ class ListViewFrame extends StatelessWidget {
               child: Text(
                 items[index]['title'], // Title
                 style: GoogleFonts.inter(
-                  fontSize: 14,
+                  fontSize: 13,
                   height: 1.5,
-                  color: AppColors.textdarkblack,
+                  color: AppColors.textdarkblack, 
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ),
             subtitle: Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: const EdgeInsets.only(bottom: 0),
               child: Text(
                 items[index]['from_name'], // Sender's name
                 style: GoogleFonts.inter(
                   fontSize: 12,
                   color: AppColors.textGrey,
-                  fontWeight: FontWeight.w500,
+                  // fontWeight: FontWeight.w500,
                 ),
               ),
             ),
@@ -79,7 +79,7 @@ class ListViewFrame extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  padding: const EdgeInsets.only(top:5),
                   child: Text(
                     items[index]['date'], // Date
                     style: GoogleFonts.inter(
@@ -114,13 +114,13 @@ class ListViewFrame extends StatelessWidget {
                             : AppColors.textRed,
                       ),
                     ),
-                    const SizedBox(width: 5),
+                    const SizedBox(width: 2),
                     // CC text
                     Text(
-                      'Cc',
+                      'CC',
                       style: GoogleFonts.inter(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                         color: items[index]['status'] == 'increase'
                             ? AppColors.textgreen
                             : AppColors.textRed,

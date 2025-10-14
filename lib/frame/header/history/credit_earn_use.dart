@@ -90,163 +90,174 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
             ),
           ),
 
-          const SizedBox(height: 14),
+          const SizedBox(height: 6),
 
+          // replaced Stack with responsive Row so both cards have same size/fit
           SizedBox(
             height: 110,
             width: double.infinity,
-            child: Stack(
+            child: Row(
               children: [
-                // Total Earn
-                Positioned(
-                  left: 0,
-                  child: SizedBox(
-                    height: 110,
-                    width: cardWidth,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          PackageAssets.image(
-                            "assets/image/earn.png",
-                            fit: BoxFit.contain,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Total Earn",
-                                  style: GoogleFonts.inter(
-                                    color: AppColors.textWhite,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                const SizedBox(height: 6),
-                                RichText(
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: "+",
-                                        style: GoogleFonts.inter(
-                                          color: AppColors.textWhite,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const WidgetSpan(
-                                        child: SizedBox(width: 2),
-                                      ),
-                                      TextSpan(
-                                        // text: widget.items == null || widget.items!.isEmpty ? "0" : "4,550",
-                                        text: "4,550",
-                                        style: GoogleFonts.inter(
-                                          color: AppColors.textWhite,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 1,
-                                        ),
-                                      ),
-                                      const WidgetSpan(
-                                        child: SizedBox(width: 8),
-                                      ),
-                                      TextSpan(
-                                        text: "Cc",
-                                        style: GoogleFonts.inter(
-                                          color: AppColors.textWhite,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400,
-                                          letterSpacing: 1,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                // Card with shadow (Total Earn)
+                Container(
+                  height: 90,
+                  width: cardWidth,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.12),
+                        blurRadius: 12,
+                        spreadRadius: 0,
+                        offset: const Offset(0, 4),
                       ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        // use BoxFit.cover so the background fills the card
+                        PackageAssets.image(
+                          "assets/image/earn01.png",
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 18),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Total Earn",
+                                style: GoogleFonts.inter(
+                                  color: AppColors.textWhite,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "+",
+                                      style: GoogleFonts.inter(
+                                        color: AppColors.textWhite,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    const WidgetSpan(child: SizedBox(width: 2)),
+                                    TextSpan(
+                                      text: "4,550",
+                                      style: GoogleFonts.inter(
+                                        color: AppColors.textWhite,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1,
+                                      ),
+                                    ),
+                                    const WidgetSpan(child: SizedBox(width: 2)),
+                                    TextSpan(
+                                      text: "CC",
+                                      style: GoogleFonts.inter(
+                                        color: AppColors.textWhite,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
 
-                // Total Use
-                Positioned(
-                  right: 0,
-                  child: SizedBox(
-                    height: 110,
-                    width: cardWidth,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          PackageAssets.image(
-                            "assets/image/use.png",
-                            fit: BoxFit.contain,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Total Use",
-                                  style: GoogleFonts.inter(
-                                    color: AppColors.textWhite,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                const SizedBox(height: 6),
-                                RichText(
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: "-",
-                                        style: GoogleFonts.inter(
-                                          color: AppColors.textWhite,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const WidgetSpan(
-                                        child: SizedBox(width: 2),
-                                      ),
-                                      TextSpan(
-                                        // text: widget.items == null || widget.items!.isEmpty ? "0" : "2,000",
-                                        text: "2,000",
-                                        style: GoogleFonts.inter(
-                                          color: AppColors.textWhite,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      const WidgetSpan(
-                                        child: SizedBox(width: 8),
-                                      ),
-                                      TextSpan(
-                                        text: "Cc",
-                                        style: GoogleFonts.inter(
-                                          color: AppColors.textWhite,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                const SizedBox(width: 14), // spacing between cards
+
+                // Card with shadow (Total Use)
+                Container(
+                  height: 90,
+                  width: cardWidth,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.12),
+                        blurRadius: 12,
+                        spreadRadius: 0,
+                        offset: const Offset(0, 4),
                       ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        // changed to BoxFit.cover to match the first card
+                        PackageAssets.image(
+                          "assets/image/use.png",
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 18),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Total Use",
+                                style: GoogleFonts.inter(
+                                  color: AppColors.textWhite,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "-",
+                                      style: GoogleFonts.inter(
+                                        color: AppColors.textWhite,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    const WidgetSpan(child: SizedBox(width: 2)),
+                                    TextSpan(
+                                      text: "2,000",
+                                      style: GoogleFonts.inter(
+                                        color: AppColors.textWhite,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const WidgetSpan(child: SizedBox(width: 2)),
+                                    TextSpan(
+                                      text: "CC",
+                                      style: GoogleFonts.inter(
+                                        color: AppColors.textWhite,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -21,18 +21,21 @@ class _CalendarState extends State<Calendar> {
 
   // final TextEditingController _endDateController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.startDateController.text.isEmpty) {
-      widget.startDateController.text = "Monday\n11 Aug, 2025";
+    @override
+    void initState() {
+      super.initState();
+  
+      final now = DateTime.now();
+      final dayName = DateFormat('EEEE').format(now);
+      final datePart = DateFormat('dd MMM, yyyy').format(now);
+  
+      if (widget.startDateController.text.isEmpty) {
+        widget.startDateController.text = "$dayName\n$datePart";
+      }
+      if (widget.endDateController.text.isEmpty) {
+        widget.endDateController.text = "$dayName\n$datePart";
+      }
     }
-    if (widget.endDateController.text.isEmpty) {
-      widget.endDateController.text = "Wednesday\n20 Aug, 2025";
-    }
-  }
-
   Future<void> _pickStartDate() async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -94,18 +97,18 @@ class _CalendarState extends State<Calendar> {
       width: responsive.isMobile
           ? responsive.width * 0.42
           : responsive.width * 0.37,
-      height: 60,
+      height: 50,
       decoration: BoxDecoration(
-        color: const Color(0xFFF7F8FA), // subtle off-white
+        color: const Color(0xFFFFFFFF), // subtle off-white
         borderRadius: BorderRadius.circular(43),
         border: Border.all(
-          color: Color(0xFF83848B).withOpacity(0.1),
+          color: Color(0xFF959595).withOpacity(0.3),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
-            blurRadius: 6,
+            blurRadius: 2,
             offset: Offset(0, 2),
           ),
         ],
