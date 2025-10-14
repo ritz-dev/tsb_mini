@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/button/custom_elevated_button.dart';
 import 'package:tsb_mini/frame/form/credit_history/calendar.dart';
 import 'package:tsb_mini/frame/form/credit_history/checkbox_circle.dart';
-import 'package:tsb_mini/screen/history/credit_history.dart';
+import 'package:tsb_mini/screen/history/history_page.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 

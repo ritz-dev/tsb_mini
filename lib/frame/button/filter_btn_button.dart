@@ -26,8 +26,8 @@ class _FrostedFilterButtonState extends State<FilterButton> {
       onTap: widget.onFilter ?? () => _showFilterSheet(context),
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        width: 45,
-        height: 45,
+        width: 50,
+        height: 50,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.15), // Glassmorphic effect
           shape: BoxShape.circle,

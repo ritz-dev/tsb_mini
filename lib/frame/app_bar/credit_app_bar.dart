@@ -48,14 +48,10 @@ class CreditHomeAppBar extends StatelessWidget
     return Container(
       height: preferredSize.height,
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0xFF083F8B),
-            Color(0xFF0F5EB8),
-          ], // Light blue to dark blue
-          begin: Alignment.topLeft,
-          end: Alignment.topRight,
-        ) // Deep blue
+        image: DecorationImage(
+          image: AssetImage('assets/image/app_bar_bg.png'),
+          fit: BoxFit.cover,
+        ),
       ),
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
@@ -71,7 +67,7 @@ class CreditHomeAppBar extends StatelessWidget
                 title,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: AppColors.textWhite,
                 ),
