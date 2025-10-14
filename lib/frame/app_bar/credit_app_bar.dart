@@ -5,6 +5,7 @@ import 'package:tsb_mini/frame/button/filter_btn_button.dart';
 import 'package:tsb_mini/frame/button/frosted_filter_button.dart';
 import 'package:tsb_mini/frame/button/heart_button.dart';
 import 'package:tsb_mini/frame/button/qr_scan_button.dart';
+import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class CreditHomeAppBar extends StatelessWidget
@@ -47,12 +48,16 @@ class CreditHomeAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return Container(
       height: preferredSize.height,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/image/app_bar_bg.png'),
+          image: PackageAssets.image(
+            "assets/image/app_bar_bg.png",
+            fit: BoxFit.cover,
+          ).image, // <-- important: access the .image property
           fit: BoxFit.cover,
         ),
       ),
+
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
         child: Row(
