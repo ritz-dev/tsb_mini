@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Carbon Credit App V2',
+          title: 'TSB MINI APPr',
           locale: Locale(state.locale),
           supportedLocales: const [Locale('en'), Locale('th')],
           localizationsDelegates: const [

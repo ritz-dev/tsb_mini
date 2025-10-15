@@ -5,6 +5,7 @@ import 'package:tsb_mini/frame/button/filter_btn_button.dart';
 import 'package:tsb_mini/frame/button/frosted_filter_button.dart';
 import 'package:tsb_mini/frame/button/heart_button.dart';
 import 'package:tsb_mini/frame/button/qr_scan_button.dart';
+import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class CreditHomeAppBar extends StatelessWidget
@@ -47,16 +48,16 @@ class CreditHomeAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return Container(
       height: preferredSize.height,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0xFF083F8B),
-            Color(0xFF0F5EB8),
-          ], // Light blue to dark blue
-          begin: Alignment.topLeft,
-          end: Alignment.topRight,
-        ) // Deep blue
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: PackageAssets.image(
+            "assets/image/app_bar_bg.png",
+            fit: BoxFit.cover,
+          ).image, // <-- important: access the .image property
+          fit: BoxFit.cover,
+        ),
       ),
+
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
         child: Row(
@@ -82,6 +83,7 @@ class CreditHomeAppBar extends StatelessWidget
             if (enableHeart)
               FrostedHeartButton(onNavigate: onTapHeart)
             else if (enableFilter)
+              // for history page
               FilterButton(onFilter: onTapFilter) // placeholder for symmetry
             else if (enableScan)
               ScanButton(onScan: onTapScan)

@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CheckboxCircle extends StatefulWidget {
-  const CheckboxCircle({super.key});
+  const CheckboxCircle({Key? key}) : super(key: key);
 
   @override
-  State<CheckboxCircle> createState() => _CheckboxCircleState();
+  CheckboxCircleState createState() => CheckboxCircleState();
 }
 
-class _CheckboxCircleState extends State<CheckboxCircle> {
-  bool isCheckedAll = true;
-  bool isTransferIn = false;
-  bool isTransferOut = false;
-  bool isRedeemed = false;
-  bool isEarned = false;
+class CheckboxCircleState extends State<CheckboxCircle> {
+  // allow multiple selections
+  final Set<int> _selectedIndices = <int>{};
+
+  // add this method so parent can clear selection via GlobalKey
+  void clearSelection() {
+    setState(() {
+      _selectedIndices.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +27,50 @@ class _CheckboxCircleState extends State<CheckboxCircle> {
           spacing: 5, // horizontal gap
           runSpacing: 8, // vertical gap if wrapped
           children: [
-            checkboxText(64, 37, isCheckedAll, "All", (val) {
-              setState(() => isCheckedAll = val ?? false);
+            checkboxText(64, 37, _selectedIndices.contains(0), "All", (val) {
+              setState(() {
+                if (val == true) {
+                  _selectedIndices.add(0);
+                } else {
+                  _selectedIndices.remove(0);
+                }
+              });
             }),
-            checkboxText(117, 37, isTransferIn, "Transfer In", (val) {
-              setState(() => isTransferIn = val ?? false);
+            checkboxText(117, 37, _selectedIndices.contains(1), "Transfer In", (val) {
+              setState(() {
+                if (val == true) {
+                  _selectedIndices.add(1);
+                } else {
+                  _selectedIndices.remove(1);
+                }
+              });
             }),
-            checkboxText(129, 37, isTransferOut, "Transfer Out", (val) {
-              setState(() => isTransferOut = val ?? false);
+            checkboxText(129, 37, _selectedIndices.contains(2), "Transfer Out", (val) {
+              setState(() {
+                if (val == true) {
+                  _selectedIndices.add(2);
+                } else {
+                  _selectedIndices.remove(2);
+                }
+              });
             }),
-            checkboxText(120, 37, isRedeemed, "Redeemed", (val) {
-              setState(() => isRedeemed = val ?? false);
+            checkboxText(120, 37, _selectedIndices.contains(3), "Redeemed", (val) {
+              setState(() {
+                if (val == true) {
+                  _selectedIndices.add(3);
+                } else {
+                  _selectedIndices.remove(3);
+                }
+              });
             }),
-            checkboxText(100, 37, isEarned, "Earned", (val) {
-              setState(() => isEarned = val ?? false);
+            checkboxText(100, 37, _selectedIndices.contains(4), "Earned", (val) {
+              setState(() {
+                if (val == true) {
+                  _selectedIndices.add(4);
+                } else {
+                  _selectedIndices.remove(4);
+                }
+              });
             }),
           ],
         ),

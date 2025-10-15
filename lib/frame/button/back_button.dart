@@ -12,8 +12,8 @@ class FrostedBackButton extends StatelessWidget {
       onTap: onBack ?? () => Navigator.of(context).pop(),
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        width: 45,
-        height: 45,
+        width: 50,
+        height: 50,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(
             0.15,
