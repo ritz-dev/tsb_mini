@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'TSB MINI APPr',
+          title: 'TSB MINI APP',
           locale: Locale(state.locale),
           supportedLocales: const [Locale('en'), Locale('th')],
           localizationsDelegates: const [

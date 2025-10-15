@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
+import 'package:tsb_mini/theme/color_theme.dart';
 
 class MyRewardPage extends StatefulWidget {
   final String? startDate;
@@ -27,18 +27,18 @@ class _MyRewardPageState extends State<MyRewardPage> {
   // Example coupon data
   final List<Map<String, dynamic>> coupons = [
     {
-      "image": "assets/home_images/truesg.png",
-      "title": "Prepaid 5G Coupon",
-      "merchant": "True",
-      "valid": "Valid Until 1 October 2025",
-      "count": 1,
-    },
-    {
       "image": "assets/home_images/tm.png",
       "title": "Free Handcrafted Drink",
       "merchant": "Starbucks",
       "valid": "Valid Until 4 October 2025",
       "count": 99,
+    },
+     {
+      "image": "assets/home_images/truesg.png",
+      "title": "Prepaid 5G Coupon",
+      "merchant": "True",
+      "valid": "Valid Until 1 October 2025",
+      "count": 1,
     },
     {
       "image": "assets/home_images/kfc.png",
@@ -91,7 +91,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
       extendBody: true,
       backgroundColor: const Color(0xFF0D47A1),
       appBar: CreditHomeAppBar(
-        title: 'My Rewards',
+        title: 'My Coupons',
         enableBack: true,
         enableScan: true,
         // need to be change with qr scan
@@ -118,8 +118,8 @@ class _MyRewardPageState extends State<MyRewardPage> {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
                       color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -179,24 +179,30 @@ class RewardCouponCard extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
+          height: 120,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(18),
+            image: DecorationImage(
+              image: PackageAssets.image(
+                "assets/image/reward_card_many.png",
+                width: double.infinity,
+                fit: BoxFit.contain,
+
+              ).image, // <-- important: access the .image property
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 5,
+                spreadRadius: 0,
+                offset: const Offset( -2 , -4),
               ),
             ],
           ),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Left "ticket" edge
-              ClipPath(
-                clipper: _TicketEdgeClipper(),
-                child: Container(width: 16, height: 90, color: Colors.white),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -204,44 +210,52 @@ class RewardCouponCard extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    PackageAssets.image(image, width: 40, height: 40),
-                    const SizedBox(width: 16),
-                    Container(
-                      width: 2,
-                      height: 50,
-                      color: Colors.grey.shade300,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: PackageAssets.image(image, width: 40, height: 40),
                     ),
                     const SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                            color: Colors.black,
+                    // REPLACED: simple Container -> vertical dashed line widget
+                    VerticalDashed(
+                      height: 100,
+                      dashHeight: 12,
+                      dashSpace: 10,
+                      thickness: 2,
+                      color: AppColors.clearBtn,
+                    ),
+                    const SizedBox(width: 16),
+                    Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          merchant,
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: Colors.grey[700],
+                          const SizedBox(height: 4),
+                          Text(
+                            merchant,
+                            style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: AppColors.textGrey,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          valid,
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 13,
-                            color: Colors.grey[500],
+                          const SizedBox(height: 4),
+                          Text(
+                            valid,
+                            style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                              color: AppColors.textGrey,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -252,8 +266,8 @@ class RewardCouponCard extends StatelessWidget {
         // Coupon count badge
         if (count > 1)
           Positioned(
-            top: 10,
-            right: 18,
+            top: 0,
+            right: 2,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
@@ -275,27 +289,99 @@ class RewardCouponCard extends StatelessWidget {
   }
 }
 
-// Custom clipper for ticket edge
-class _TicketEdgeClipper extends CustomClipper<Path> {
+class VerticalDashed extends StatelessWidget {
+  final double height;
+  /// base dash length for the "long" inside dashes
+  final double dashHeight;
+  /// space between dashes
+  final double dashSpace;
+  final double thickness;
+  final Color color;
+
+  const VerticalDashed({
+    super.key,
+    this.height = 50,
+    this.dashHeight = 6,
+    this.dashSpace = 4,
+    this.thickness = 2,
+    this.color = Colors.grey,
+  });
+
   @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.moveTo(0, 0);
-    path.lineTo(size.width, 0);
-    path.arcToPoint(
-      Offset(size.width, size.height),
-      radius: Radius.circular(size.width / 2),
-      clockwise: false,
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: thickness,
+      height: height,
+      child: CustomPaint(
+        painter: _VerticalDashedPainter(
+          dashHeight: dashHeight,
+          dashSpace: dashSpace,
+          color: color,
+          thickness: thickness,
+        ),
+      ),
     );
-    path.lineTo(0, size.height);
-    path.arcToPoint(
-      Offset(0, 0),
-      radius: Radius.circular(size.width / 2),
-      clockwise: false,
-    );
-    return path;
+  }
+}
+
+class _VerticalDashedPainter extends CustomPainter {
+  final double dashHeight;
+  final double dashSpace;
+  final Color color;
+  final double thickness;
+
+  _VerticalDashedPainter({
+    required this.dashHeight,
+    required this.dashSpace,
+    required this.color,
+    required this.thickness,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = thickness
+      ..strokeCap = StrokeCap.round;
+
+    final centerX = size.width / 2;
+
+    // Short dashes for top & bottom, longer dashes for middle
+    final shortDash = (dashHeight * 0.3).clamp(1.0, dashHeight);
+    final longDash = (dashHeight * 1.2).clamp(dashHeight, dashHeight * 3);
+
+    double y = 0;
+
+    // draw top short dash
+    final topEnd = shortDash.clamp(0.0, size.height);
+    if (topEnd > 0) {
+      canvas.drawLine(Offset(centerX, 0), Offset(centerX, topEnd), paint);
+    }
+    y = topEnd + dashSpace;
+
+    // draw middle long dashes
+    while (y + longDash + dashSpace < size.height - shortDash) {
+      final endY = (y + longDash).clamp(0.0, size.height);
+      canvas.drawLine(Offset(centerX, y), Offset(centerX, endY), paint);
+      y += longDash + dashSpace;
+    }
+
+    // draw remaining long (if space) or short before bottom
+    if (y < size.height - shortDash) {
+      final endY = (size.height - shortDash).clamp(0.0, size.height);
+      if (endY > y) {
+        canvas.drawLine(Offset(centerX, y), Offset(centerX, endY), paint);
+      }
+    }
+
+    // draw bottom short dash
+    final bottomStart = (size.height - shortDash).clamp(0.0, size.height);
+    if (bottomStart < size.height) {
+      canvas.drawLine(Offset(centerX, bottomStart), Offset(centerX, size.height), paint);
+    }
   }
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+

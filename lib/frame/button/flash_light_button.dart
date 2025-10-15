@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/coupon/my_coupon.dart';
+import 'package:tsb_mini/screen/coupon/my_coupon_second_page.dart';
 import 'package:tsb_mini/screen/coupon/reward_merchant_scan.dart';
 
 class FlashLightButton extends StatelessWidget {
@@ -26,8 +26,8 @@ class FlashLightButton extends StatelessWidget {
           },
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        width: 45,
-        height: 45,
+        width: 50,
+        height: 50,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(
             0.25,

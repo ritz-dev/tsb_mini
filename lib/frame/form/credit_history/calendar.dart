@@ -17,37 +17,55 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  // final TextEditingController _startDateController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
 
-  // final TextEditingController _endDateController = TextEditingController();
+    final now = DateTime.now();
+    final dayName = DateFormat('EEEE').format(now);
+    final datePart = DateFormat('dd MMM, yyyy').format(now);
 
-    @override
-    void initState() {
-      super.initState();
-  
-      final now = DateTime.now();
-      final dayName = DateFormat('EEEE').format(now);
-      final datePart = DateFormat('dd MMM, yyyy').format(now);
-  
-      if (widget.startDateController.text.isEmpty) {
-        widget.startDateController.text = "$dayName\n$datePart";
-      }
-      if (widget.endDateController.text.isEmpty) {
-        widget.endDateController.text = "$dayName\n$datePart";
-      }
+    if (widget.startDateController.text.isEmpty) {
+      widget.startDateController.text = "$dayName\n$datePart";
     }
+    if (widget.endDateController.text.isEmpty) {
+      widget.endDateController.text = "$dayName\n$datePart";
+    }
+  }
+
+  DateTime? _parseControllerDate(String text) {
+    if (text.isEmpty) return null;
+    var s = text;
+    if (s.contains('\n')) s = s.split('\n').last;
+    try {
+      return DateFormat('d MMM, yyyy').parse(s);
+    } catch (_) {
+      return null;
+    }
+  }
+
   Future<void> _pickStartDate() async {
-    DateTime? pickedDate = await showDatePicker(
+    final end = _parseControllerDate(widget.endDateController.text);
+
+    // set lastDate to end (if available) to prevent selecting a start after the end
+    final pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900), // Earliest date
-      lastDate: DateTime(2100), // Latest date
+      initialDate: _parseControllerDate(widget.startDateController.text) ?? DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: end ?? DateTime(2100),
     );
 
     if (pickedDate != null) {
-      String dayName = DateFormat('EEEE').format(pickedDate);
+      // If end exists and picked start is after end, show message and don't accept
+      if (end != null && pickedDate.isAfter(end)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Start date cannot be after the selected end date')),
+        );
+        return;
+      }
 
-      String datePart = DateFormat('dd MMM, yyyy').format(pickedDate);
+      final dayName = DateFormat('EEEE').format(pickedDate);
+      final datePart = DateFormat('dd MMM, yyyy').format(pickedDate);
 
       setState(() {
         widget.startDateController.text = "$dayName\n$datePart";
@@ -56,17 +74,27 @@ class _CalendarState extends State<Calendar> {
   }
 
   Future<void> _pickEndDate() async {
-    DateTime? pickedDate = await showDatePicker(
+    final start = _parseControllerDate(widget.startDateController.text);
+
+    // set firstDate to start (if available) to prevent selecting an end before the start
+    final pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900), // Earliest date
-      lastDate: DateTime(2100), // Latest date
+      initialDate: _parseControllerDate(widget.endDateController.text) ?? DateTime.now(),
+      firstDate: start ?? DateTime(1900),
+      lastDate: DateTime(2100),
     );
 
     if (pickedDate != null) {
-      String dayName = DateFormat('EEEE').format(pickedDate);
+      // If start exists and picked end is before start, show message and don't accept
+      if (start != null && pickedDate.isBefore(start)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('End date cannot be before the selected start date')),
+        );
+        return;
+      }
 
-      String datePart = DateFormat('dd MMM, yyyy').format(pickedDate);
+      final dayName = DateFormat('EEEE').format(pickedDate);
+      final datePart = DateFormat('dd MMM, yyyy').format(pickedDate);
 
       setState(() {
         widget.endDateController.text = "$dayName\n$datePart";
@@ -80,7 +108,6 @@ class _CalendarState extends State<Calendar> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _dateBuilder(widget.startDateController, _pickStartDate),
-
         _dateBuilder(widget.endDateController, _pickEndDate),
       ],
     );
@@ -109,7 +136,7 @@ class _CalendarState extends State<Calendar> {
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
             blurRadius: 2,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -120,7 +147,7 @@ class _CalendarState extends State<Calendar> {
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
           child: Row(
             children: [
-              Icon(Icons.calendar_today, size: 20, color: Color(0xFF959595)),
+              const Icon(Icons.calendar_today, size: 20, color: Color(0xFF959595)),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(
@@ -129,7 +156,7 @@ class _CalendarState extends State<Calendar> {
                   children: [
                     Text(
                       dayName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF323236),
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -138,7 +165,7 @@ class _CalendarState extends State<Calendar> {
                     ),
                     Text(
                       datePart,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF323236),
                         fontWeight: FontWeight.bold,
                         fontSize: 14,

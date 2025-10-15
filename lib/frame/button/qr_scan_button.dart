@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/coupon/my_coupon.dart';
+import 'package:tsb_mini/screen/coupon/my_coupon_second_page.dart';
 import 'package:tsb_mini/screen/coupon/reward_merchant_scan.dart';
 
 class ScanButton extends StatelessWidget {
@@ -26,20 +26,20 @@ class ScanButton extends StatelessWidget {
           },
       borderRadius: BorderRadius.circular(30),
       child: Container(
-        width: 45,
-        height: 45,
+        width: 50,
+        height: 50,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(
             0.25,
           ), // Semi-transparent for glass effect
           shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2), // Light border for depth
-            width: 1.5,
-          ),
+          // border: Border.all(
+          //   color: Colors.white.withOpacity(0.2), // Light border for depth
+          //   width: 1.5,
+          // ),
           boxShadow: [
             BoxShadow(
-              color: Color(0XFF4069A2).withOpacity(0.05),
+              color: Color(0XFF4069A2).withOpacity(0.01),
               offset: const Offset(2, 4),
               blurRadius: 8,
             ),
@@ -49,8 +49,8 @@ class ScanButton extends StatelessWidget {
         child: Center(
           child: PackageAssets.image(
             "assets/icon/scan_merchant.png",
-            width: 20,
-            height: 20,
+            width: 22,
+            height: 22,
             color: Colors.white,
           ),
         ),
