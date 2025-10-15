@@ -89,44 +89,42 @@ class ListViewFrame extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Sign (+ or -)
-                    Text(
-                      items[index]['status'] == 'increase' ? '+' : '-',
-                      style: GoogleFonts.inter(
-                        fontSize: 16, // smaller size for sign
-                        fontWeight: FontWeight.w500,
-                        color: items[index]['status'] == 'increase'
-                            ? AppColors.textgreen
-                            : AppColors.textRed,
+                // replace the Row with a single Text.rich so all parts share the same baseline
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: items[index]['status'] == 'increase' ? '+' : '-',
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: items[index]['status'] == 'increase'
+                              ? AppColors.textgreen
+                              : AppColors.textRed,
+                        ),
                       ),
-                    ),
-                    // Point value
-                    Text(
-                      items[index]['point'].toString(),
-                      style: GoogleFonts.inter(
-                        fontSize: 18, // larger size for point
-                        fontWeight: FontWeight.w600,
-                        color: items[index]['status'] == 'increase'
-                            ? AppColors.textgreen
-                            : AppColors.textRed,
+                      TextSpan(
+                        text: items[index]['point'].toString(),
+                        style: GoogleFonts.inter(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: items[index]['status'] == 'increase'
+                              ? AppColors.textgreen
+                              : AppColors.textRed,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 2),
-                    // CC text
-                    Text(
-                      'CC',
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: items[index]['status'] == 'increase'
-                            ? AppColors.textgreen
-                            : AppColors.textRed,
+                      TextSpan(
+                        text: ' CC',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: items[index]['status'] == 'increase'
+                              ? AppColors.textgreen
+                              : AppColors.textRed,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -22,9 +22,104 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
   @override
   void initState() {
     super.initState();
-    // Set initial values if items are empty
-    totalEarn = 4550; // initial Total Earn
-    totalUse = 2000; // initial Total Use
+
+    // If no date filter is provided, show the default totals (normal condition)
+    final hasStart = (widget.startDate != null && widget.startDate!.isNotEmpty);
+    final hasEnd = (widget.endDate != null && widget.endDate!.isNotEmpty);
+
+    if (!hasStart && !hasEnd) {
+      totalEarn = 4550; // default shown when not filtering by date
+      totalUse = 2000;  // default shown when not filtering by date
+      return;
+    }
+
+    // Otherwise compute totals from provided items and optional start/end date filters
+    int earn = 0;
+    int use = 0;
+
+    if (widget.items != null && widget.items!.isNotEmpty) {
+      DateTime? start;
+      DateTime? end;
+
+      String? rawStart = widget.startDate;
+      String? rawEnd = widget.endDate;
+
+      // if start/end include newline (calendar controllers use "EEEE\ndd MMM, yyyy"), take last line
+      if (rawStart != null && rawStart.contains('\n')) rawStart = rawStart.split('\n').last;
+      if (rawEnd != null && rawEnd.contains('\n')) rawEnd = rawEnd.split('\n').last;
+
+      try {
+        if (rawStart != null && rawStart.isNotEmpty) {
+          start = DateFormat("d MMM, yyyy").parse(rawStart);
+        }
+      } catch (_) {
+        start = null;
+      }
+      try {
+        if (rawEnd != null && rawEnd.isNotEmpty) {
+          end = DateFormat("d MMM, yyyy").parse(rawEnd);
+        }
+      } catch (_) {
+        end = null;
+      }
+
+      for (final item in widget.items!) {
+        // read points safely (accept int or numeric string with commas)
+        int pts = 0;
+        try {
+          final p = item['point'];
+          if (p is int) pts = p;
+          else if (p is String) pts = int.parse(p.replaceAll(',', ''));
+        } catch (_) {
+          pts = 0;
+        }
+
+        // date filtering: only apply when item has a parseable date field
+        bool inRange = true;
+        if ((start != null || end != null) &&
+            (item.containsKey('date') || item.containsKey('createdAt') || item.containsKey('created_at'))) {
+          String? rawItemDate;
+          if (item.containsKey('date')) rawItemDate = item['date']?.toString();
+          else if (item.containsKey('createdAt')) rawItemDate = item['createdAt']?.toString();
+          else rawItemDate = item['created_at']?.toString();
+
+          if (rawItemDate == null || rawItemDate.isEmpty) {
+            inRange = false;
+          } else {
+            try {
+              if (rawItemDate.contains('\n')) rawItemDate = rawItemDate.split('\n').last;
+              // if item date contains time, extract date part like "dd MMM, yyyy"
+              final match = RegExp(r'\d{1,2}\s+\w{3},\s*\d{4}').firstMatch(rawItemDate);
+              final datePart = match?.group(0) ?? rawItemDate;
+              final itemDate = DateFormat("d MMM, yyyy").parse(datePart);
+              if (start != null && end != null) {
+                inRange = !(itemDate.isBefore(start) || itemDate.isAfter(end));
+              } else if (start != null) {
+                inRange = itemDate.year == start.year &&
+                          itemDate.month == start.month &&
+                          itemDate.day == start.day;
+              } else if (end != null) {
+                inRange = itemDate.year == end.year &&
+                          itemDate.month == end.month &&
+                          itemDate.day == end.day;
+              }
+            } catch (_) {
+              inRange = false;
+            }
+          }
+        }
+
+        if (!inRange) continue;
+
+        final status = (item['status'] ?? '').toString();
+        if (status == 'increase') earn += pts;
+        else use += pts;
+      }
+    }
+
+    // When filtering is applied: if no items matched, totals stay 0
+    totalEarn = earn;
+    totalUse = use;
   }
 
   @override
@@ -32,6 +127,10 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
     double screenWidth = MediaQuery.of(context).size.width;
     double cardWidth = (screenWidth - 15 - 15 - 30) / 2;
     cardWidth = cardWidth > 180 ? 180 : cardWidth;
+
+    // detect whether user applied a date filter
+    final bool isFiltered = (widget.startDate?.isNotEmpty ?? false) ||
+        (widget.endDate?.isNotEmpty ?? false);
 
     // Helper function to format dates
     String getFormattedDate(String? startDate, String? endDate) {
@@ -141,17 +240,20 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
                               RichText(
                                 text: TextSpan(
                                   children: [
-                                    TextSpan(
-                                      text: "+",
-                                      style: GoogleFonts.inter(
-                                        color: AppColors.textWhite,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
+                                    // show '+' when filtered OR when value != 0 (keeps previous behavior)
+                                    if (isFiltered || totalEarn != 0)
+                                      TextSpan(
+                                        text: "+",
+                                        style: GoogleFonts.inter(
+                                          color: AppColors.textWhite,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
-                                    const WidgetSpan(child: SizedBox(width: 2)),
+                                    if (isFiltered || totalEarn != 0)
+                                      const WidgetSpan(child: SizedBox(width: 2)),
                                     TextSpan(
-                                      text: "4,550",
+                                      text: NumberFormat.decimalPattern().format(totalEarn),
                                       style: GoogleFonts.inter(
                                         color: AppColors.textWhite,
                                         fontSize: 18,
@@ -164,7 +266,7 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
                                       text: "CC",
                                       style: GoogleFonts.inter(
                                         color: AppColors.textWhite,
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w600,
                                         letterSpacing: 1,
                                       ),
@@ -225,17 +327,20 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
                               RichText(
                                 text: TextSpan(
                                   children: [
-                                    TextSpan(
-                                      text: "-",
-                                      style: GoogleFonts.inter(
-                                        color: AppColors.textWhite,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
+                                    // show '-' when filtered OR when value != 0 (keeps previous behavior)
+                                    if (isFiltered || totalUse != 0)
+                                      TextSpan(
+                                        text: "-",
+                                        style: GoogleFonts.inter(
+                                          color: AppColors.textWhite,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
-                                    const WidgetSpan(child: SizedBox(width: 2)),
+                                    if (isFiltered || totalUse != 0)
+                                      const WidgetSpan(child: SizedBox(width: 2)),
                                     TextSpan(
-                                      text: "2,000",
+                                      text: NumberFormat.decimalPattern().format(totalUse),
                                       style: GoogleFonts.inter(
                                         color: AppColors.textWhite,
                                         fontSize: 18,
@@ -247,7 +352,7 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
                                       text: "CC",
                                       style: GoogleFonts.inter(
                                         color: AppColors.textWhite,
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
