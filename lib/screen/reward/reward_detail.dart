@@ -59,7 +59,7 @@ class _RewardDetailState extends State<RewardDetail> {
   Widget _redeemBuild() {
     return Container(
       decoration: const BoxDecoration(
-        color: AppColors.cardBackground,
+        color: Colors.amber,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(43),
           topRight: Radius.circular(43),
@@ -70,7 +70,7 @@ class _RewardDetailState extends State<RewardDetail> {
           left: 20,
           right: 20,
           bottom: MediaQuery.of(context).viewInsets.bottom,
-          top: 30,
+          top: 20,
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -106,14 +106,14 @@ class _RewardDetailState extends State<RewardDetail> {
         children: [
           SingleChildScrollView(
             padding: const EdgeInsets.only(
-              bottom: 80,
+              bottom: 0,
             ), // leave space for the sticky button
             child: Column(
               children: [
                 RewardDetailCard(),
                 Container(
                   padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
-                  color: AppColors.scaffoldBackground,
+                  color: AppColors.error,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

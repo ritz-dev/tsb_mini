@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
+import 'package:intl/intl.dart'; // <-- added for date formatting
 
 class MyRewardPage extends StatefulWidget {
   final String? startDate;
@@ -26,64 +27,165 @@ class _MyRewardPageState extends State<MyRewardPage> {
 
   // Example coupon data
   final List<Map<String, dynamic>> coupons = [
-    {
-      "image": "assets/home_images/tm.png",
-      "title": "Free Handcrafted Drink",
-      "merchant": "Starbucks",
-      "valid": "Valid Until 4 October 2025",
-      "count": 99,
-    },
-     {
-      "image": "assets/home_images/truesg.png",
-      "title": "Prepaid 5G Coupon",
-      "merchant": "True",
-      "valid": "Valid Until 1 October 2025",
-      "count": 1,
-    },
-    {
-      "image": "assets/home_images/kfc.png",
-      "title": "Free Bucket On Us",
-      "merchant": "KFC",
-      "valid": "Valid Until 5 October 2025",
-      "count": 99,
-    },
-    {
-      "image": "assets/home_images/adidas.png",
-      "title": "15% Off Voucher",
-      "merchant": "Adidas",
-      "valid": "Valid Until 10 October 2025",
-      "count": 1,
-    },
-    {
-      "image": "assets/home_images/truesg.png",
-      "title": "Prepaid 5G Coupon",
-      "merchant": "True",
-      "valid": "Valid Until 1 October 2025",
-      "count": 1,
-    },
-    {
-      "image": "assets/home_images/tm.png",
-      "title": "Free Handcrafted Drink",
-      "merchant": "Starbucks",
-      "valid": "Valid Until 4 October 2025",
-      "count": 99,
-    },
-    {
-      "image": "assets/home_images/kfc.png",
-      "title": "Free Bucket On Us",
-      "merchant": "KFC",
-      "valid": "Valid Until 5 October 2025",
-      "count": 99,
-    },
-    {
-      "image": "assets/home_images/adidas.png",
-      "title": "15% Off Voucher",
-      "merchant": "Adidas",
-      "valid": "Valid Until 10 October 2025",
-      "count": 1,
-    },
-    // Add more coupons as needed
-  ];
+  // == STARBUCKS 1 COUNT ===
+  {
+    "slug": "1000100010007000",
+    "status": "active",
+    "datetime": "2025-07-20T09:00:00Z",
+    "expiry_date": "2025-12-15T23:59:59Z",
+    "merchant_logo": "assets/home_images/tm.png",
+    "merchant_name": "Starbucks",
+    "reward_name": "Free Handcrafted Drink",
+  },
+
+  // === TRUE (3 duplicates) ===
+  {
+    "slug": "1000100010001000",
+    "status": "active",
+    "datetime": "2025-08-10T10:00:00Z",
+    "expiry_date": "2025-11-30T23:59:59Z",
+    "merchant_logo": "assets/home_images/truesg.png",
+    "merchant_name": "True",
+    "reward_name": "Prepaid 5G Coupon",
+  },
+  {
+    "slug": "1000100010001000",
+    "status": "active",
+    "datetime": "2025-08-12T11:00:00Z",
+    "expiry_date": "2025-11-30T23:59:59Z",
+    "merchant_logo": "assets/home_images/truesg.png",
+    "merchant_name": "True",
+    "reward_name": "Prepaid 5G Coupon",
+  },
+  {
+    "slug": "1000100010001000",
+    "status": "active",
+    "datetime": "2025-08-15T09:30:00Z",
+    "expiry_date": "2025-11-30T23:59:59Z",
+    "merchant_logo": "assets/home_images/truesg.png",
+    "merchant_name": "True",
+    "reward_name": "Prepaid 5G Coupon",
+  },
+  // === KFC (1 count) ===
+  {
+  "slug": "1000100010008000", 
+  "status": "active",
+  "datetime": "2025-09-05T12:00:00Z",
+  "expiry_date": "2025-11-30T23:59:59Z",
+  "merchant_logo": "assets/home_images/kfc.png",
+  "merchant_name": "Uniqlo",
+  "reward_name": "Buy 1 Get 1 Free",
+},  
+
+  // === STARBUCKS (5 duplicates) ===
+  {
+    "slug": "1000100010002000",
+    "status": "active",
+    "datetime": "2025-07-20T09:00:00Z",
+    "expiry_date": "2025-12-15T23:59:59Z",
+    "merchant_logo": "assets/home_images/tm.png",
+    "merchant_name": "Starbucks",
+    "reward_name": "Free Handcrafted Drink",
+  },
+  {
+    "slug": "1000100010002000",
+    "status": "active",
+    "datetime": "2025-07-22T09:45:00Z",
+    "expiry_date": "2025-12-15T23:59:59Z",
+    "merchant_logo": "assets/home_images/tm.png",
+    "merchant_name": "Starbucks",
+    "reward_name": "Free Handcrafted Drink",
+  },
+  {
+    "slug": "1000100010002000",
+    "status": "active",
+    "datetime": "2025-07-25T08:15:00Z",
+    "expiry_date": "2025-12-15T23:59:59Z",
+    "merchant_logo": "assets/home_images/tm.png",
+    "merchant_name": "Starbucks",
+    "reward_name": "Free Handcrafted Drink",
+  },
+  {
+    "slug": "1000100010002000",
+    "status": "active",
+    "datetime": "2025-07-28T10:00:00Z",
+    "expiry_date": "2025-12-15T23:59:59Z",
+    "merchant_logo": "assets/home_images/tm.png",
+    "merchant_name": "Starbucks",
+    "reward_name": "Free Handcrafted Drink",
+  },
+  {
+    "slug": "1000100010002000",
+    "status": "active",
+    "datetime": "2025-07-30T11:30:00Z",
+    "expiry_date": "2025-12-15T23:59:59Z",
+    "merchant_logo": "assets/home_images/tm.png",
+    "merchant_name": "Starbucks",
+    "reward_name": "Free Handcrafted Drink",
+  },
+
+  // === KFC (2 duplicates) ===
+  {
+    "slug": "1000100010003000",
+    "status": "active",
+    "datetime": "2025-06-18T13:00:00Z",
+    "expiry_date": "2025-10-25T23:59:59Z",
+    "merchant_logo": "assets/home_images/kfc.png",
+    "merchant_name": "KFC",
+    "reward_name": "Free Bucket On Us",
+  },
+  {
+    "slug": "1000100010003000",
+    "status": "active",
+    "datetime": "2025-06-20T14:15:00Z",
+    "expiry_date": "2025-10-25T23:59:59Z",
+    "merchant_logo": "assets/home_images/kfc.png",
+    "merchant_name": "KFC",
+    "reward_name": "Free Bucket On Us",
+  },
+
+  // === ADIDAS (3 duplicates, 1 expired) ===
+  {
+    "slug": "1000100010004000",
+    "status": "expired",
+    "datetime": "2025-05-01T08:30:00Z",
+    "expiry_date": "2025-09-30T23:59:59Z",
+    "merchant_logo": "assets/home_images/adidas.png",
+    "merchant_name": "Adidas",
+    "reward_name": "15% Off Voucher",
+  },
+  {
+    "slug": "1000100010004000",
+    "status": "expired",
+    "datetime": "2025-05-03T08:45:00Z",
+    "expiry_date": "2025-09-30T23:59:59Z",
+    "merchant_logo": "assets/home_images/adidas.png",
+    "merchant_name": "Adidas",
+    "reward_name": "15% Off Voucher",
+  },
+  {
+    "slug": "1000100010004000",
+    "status": "expired",
+    "datetime": "2025-05-05T09:10:00Z",
+    "expiry_date": "2025-09-30T23:59:59Z",
+    "merchant_logo": "assets/home_images/adidas.png",
+    "merchant_name": "Adidas",
+    "reward_name": "15% Off Voucher",
+  },
+
+  // === SINGLE-COUNT EXAMPLES (will show "one" background) ===
+  {
+    "slug": "1000100010005000",
+    "status": "active",
+    "datetime": "2025-09-01T10:00:00Z",
+    "expiry_date": "2025-12-01T23:59:59Z",
+    "merchant_logo": "assets/home_images/adidas.png",
+    "merchant_name": "Zara",
+    "reward_name": "10% Off Select Items",
+  },
+
+];
+
 
   @override
   Widget build(BuildContext context) {
@@ -127,19 +229,45 @@ class _MyRewardPageState extends State<MyRewardPage> {
               Expanded(
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
+                    horizontal: 10,
+                    vertical: 0,
                   ),
                   itemCount: coupons.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 16),
                   itemBuilder: (context, index) {
                     final coupon = coupons[index];
+
+                    // safe values with fallbacks to avoid null runtime errors
+                    final image = (coupon['merchant_logo'] as String?) ??
+                        'assets/home_images/default.png';
+                    final title =
+                        (coupon['reward_name'] as String?) ?? 'Unknown Reward';
+                    final merchant = (coupon['merchant_name'] as String?) ?? '';
+
+                    // format expiry date if present
+                    String valid = '';
+                    final expiry = coupon['expiry_date'];
+                    if (expiry != null) {
+                      try {
+                        final dt = DateTime.parse(expiry.toString());
+                        valid = 'Valid Until ${DateFormat('d MMMM y').format(dt)}';
+                      } catch (_) {
+                        valid = expiry.toString();
+                      }
+                    }
+
+                    // compute duplicate count by slug (fallback to reward_name)
+                    final key = (coupon['slug'] ?? coupon['reward_name']).toString();
+                    final count = coupons
+                        .where((c) => (c['slug'] ?? c['reward_name']).toString() == key)
+                        .length;
+
                     return RewardCouponCard(
-                      image: coupon["image"],
-                      title: coupon["title"],
-                      merchant: coupon["merchant"],
-                      valid: coupon["valid"],
-                      count: coupon["count"],
+                      image: image,
+                      title: title,
+                      merchant: merchant,
+                      valid: valid,
+                      count: count,
                     );
                   },
                 ),
@@ -175,116 +303,178 @@ class RewardCouponCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          height: 120,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: PackageAssets.image(
-                "assets/image/reward_card_many.png",
-                width: double.infinity,
-                fit: BoxFit.contain,
+    // choose background artwork based on count (many vs one)
+    final bgAsset = count > 1
+        ? "assets/image/reward_card_many.png"
+        : "assets/image/reward_card_one.png";
 
-              ).image, // <-- important: access the .image property
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 5,
-                spreadRadius: 0,
-                offset: const Offset( -2 , -4),
+    return SizedBox(
+      height: 140, // fixed card height to avoid vertical overflow
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Card background + content
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: PackageAssets.image(
+                  bgAsset,
+                  fit: BoxFit.fill,
+                ).image,
+                fit: BoxFit.fill,
               ),
-            ],
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 14,
-                ),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
+              borderRadius: BorderRadius.circular(12),
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.black.withOpacity(0.05),
+              //     blurRadius: 5,
+              //     offset: const Offset(0, 3),
+              //   ),
+              // ],
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Logo column (fixed width)
+                  SizedBox(
+                    width: 56,
+                    child: Center(
                       child: PackageAssets.image(image, width: 40, height: 40),
                     ),
-                    const SizedBox(width: 16),
-                    // REPLACED: simple Container -> vertical dashed line widget
-                    VerticalDashed(
-                      height: 100,
-                      dashHeight: 12,
-                      dashSpace: 10,
-                      thickness: 2,
-                      color: AppColors.clearBtn,
+                  ),
+
+                  const SizedBox(width: 12),
+
+                  // vertical dashed divider (fixed width)
+                  VerticalDashed(
+                    height: 96,
+                    dashHeight: 10,
+                    dashSpace: 8,
+                    thickness: 2,
+                    color: AppColors.clearBtn,
+                  ),
+
+                  const SizedBox(width: 12),
+
+                  // Main texts + Use button — use Expanded to avoid overflow
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Title
+                        Text(
+                          title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+
+                        // Merchant
+                        Text(
+                          merchant,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            color: AppColors.textGrey,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+
+                        // expiry + use row — expiry expands, Use is shrink-wrapped
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                valid,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
+                                  color: AppColors.textGrey,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(width: 8),
+
+                            // Use button with InkWell for ripple and no forced width
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(6),
+                                onTap: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Use tapped for: $title')),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 4.0),
+                                  child: Text(
+                                    'Use',
+                                    style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 12,
+                                      color: const Color(0xFF2E3192),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 16),
-                    Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            title,
-                            style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            merchant,
-                            style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: AppColors.textGrey,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            valid,
-                            style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                              color: AppColors.textGrey,
-                            ),
-                          ),
-                        ],
-                      ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // count badge (top-right) — positioned inside card bounds to avoid right overflow
+          if (count > 1)
+            Positioned(
+              top: 2,
+              right: 2,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2E3192),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.12),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ),
-        // Coupon count badge
-        if (count > 1)
-          Positioned(
-            top: 0,
-            right: 2,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(
-                color: const Color(0xFF2E3192),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                "x$count",
-                style: GoogleFonts.inter(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 13,
+                child: Text(
+                  "x$count",
+                  style: GoogleFonts.inter(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
