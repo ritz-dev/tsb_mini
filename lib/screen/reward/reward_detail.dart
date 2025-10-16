@@ -36,7 +36,7 @@ class _RewardDetailState extends State<RewardDetail> {
     BuildContext context, {
     bool keepBottomNavVisible = false,
   }) {
-    showModalBottomSheet(
+    showModalBottomSheet( 
       context: context,
       isScrollControlled: true,
       useRootNavigator: false,

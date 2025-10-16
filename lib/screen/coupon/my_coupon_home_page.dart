@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
+import 'package:tsb_mini/screen/reward/reward_detail_page.dart';
+import 'package:tsb_mini/screen/reward/reward_detail_test.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:intl/intl.dart'; // <-- added for date formatting
 
@@ -285,6 +287,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
 }
 
 // Coupon card widget
+// Coupon card widget
 class RewardCouponCard extends StatelessWidget {
   final String image;
   final String title;
@@ -292,188 +295,188 @@ class RewardCouponCard extends StatelessWidget {
   final String valid;
   final int count;
 
+  /// New callback for when the card is tapped
+  final VoidCallback? onTap;
+
   const RewardCouponCard({
     required this.image,
     required this.title,
     required this.merchant,
     required this.valid,
     required this.count,
+    this.onTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    // choose background artwork based on count (many vs one)
     final bgAsset = count > 1
         ? "assets/image/reward_card_many.png"
         : "assets/image/reward_card_one.png";
 
     return SizedBox(
-      height: 140, // fixed card height to avoid vertical overflow
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          // Card background + content
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: PackageAssets.image(
-                  bgAsset,
-                  fit: BoxFit.fill,
-                ).image,
-                fit: BoxFit.fill,
-              ),
-              borderRadius: BorderRadius.circular(12),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black.withOpacity(0.05),
-              //     blurRadius: 5,
-              //     offset: const Offset(0, 3),
-              //   ),
-              // ],
-              color: Colors.white,
+      height: 140,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RewardDetailTest(),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Logo column (fixed width)
-                  SizedBox(
-                    width: 56,
-                    child: Center(
-                      child: PackageAssets.image(image, width: 40, height: 40),
+          );
+        }, // <-- Trigger navigation when tapped
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            // Card background + content
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: PackageAssets.image(bgAsset, fit: BoxFit.fill).image,
+                  fit: BoxFit.fill,
+                ),
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 56,
+                      child: Center(
+                        child: PackageAssets.image(
+                          image,
+                          width: 40,
+                          height: 40,
+                        ),
+                      ),
                     ),
-                  ),
-
-                  const SizedBox(width: 12),
-
-                  // vertical dashed divider (fixed width)
-                  VerticalDashed(
-                    height: 96,
-                    dashHeight: 10,
-                    dashSpace: 8,
-                    thickness: 2,
-                    color: AppColors.clearBtn,
-                  ),
-
-                  const SizedBox(width: 12),
-
-                  // Main texts + Use button — use Expanded to avoid overflow
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Title
-                        Text(
-                          title,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                            color: Colors.black,
+                    const SizedBox(width: 12),
+                    VerticalDashed(
+                      height: 96,
+                      dashHeight: 10,
+                      dashSpace: 8,
+                      thickness: 2,
+                      color: AppColors.clearBtn,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 6),
-
-                        // Merchant
-                        Text(
-                          merchant,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: AppColors.textGrey,
+                          const SizedBox(height: 6),
+                          Text(
+                            merchant,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: AppColors.textGrey,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-
-                        // expiry + use row — expiry expands, Use is shrink-wrapped
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                valid,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                  color: AppColors.textGrey,
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  valid,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    color: AppColors.textGrey,
+                                  ),
                                 ),
                               ),
-                            ),
-
-                            const SizedBox(width: 8),
-
-                            // Use button with InkWell for ripple and no forced width
-                            Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(6),
-                                onTap: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Use tapped for: $title')),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0, vertical: 4.0),
-                                  child: Text(
-                                    'Use',
-                                    style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 12,
-                                      color: const Color(0xFF2E3192),
+                              const SizedBox(width: 8),
+                              Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(6),
+                                  onTap: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Use tapped for: $title'),
+                                      ),
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
+                                      vertical: 4.0,
+                                    ),
+                                    child: Text(
+                                      'Use',
+                                      style: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 12,
+                                        color: const Color(0xFF2E3192),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // count badge (top-right) — positioned inside card bounds to avoid right overflow
-          if (count > 1)
-            Positioned(
-              top: 2,
-              right: 2,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF2E3192),
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.12),
-                      blurRadius: 6,
-                      offset: const Offset(0, 3),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-                child: Text(
-                  "x$count",
-                  style: GoogleFonts.inter(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 12,
+              ),
+            ),
+            if (count > 1)
+              Positioned(
+                top: 2,
+                right: 2,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF2E3192),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.12),
+                        blurRadius: 6,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    "x$count",
+                    style: GoogleFonts.inter(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

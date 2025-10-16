@@ -1,47 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tsb_mini/frame/button/back_button.dart';
-import 'package:tsb_mini/theme/color_theme.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
+import 'package:tsb_mini/frame/button/reward_back_button.dart';
 
-class RewardDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
-
+class RewardDetailAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   // Button actions
   final VoidCallback? onTapBack;
 
   // Controls
   final bool enableBack;
 
-  const RewardDetailAppBar({
-    super.key,
-    this.onTapBack,
-    this.enableBack = true,
-  });
+  const RewardDetailAppBar({super.key, this.onTapBack, this.enableBack = true});
 
   @override
-  Size get preferredSize => const Size.fromHeight(115);
+  Size get preferredSize => const Size.fromHeight(230);
 
   @override
   Widget build(BuildContext context) {
+    final localize = AppLocalizations.of(context)!;
+
     return Container(
       height: preferredSize.height,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/home_images/starbucks_lastest.png'),
+          image: AssetImage('assets/image/starbucks_main.png'),
           fit: BoxFit.cover,
         ),
       ),
-      padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // Back button (left side)
-            if (enableBack)
-              FrostedBackButton(
-                onBack: onTapBack,
-              ), // placeholder to keep spacing
-            // Title (centered)
-          ],
+        top: true,
+        bottom: false,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 12.0, right: 12.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Back button (top-left)
+              if (enableBack)
+              RewardBackButton(
+                    onBack: onTapBack,
+                    localize: localize, // localization passed correctly
+                  ),
+            ],
+          ),
         ),
       ),
     );
