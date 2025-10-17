@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/reward/reward_detail_page.dart';
-import 'package:tsb_mini/screen/reward/reward_detail_test.dart';
+import 'package:tsb_mini/screen/reward_detail/reward_detail_test.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:intl/intl.dart'; // <-- added for date formatting
 

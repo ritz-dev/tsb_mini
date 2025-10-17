@@ -113,7 +113,7 @@ class _RewardDetailState extends State<RewardDetail> {
                 RewardDetailCard(),
                 Container(
                   padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
-                  color: AppColors.error,
+                  color: AppColors.cardBackground,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
