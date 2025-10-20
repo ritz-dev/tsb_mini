@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/reward_detail/reward_detail_test.dart';
+import 'package:tsb_mini/screen/coupon/my_coupon_second_page.dart';
+import 'package:tsb_mini/screen/coupon/reward_merchant_scan.dart';
+import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:intl/intl.dart'; // <-- added for date formatting
 
@@ -216,17 +218,33 @@ class _MyRewardPageState extends State<MyRewardPage> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Center(
-                  child: Text(
-                    'Scan the merchant’s QR code to apply your coupons.',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Scan the merchant’s QR code to apply your\n',
+                          style: GoogleFonts.inter(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'coupons.',
+                          style: GoogleFonts.inter(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight:
+                                FontWeight.bold, // example of different style
+                          ),
+                        ),
+                      ],
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
+
               Expanded(
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(
@@ -408,14 +426,19 @@ class RewardCouponCard extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Material(
+                            Material(
                                 color: Colors.transparent,
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(6),
                                   onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('Use tapped for: $title'),
+                                    // Navigate to RewardDetailTest page
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MyCouponPage(
+                                          // You can pass the coupon data if needed
+                                          // coupon: coupon,
+                                        ),
                                       ),
                                     );
                                   },
@@ -435,6 +458,7 @@ class RewardCouponCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
+
                             ],
                           ),
                         ],

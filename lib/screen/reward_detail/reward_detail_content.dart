@@ -3,7 +3,7 @@ import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RewardDetailContent extends StatelessWidget {
+class RewardDetailContent extends StatefulWidget {
   final String title;
   final String merchant;
   final int used;
@@ -11,7 +11,6 @@ class RewardDetailContent extends StatelessWidget {
   final String redeemDate;
   final String pointsText;
   final String pointsValue;
-  final void Function()? onTapHeart;
   final void Function()? onTapRedeem;
 
   const RewardDetailContent({
@@ -23,9 +22,15 @@ class RewardDetailContent extends StatelessWidget {
     this.redeemDate = '22 October 2024',
     this.pointsText = 'Redeemed with',
     this.pointsValue = '200 points',
-    this.onTapHeart,
     this.onTapRedeem,
   });
+
+  @override
+  State<RewardDetailContent> createState() => _RewardDetailContentState();
+}
+
+class _RewardDetailContentState extends State<RewardDetailContent> {
+  bool isHeartFull = false; // initial state
 
   Widget _statusRow(String text) {
     return Row(
@@ -81,18 +86,18 @@ class RewardDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      color: Colors.white, // changed from AppColors.error
+      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Title & merchant
           Text(
-            title,
+            widget.title,
             style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 6),
           Text(
-            merchant,
+            widget.merchant,
             style: GoogleFonts.inter(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -122,14 +127,14 @@ class RewardDetailContent extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: used == 0 && expired == 0
+                        text: widget.used == 0 && widget.expired == 0
                             ? 'Expired on '
-                            : used == 1 && expired == 0
+                            : widget.used == 1 && widget.expired == 0
                             ? 'Used on '
                             : 'Expired on ',
                       ),
                       TextSpan(
-                        text: redeemDate,
+                        text: widget.redeemDate,
                         style: GoogleFonts.inter(
                           fontSize: 15,
                           color: AppColors.textBlack,
@@ -164,9 +169,9 @@ class RewardDetailContent extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                     children: [
-                      TextSpan(text: '$pointsText '),
+                      TextSpan(text: '${widget.pointsText} '),
                       TextSpan(
-                        text: pointsValue,
+                        text: widget.pointsValue,
                         style: GoogleFonts.inter(
                           fontSize: 15,
                           color: AppColors.textBlack,
@@ -182,25 +187,34 @@ class RewardDetailContent extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // Status chip and heart
+          // Status chip and heart with toggle
           Row(
             children: [
-              if (used == 1)
+              if (widget.used == 1)
                 _statusRow('Used')
-              else if (expired == 1)
+              else if (widget.expired == 1)
                 _statusRow('Expired')
               else
                 _statusRow('Expired'),
               const Spacer(),
               GestureDetector(
-                onTap: onTapHeart,
+                onTap: () {
+                  setState(() {
+                    isHeartFull = !isHeartFull; // toggle heart
+                  });
+                  if (widget.onTapRedeem != null) {
+                    widget.onTapRedeem!(); // optional callback
+                  }
+                },
                 child: Container(
                   width: 40,
                   height: 40,
                   decoration: const BoxDecoration(shape: BoxShape.circle),
                   padding: const EdgeInsets.all(8),
                   child: PackageAssets.image(
-                    'assets/reward/heart_full.png',
+                    isHeartFull
+                        ? 'assets/reward/heart_full.png'
+                        : 'assets/reward/heart.png',
                     fit: BoxFit.contain,
                   ),
                 ),
