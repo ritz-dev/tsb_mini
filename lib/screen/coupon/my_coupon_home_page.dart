@@ -13,7 +13,13 @@ class MyRewardPage extends StatefulWidget {
   final String? endDate;
   final List<Map<String, dynamic>>? items;
 
-  const MyRewardPage({super.key, this.startDate, this.endDate, this.items});
+
+  const MyRewardPage({
+    super.key, 
+    this.startDate, 
+    this.endDate, 
+    this.items
+    });
 
   @override
   _MyRewardPageState createState() => _MyRewardPageState();
@@ -30,164 +36,165 @@ class _MyRewardPageState extends State<MyRewardPage> {
 
   // Example coupon data
   final List<Map<String, dynamic>> coupons = [
-  // == STARBUCKS 1 COUNT ===
-  {
-    "slug": "1000100010007000",
-    "status": "active",
-    "datetime": "2025-07-20T09:00:00Z",
-    "expiry_date": "2025-12-15T23:59:59Z",
-    "merchant_logo": "assets/home_images/tm.png",
-    "merchant_name": "Starbucks",
-    "reward_name": "Free Handcrafted Drink",
-  },
+    // == STARBUCKS 1 COUNT ===
+    {
+      "slug": "1000100010007000",
+      "status": "active",
+      "datetime": "2025-07-20T09:00:00Z",
+      "expiry_date": "2025-12-15T23:59:59Z",
+      "merchant_logo": "assets/home_images/tm.png",
+      "merchant_name": "Starbucks",
+      "reward_name": "Free Handcrafted Drink with Extra Shot and Syrup",
+    },
 
-  // === TRUE (3 duplicates) ===
-  {
-    "slug": "1000100010001000",
-    "status": "active",
-    "datetime": "2025-08-10T10:00:00Z",
-    "expiry_date": "2025-11-30T23:59:59Z",
-    "merchant_logo": "assets/home_images/truesg.png",
-    "merchant_name": "True",
-    "reward_name": "Prepaid 5G Coupon",
-  },
-  {
-    "slug": "1000100010001000",
-    "status": "active",
-    "datetime": "2025-08-12T11:00:00Z",
-    "expiry_date": "2025-11-30T23:59:59Z",
-    "merchant_logo": "assets/home_images/truesg.png",
-    "merchant_name": "True",
-    "reward_name": "Prepaid 5G Coupon",
-  },
-  {
-    "slug": "1000100010001000",
-    "status": "active",
-    "datetime": "2025-08-15T09:30:00Z",
-    "expiry_date": "2025-11-30T23:59:59Z",
-    "merchant_logo": "assets/home_images/truesg.png",
-    "merchant_name": "True",
-    "reward_name": "Prepaid 5G Coupon",
-  },
-  // === KFC (1 count) ===
-  {
-  "slug": "1000100010008000", 
-  "status": "active",
-  "datetime": "2025-09-05T12:00:00Z",
-  "expiry_date": "2025-11-30T23:59:59Z",
-  "merchant_logo": "assets/home_images/kfc.png",
-  "merchant_name": "Uniqlo",
-  "reward_name": "Buy 1 Get 1 Free",
-},  
+    // === TRUE (3 duplicates) ===
+    {
+      "slug": "1000100010001000",
+      "status": "active",
+      "datetime": "2025-08-10T10:00:00Z",
+      "expiry_date": "2025-11-30T23:59:59Z",
+      "merchant_logo": "assets/home_images/truesg.png",
+      "merchant_name": "True",
+      "reward_name": "Prepaid 5G Coupon",
+    },
+    {
+      "slug": "1000100010001000",
+      "status": "active",
+      "datetime": "2025-08-12T11:00:00Z",
+      "expiry_date": "2025-11-30T23:59:59Z",
+      "merchant_logo": "assets/home_images/truesg.png",
+      "merchant_name": "True",
+      "reward_name": "Prepaid 5G Coupon",
+    },
+    {
+      "slug": "1000100010001000",
+      "status": "active",
+      "datetime": "2025-08-15T09:30:00Z",
+      "expiry_date": "2025-11-30T23:59:59Z",
+      "merchant_logo": "assets/home_images/truesg.png",
+      "merchant_name": "True",
+      "reward_name": "Prepaid 5G Coupon",
+    },
 
-  // === STARBUCKS (5 duplicates) ===
-  {
-    "slug": "1000100010002000",
-    "status": "active",
-    "datetime": "2025-07-20T09:00:00Z",
-    "expiry_date": "2025-12-15T23:59:59Z",
-    "merchant_logo": "assets/home_images/tm.png",
-    "merchant_name": "Starbucks",
-    "reward_name": "Free Handcrafted Drink",
-  },
-  {
-    "slug": "1000100010002000",
-    "status": "active",
-    "datetime": "2025-07-22T09:45:00Z",
-    "expiry_date": "2025-12-15T23:59:59Z",
-    "merchant_logo": "assets/home_images/tm.png",
-    "merchant_name": "Starbucks",
-    "reward_name": "Free Handcrafted Drink",
-  },
-  {
-    "slug": "1000100010002000",
-    "status": "active",
-    "datetime": "2025-07-25T08:15:00Z",
-    "expiry_date": "2025-12-15T23:59:59Z",
-    "merchant_logo": "assets/home_images/tm.png",
-    "merchant_name": "Starbucks",
-    "reward_name": "Free Handcrafted Drink",
-  },
-  {
-    "slug": "1000100010002000",
-    "status": "active",
-    "datetime": "2025-07-28T10:00:00Z",
-    "expiry_date": "2025-12-15T23:59:59Z",
-    "merchant_logo": "assets/home_images/tm.png",
-    "merchant_name": "Starbucks",
-    "reward_name": "Free Handcrafted Drink",
-  },
-  {
-    "slug": "1000100010002000",
-    "status": "active",
-    "datetime": "2025-07-30T11:30:00Z",
-    "expiry_date": "2025-12-15T23:59:59Z",
-    "merchant_logo": "assets/home_images/tm.png",
-    "merchant_name": "Starbucks",
-    "reward_name": "Free Handcrafted Drink",
-  },
+    // === KFC (1 count) ===
+    {
+      "slug": "1000100010008000",
+      "status": "active",
+      "datetime": "2025-09-05T12:00:00Z",
+      "expiry_date": "2025-11-30T23:59:59Z",
+      "merchant_logo": "assets/home_images/kfc.png",
+      "merchant_name": "KFC",
+      "reward_name": "Buy 1 Get 1 Free Meal Combo Special Offer",
+    },
 
-  // === KFC (2 duplicates) ===
-  {
-    "slug": "1000100010003000",
-    "status": "active",
-    "datetime": "2025-06-18T13:00:00Z",
-    "expiry_date": "2025-10-25T23:59:59Z",
-    "merchant_logo": "assets/home_images/kfc.png",
-    "merchant_name": "KFC",
-    "reward_name": "Free Bucket On Us",
-  },
-  {
-    "slug": "1000100010003000",
-    "status": "active",
-    "datetime": "2025-06-20T14:15:00Z",
-    "expiry_date": "2025-10-25T23:59:59Z",
-    "merchant_logo": "assets/home_images/kfc.png",
-    "merchant_name": "KFC",
-    "reward_name": "Free Bucket On Us",
-  },
+    // === STARBUCKS (5 duplicates) ===
+    {
+      "slug": "1000100010002000",
+      "status": "active",
+      "datetime": "2025-07-20T09:00:00Z",
+      "expiry_date": "2025-12-15T23:59:59Z",
+      "merchant_logo": "assets/home_images/tm.png",
+      "merchant_name": "Starbucks",
+      "reward_name": "Free Handcrafted Drink with Seasonal Flavors Included",
+    },
+    {
+      "slug": "1000100010002000",
+      "status": "active",
+      "datetime": "2025-07-22T09:45:00Z",
+      "expiry_date": "2025-12-15T23:59:59Z",
+      "merchant_logo": "assets/home_images/tm.png",
+      "merchant_name": "Starbucks",
+      "reward_name": "Free Handcrafted Drink with Seasonal Flavors Included",
+    },
+    {
+      "slug": "1000100010002000",
+      "status": "active",
+      "datetime": "2025-07-25T08:15:00Z",
+      "expiry_date": "2025-12-15T23:59:59Z",
+      "merchant_logo": "assets/home_images/tm.png",
+      "merchant_name": "Starbucks",
+      "reward_name": "Free Handcrafted Drink with Seasonal Flavors Included",
+    },
+    {
+      "slug": "1000100010002000",
+      "status": "active",
+      "datetime": "2025-07-28T10:00:00Z",
+      "expiry_date": "2025-12-15T23:59:59Z",
+      "merchant_logo": "assets/home_images/tm.png",
+      "merchant_name": "Starbucks",
+      "reward_name": "Free Handcrafted Drink with Seasonal Flavors Included",
+    },
+    {
+      "slug": "1000100010002000",
+      "status": "active",
+      "datetime": "2025-07-30T11:30:00Z",
+      "expiry_date": "2025-12-15T23:59:59Z",
+      "merchant_logo": "assets/home_images/tm.png",
+      "merchant_name": "Starbucks",
+      "reward_name": "Free Handcrafted Drink with Seasonal Flavors Included",
+    },
 
-  // === ADIDAS (3 duplicates, 1 expired) ===
-  {
-    "slug": "1000100010004000",
-    "status": "expired",
-    "datetime": "2025-05-01T08:30:00Z",
-    "expiry_date": "2025-09-30T23:59:59Z",
-    "merchant_logo": "assets/home_images/adidas.png",
-    "merchant_name": "Adidas",
-    "reward_name": "15% Off Voucher",
-  },
-  {
-    "slug": "1000100010004000",
-    "status": "expired",
-    "datetime": "2025-05-03T08:45:00Z",
-    "expiry_date": "2025-09-30T23:59:59Z",
-    "merchant_logo": "assets/home_images/adidas.png",
-    "merchant_name": "Adidas",
-    "reward_name": "15% Off Voucher",
-  },
-  {
-    "slug": "1000100010004000",
-    "status": "expired",
-    "datetime": "2025-05-05T09:10:00Z",
-    "expiry_date": "2025-09-30T23:59:59Z",
-    "merchant_logo": "assets/home_images/adidas.png",
-    "merchant_name": "Adidas",
-    "reward_name": "15% Off Voucher",
-  },
+    // === KFC (2 duplicates) ===
+    {
+      "slug": "1000100010003000",
+      "status": "active",
+      "datetime": "2025-06-18T13:00:00Z",
+      "expiry_date": "2025-10-25T23:59:59Z",
+      "merchant_logo": "assets/home_images/kfc.png",
+      "merchant_name": "KFC",
+      "reward_name": "Free Bucket On Us with Extra Spicy Sauce",
+    },
+    {
+      "slug": "1000100010003000",
+      "status": "active",
+      "datetime": "2025-06-20T14:15:00Z",
+      "expiry_date": "2025-10-25T23:59:59Z",
+      "merchant_logo": "assets/home_images/kfc.png",
+      "merchant_name": "KFC",
+      "reward_name": "Free Bucket On Us with Extra Spicy Sauce",
+    },
 
-  // === SINGLE-COUNT EXAMPLES (will show "one" background) ===
-  {
-    "slug": "1000100010005000",
-    "status": "active",
-    "datetime": "2025-09-01T10:00:00Z",
-    "expiry_date": "2025-12-01T23:59:59Z",
-    "merchant_logo": "assets/home_images/adidas.png",
-    "merchant_name": "Zara",
-    "reward_name": "10% Off Select Items",
-  },
+    // === ADIDAS (3 duplicates, 1 expired) ===
+    {
+      "slug": "1000100010004000",
+      "status": "expired",
+      "datetime": "2025-05-01T08:30:00Z",
+      "expiry_date": "2025-09-30T23:59:59Z",
+      "merchant_logo": "assets/home_images/adidas.png",
+      "merchant_name": "Adidas",
+      "reward_name": "15% Off Voucher for All Footwear and Apparel",
+    },
+    {
+      "slug": "1000100010004000",
+      "status": "expired",
+      "datetime": "2025-05-03T08:45:00Z",
+      "expiry_date": "2025-09-30T23:59:59Z",
+      "merchant_logo": "assets/home_images/adidas.png",
+      "merchant_name": "Adidas",
+      "reward_name": "15% Off Voucher for All Footwear and Apparel",
+    },
+    {
+      "slug": "1000100010004000",
+      "status": "expired",
+      "datetime": "2025-05-05T09:10:00Z",
+      "expiry_date": "2025-09-30T23:59:59Z",
+      "merchant_logo": "assets/home_images/adidas.png",
+      "merchant_name": "Adidas",
+      "reward_name": "15% Off Voucher for All Footwear and Apparel",
+    },
 
-];
+    // === SINGLE-COUNT EXAMPLES ===
+    {
+      "slug": "1000100010005000",
+      "status": "active",
+      "datetime": "2025-09-01T10:00:00Z",
+      "expiry_date": "2025-12-01T23:59:59Z",
+      "merchant_logo": "assets/home_images/adidas.png",
+      "merchant_name": "Adidas",
+      "reward_name": "10% Off Select Items",
+    },
+  ];
+
 
 
   @override
@@ -331,6 +338,16 @@ class RewardCouponCard extends StatelessWidget {
         ? "assets/image/reward_card_many.png"
         : "assets/image/reward_card_one.png";
 
+    // Split title if longer than 30 chars
+    String truncatedTitle;
+    String remainingTitle = '';
+    if (title.length > 30) {
+      truncatedTitle = title.substring(0, 23);
+      remainingTitle = title.substring(20);
+    } else {
+      truncatedTitle = title;
+    }
+
     return SizedBox(
       height: 140,
       child: InkWell(
@@ -338,11 +355,9 @@ class RewardCouponCard extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => RewardDetailTest(),
-            ),
+            MaterialPageRoute(builder: (context) => RewardDetailTest()),
           );
-        }, // <-- Trigger navigation when tapped
+        },
         child: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -389,16 +404,144 @@ class RewardCouponCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: Colors.black,
+                          // Reward title with "..." modal
+                        Text.rich(
+                            TextSpan(
+                              text: truncatedTitle,
+                              style: GoogleFonts.inter(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              children: remainingTitle.isNotEmpty
+                                  ? [
+                                      WidgetSpan(
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            // Show a bottom sheet instead of full modal
+                                            showModalBottomSheet(
+                                              context: context,
+                                              backgroundColor: Colors.white,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.vertical(
+                                                          top: Radius.circular(
+                                                            20,
+                                                          ),
+                                                        ),
+                                                  ),
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding: const EdgeInsets.all(
+                                                    16.0,
+                                                  ),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        "Reward Details",
+                                                        style:
+                                                            GoogleFonts.inter(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 18,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                      ),
+                                                      const SizedBox(height: 12),
+                                                      Text(
+                                                        title,
+                                                        style:
+                                                            GoogleFonts.inter(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 16,
+                                                              color: Colors
+                                                                  .black87,
+                                                            ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 30,
+                                                      ),
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .center,
+                                                        child: Material(
+                                                          color: Colors
+                                                              .transparent,
+                                                          child: InkWell(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  6,
+                                                                ),
+                                                            onTap: () =>
+                                                                Navigator.pop(
+                                                                  context,
+                                                                ),
+                                                            child: Container(
+                                                              width: double.infinity,
+                                                              decoration: BoxDecoration(
+                                                                color: const Color(
+                                                                  0xFF2E3192,
+                                                                ), // submit button color
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                      20,
+                                                                    ),
+                                                              ),
+                                                              padding:
+                                                                  const EdgeInsets.symmetric(
+                                                                    vertical: 11,
+                                                                  ),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  'Close',
+                                                                  style: GoogleFonts.inter(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    fontSize: 14,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: Text(
+                                            '...',
+                                            style: GoogleFonts.inter(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16,
+                                              color: Colors
+                                                  .black, // highlight the "..." for tap
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ]
+                                  : [],
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.fade,
                           ),
+
                           const SizedBox(height: 6),
                           Text(
                             merchant,
@@ -426,19 +569,15 @@ class RewardCouponCard extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                            Material(
+                              Material(
                                 color: Colors.transparent,
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(6),
                                   onTap: () {
-                                    // Navigate to RewardDetailTest page
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => MyCouponPage(
-                                          // You can pass the coupon data if needed
-                                          // coupon: coupon,
-                                        ),
+                                        builder: (context) => MyCouponPage(),
                                       ),
                                     );
                                   },
@@ -458,7 +597,6 @@ class RewardCouponCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
                             ],
                           ),
                         ],
@@ -504,6 +642,7 @@ class RewardCouponCard extends StatelessWidget {
     );
   }
 }
+
 
 class VerticalDashed extends StatelessWidget {
   final double height;
