@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
+import 'package:tsb_mini/screen/coupon/comfirm_and_success_sheet.dart';
+import 'package:tsb_mini/screen/coupon/my_coupon_home_page.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:intl/intl.dart'; // For date formatting
@@ -274,22 +276,17 @@ class _MyCouponPageState extends State<MyCouponPage> {
                 ),
               ),
 
-              Expanded(
+             Expanded(
                 child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 0,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                   itemCount: coupons.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 16),
                   itemBuilder: (context, index) {
                     final coupon = coupons[index];
 
                     final image =
-                        (coupon['merchant_logo'] as String?) ??
-                        'assets/home_images/default.png';
-                    final title =
-                        (coupon['reward_name'] as String?) ?? 'Unknown Reward';
+                        (coupon['merchant_logo'] as String?) ?? 'assets/home_images/default.png';
+                    final title = (coupon['reward_name'] as String?) ?? 'Unknown Reward';
                     final merchant = (coupon['merchant_name'] as String?) ?? '';
 
                     String valid = '';
@@ -297,20 +294,15 @@ class _MyCouponPageState extends State<MyCouponPage> {
                     if (expiry != null) {
                       try {
                         final dt = DateTime.parse(expiry.toString());
-                        valid =
-                            'Valid Until ${DateFormat('d MMMM y').format(dt)}';
+                        valid = 'Valid Until ${DateFormat('d MMMM y').format(dt)}';
                       } catch (_) {
                         valid = expiry.toString();
                       }
                     }
 
-                    final key = (coupon['slug'] ?? coupon['reward_name'])
-                        .toString();
+                    final key = (coupon['slug'] ?? coupon['reward_name']).toString();
                     final count = coupons
-                        .where(
-                          (c) =>
-                              (c['slug'] ?? c['reward_name']).toString() == key,
-                        )
+                        .where((c) => (c['slug'] ?? c['reward_name']).toString() == key)
                         .length;
 
                     return RewardCouponCard(
@@ -319,6 +311,38 @@ class _MyCouponPageState extends State<MyCouponPage> {
                       merchant: merchant,
                       valid: valid,
                       count: count,
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (_) => ConfirmCouponSheet(
+                            onUse: () {
+                              Navigator.of(context).pop(); // Close Confirm sheet
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                builder: (_) => SuccessCouponSheet(
+                                  onGoToReward: () {
+                                    Navigator.of(context).pop();
+                                    // Navigate to MyRewardPage
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => MyRewardPage(),
+                                      ),
+                                    );
+                                  },
+                                  onUseAgain: () {
+                                    Navigator.of(context).pop(); // Close Success sheet
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
