@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tsb_mini/frame/app_bar/credit_scan_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
+import 'package:tsb_mini/screen/coupon/qr_scan_card.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class RewardMarchantScan extends StatefulWidget {
@@ -29,37 +30,62 @@ class _RewardMarchantScanState extends State<RewardMarchantScan> {
         width: double.infinity,
         height: double.infinity,
         color: const Color(0xFF224474),
+        child:Padding(
+        padding: const EdgeInsets.only(top: 0, bottom: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: height * 0.08), // Responsive spacing
-            // QR Frame Box
-            Container(
-              width: width * 0.6,
-              height: width * 0.6, // keep it square
-              padding: EdgeInsets.symmetric(vertical: height * 0.04),
-              decoration: BoxDecoration(
-                color: const Color(0xFFE4E7EC),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: PackageAssets.image(
-                'assets/image/qr_scan.png',
-                fit: BoxFit.contain,
+            // Center the QR frame column vertically
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, // center vertically
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        width: width * 0.7,
+                        height: width * 0.7,
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE4E7EC),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Center(
+                          child: PackageAssets.image(
+                            'assets/image/qr_scan.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                      // QR corner border overlay
+                      CustomPaint(
+                        size: Size(width * 0.78, width * 0.78),
+                        painter: QRCornersPainter(
+                          color: const Color(0XFF5E7699),
+                          strokeWidth: 3,
+                          cornerLength: width * 0.08,
+                          borderRadius: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    "Place the code inside the frame",
+                    style: TextStyle(
+                      color: AppColors.textFrosted,
+                      fontSize: width * 0.04,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
 
-            SizedBox(height: height * 0.03),
-
-            // Instruction Text
-            Text(
-              "Place the code inside the frame",
-              style: TextStyle(
-                color: AppColors.textFrosted,
-                fontSize: width * 0.04, // scale font
-              ),
-            ),
-
-            const Spacer(), // pushes button to bottom-ish
-            // Button
+            // Button stays at the bottom
             Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.1),
               child: SizedBox(
@@ -78,16 +104,16 @@ class _RewardMarchantScanState extends State<RewardMarchantScan> {
                     "Or Select from gallery",
                     style: TextStyle(
                       color: AppColors.textFrosted,
-                      fontSize: width * 0.04, // responsive font size
+                      fontSize: width * 0.04,
                     ),
                   ),
                 ),
               ),
             ),
-
-            SizedBox(height: height * 0.05),
           ],
         ),
+      ),
+
       ),
     );
   }

@@ -10,7 +10,7 @@ class FrostedHeartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onTap: onNavigate ?? () => Navigator.of(context).pop(),
+      onTap: onNavigate ?? () => Navigator.of(context).pop(),
       borderRadius: BorderRadius.circular(30),
       child: Container(
         width: 45,
