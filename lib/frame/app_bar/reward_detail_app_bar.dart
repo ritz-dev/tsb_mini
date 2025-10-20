@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/button/reward_back_button.dart';
+import 'package:tsb_mini/package_mode.dart';
 
 class RewardDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -21,12 +22,13 @@ class RewardDetailAppBar extends StatelessWidget
 
     return Container(
       height: preferredSize.height,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/image/starbucks_main.png'),
+          image: PackageAssets.image('assets/image/starbucks_main.png').image,
           fit: BoxFit.cover,
         ),
       ),
+
       child: SafeArea(
         top: true,
         bottom: false,
