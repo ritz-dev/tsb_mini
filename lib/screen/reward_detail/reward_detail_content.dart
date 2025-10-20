@@ -27,17 +27,6 @@ class RewardDetailContent extends StatelessWidget {
     this.onTapRedeem,
   });
 
-  Widget _buildSmallText(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: AppColors.textGrey,
-      ),
-    );
-  }
-
   Widget _statusRow(String text) {
     return Row(
       children: [
@@ -50,8 +39,8 @@ class RewardDetailContent extends StatelessWidget {
           child: Text(
             text,
             style: GoogleFonts.inter(
-              color: Colors.white, 
-              fontSize: 14, 
+              color: Colors.white,
+              fontSize: 14,
               fontWeight: FontWeight.w600,
               letterSpacing: 0.5,
             ),
@@ -62,56 +51,58 @@ class RewardDetailContent extends StatelessWidget {
   }
 
   Widget _buildDescription(String title, String text) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: GoogleFonts.inter(
-              fontSize: 17,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textBlack
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.inter(
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+            color: AppColors.textBlack,
           ),
-          const SizedBox(height: 12), // slightly larger spacing to match reference
-          Text(
-            text,
-            style: GoogleFonts.inter(
-              fontSize: 13.5,
-              color: AppColors.textGrey,
-              height: 1.5,          // line-height for comfortable reading and wrapping
-              fontWeight: FontWeight.w500,
-            ),
-            // makes line endings even like the design
-            softWrap: true,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          text,
+          style: GoogleFonts.inter(
+            fontSize: 13.5,
+            color: AppColors.textGrey,
+            height: 1.5,
+            fontWeight: FontWeight.w500,
           ),
-        ],
-      );
-    }
+          softWrap: true,
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
-      color: AppColors.cardBackground,
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      color: Colors.white, // changed from AppColors.error
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title / Merchant
-          Text(title, style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+          // Title & merchant
+          Text(
+            title,
+            style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600),
+          ),
           const SizedBox(height: 6),
-          Text(merchant,
-           style: GoogleFonts.inter
-            (
-              fontSize: 16, 
-              fontWeight: FontWeight.w500, 
-              color: Color(0XFFACACAC),
+          Text(
+            merchant,
+            style: GoogleFonts.inter(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: const Color(0XFFACACAC),
               letterSpacing: 0.3,
-            )
-           ),
+            ),
+          ),
           const SizedBox(height: 14),
 
-          // expiry + points rows
+          // Expiry info
           Row(
             children: [
               PackageAssets.image(
@@ -134,8 +125,8 @@ class RewardDetailContent extends StatelessWidget {
                         text: used == 0 && expired == 0
                             ? 'Expired on '
                             : used == 1 && expired == 0
-                                ? 'Used on '
-                                : 'Expired on ',
+                            ? 'Used on '
+                            : 'Expired on ',
                       ),
                       TextSpan(
                         text: redeemDate,
@@ -151,10 +142,18 @@ class RewardDetailContent extends StatelessWidget {
               ),
             ],
           ),
+
           const SizedBox(height: 12),
+
+          // Points info
           Row(
             children: [
-              PackageAssets.image('assets/reward/star.png', width: 30, height: 30, fit: BoxFit.contain),
+              PackageAssets.image(
+                'assets/reward/star.png',
+                width: 30,
+                height: 30,
+                fit: BoxFit.contain,
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text.rich(
@@ -180,8 +179,10 @@ class RewardDetailContent extends StatelessWidget {
               ),
             ],
           ),
+
           const SizedBox(height: 20),
-          // Status chip and heart aligned: chip left, heart right
+
+          // Status chip and heart
           Row(
             children: [
               if (used == 1)
@@ -196,10 +197,8 @@ class RewardDetailContent extends StatelessWidget {
                 child: Container(
                   width: 40,
                   height: 40,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  padding: const EdgeInsets.all(8), // space inside the border
+                  decoration: const BoxDecoration(shape: BoxShape.circle),
+                  padding: const EdgeInsets.all(8),
                   child: PackageAssets.image(
                     'assets/reward/heart_full.png',
                     fit: BoxFit.contain,
@@ -208,53 +207,33 @@ class RewardDetailContent extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          // Divider
-          const Divider(
-            color: AppColors.divider, 
-            thickness: 0.5
-          ),
 
+          const SizedBox(height: 12),
+          const Divider(color: AppColors.divider, thickness: 0.5),
           const SizedBox(height: 20),
 
-          // Descriptions
+          // Description blocks
           _buildDescription(
             "Description",
-            "New Starbucks Rewards members who join by Sept 28, 2025 get a"
-            "one-time coupon for a free handcrafted drink (up to 100THB) at "
-            "participating stores. The coupon appears in the app within 48 "
-            "hours, is valid for one week after joining, and requires a qualifying "
-            "purchase (excluding alcohol, gift cards, and reloads). Not valid for "
-            "delivery or combined offers.",
-          ),
-         const SizedBox(height: 12),
-         const Divider(
-            color: AppColors.divider,
-            thickness: 0.5,
-          ),
-          const SizedBox(height: 10),
-          _buildDescription(
-            "Terms and Conditions",
-            "You agree to use the Service only for lawful purposes and in a way"
-            "that does not fringe the rights of, restrict or inhibit anyone else's"
-            "use and enjoyment of the Service.",
+            "New Starbucks Rewards members who join by Sept 28, 2025 get a one-time coupon for a free handcrafted drink (up to 100THB) at participating stores. The coupon appears in the app within 48 hours, is valid for one week after joining, and requires a qualifying purchase (excluding alcohol, gift cards, and reloads). Not valid for delivery or combined offers.",
           ),
           const SizedBox(height: 12),
-          const Divider(
-           color: AppColors.divider,
-           thickness: 0.5
-          ),
+          const Divider(color: AppColors.divider, thickness: 0.5),
           const SizedBox(height: 10),
+
+          _buildDescription(
+            "Terms and Conditions",
+            "You agree to use the Service only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the Service.",
+          ),
+          const SizedBox(height: 12),
+          const Divider(color: AppColors.divider, thickness: 0.5),
+          const SizedBox(height: 10),
+
           _buildDescription(
             "About Merchant",
             "Content created by merchants for their online stores (like product descriptions, images, videos)?",
           ),
-          // const SizedBox(height: 12),
-          // const Divider(
-          //   color: Colors.grey, 
-          //   thickness: 0.5
-          //   ),
-          const SizedBox(height: 24), // padding for bottom button / safe area
+          const SizedBox(height: 24),
         ],
       ),
     );
