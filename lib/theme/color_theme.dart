@@ -32,7 +32,7 @@ class AppColors {
 
   // Border , ivider and progress bar colors
   static const Color listcardborder = Color(0xFFE6E5E5);
-  static const Color divider = Color(0xFFD9D9D9);
+  static const Color divider = Color.fromARGB(255, 234, 234, 234);
   static const Color progressBar = Color(0xFF2E3192);
 
   // Icon colors

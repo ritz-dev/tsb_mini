@@ -33,10 +33,10 @@ class FlashLightButton extends StatelessWidget {
             0.25,
           ), // Semi-transparent for glass effect
           shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2), // Light border for depth
-            width: 1.5,
-          ),
+          // border: Border.all(
+          //   color: Colors.white.withOpacity(0.1), // Light border for depth
+          //   width: 1.5,
+          // ),
           boxShadow: [
             BoxShadow(
               color: Color(0XFF4069A2).withOpacity(0.05),
@@ -44,7 +44,7 @@ class FlashLightButton extends StatelessWidget {
               blurRadius: 8,
             ),
           ],
-          backgroundBlendMode: BlendMode.overlay,
+          // backgroundBlendMode: BlendMode.overlay,
         ),
         child: Center(
           child: PackageAssets.image(
