@@ -280,7 +280,7 @@ class _MyCouponPageState extends State<MyCouponPage> {
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                   itemCount: coupons.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 16),
+                  separatorBuilder: (_, __) => const SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     final coupon = coupons[index];
 
@@ -378,10 +378,10 @@ class RewardCouponCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bgAsset = count > 1
         ? "assets/image/reward_card_many.png"
-        : "assets/image/reward_card_one.png";
+        : "assets/image/one_card.png";
 
     return SizedBox(
-      height: 140,
+      height: 130,
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap:
@@ -413,13 +413,16 @@ class RewardCouponCard extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: 56,
-                      child: Center(
-                        child: PackageAssets.image(
-                          image,
-                          width: 40,
-                          height: 40,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: SizedBox(
+                        width: 56,
+                        child: Center(
+                          child: PackageAssets.image(
+                            image,
+                            width: 40,
+                            height: 40,
+                          ),
                         ),
                       ),
                     ),

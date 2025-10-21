@@ -5,10 +5,7 @@ import 'package:tsb_mini/package_mode.dart';
 
 class RewardDetailAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  // Button actions
   final VoidCallback? onTapBack;
-
-  // Controls
   final bool enableBack;
 
   const RewardDetailAppBar({super.key, this.onTapBack, this.enableBack = true});
@@ -20,33 +17,31 @@ class RewardDetailAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     final localize = AppLocalizations.of(context)!;
 
-    return Container(
-      height: preferredSize.height,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: PackageAssets.image('assets/image/starbucks_main.png').image,
-          fit: BoxFit.cover,
-        ),
-      ),
-
-      child: SafeArea(
-        top: true,
-        bottom: false,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 15, left: 20, right: 12.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Back button (top-left)
-              if (enableBack)
-              RewardBackButton(
-                    onBack: onTapBack,
-                    localize: localize, // localization passed correctly
-                  ),
-            ],
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        // Background image
+        Container(
+          height: preferredSize.height,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/image/starbucks_main.png'),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-      ),
+
+        // Sticky back button
+        if (enableBack)
+          Positioned(
+            top: 15,
+            left: 20,
+            child: SafeArea(
+              bottom: false,
+              child: RewardBackButton(onBack: onTapBack, localize: localize),
+            ),
+          ),
+      ],
     );
   }
 }

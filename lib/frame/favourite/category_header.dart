@@ -40,8 +40,9 @@ class _CategoryHeaderState extends State<CategoryHeader> {
     }
 
     return Container(
-      height: 120,
-      margin: const EdgeInsets.only(top: 10),
+      color: Colors.white,
+      height: 70,
+      margin: const EdgeInsets.only(top: 0),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -56,7 +57,7 @@ class _CategoryHeaderState extends State<CategoryHeader> {
               });
             },
             child: Padding(
-              padding: const EdgeInsets.only(left: 20,top: 20,bottom: 20),
+              padding: const EdgeInsets.only(left: 20, right: 10 , top: 5),
               child: Column(
                 children: [
                   Container(
