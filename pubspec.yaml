@@ -21,6 +21,7 @@ dependencies:
   equatable: ^2.0.5
   shared_preferences: ^2.3.2
   path_provider: ^2.1.3
+  http: ^1.5.0
 
   tree_circle_progress:
     git:

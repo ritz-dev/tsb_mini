@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/body/history/credit_list.dart';
 import 'package:tsb_mini/frame/header/history/credit_earn_use.dart';
+import 'package:tsb_mini/models/transactions/transaction.dart';
+import 'package:tsb_mini/services/transactions/transaction_service.dart';
 
 class CarbonHistoryPage extends StatefulWidget {
   final String? startDate;
   final String? endDate;
   final List<Map<String, dynamic>>? items;
 
-  const CarbonHistoryPage({
+  
+
+  CarbonHistoryPage({
     super.key,
     this.startDate,
     this.endDate,
@@ -20,12 +24,35 @@ class CarbonHistoryPage extends StatefulWidget {
 }
 
 class _CarbonHistoryPageState extends State<CarbonHistoryPage> {
+
+  List<Transaction>? transactions = [];
+
+  final TransactionService _transactionService = TransactionService();
+
   int _selectedIndex = 4; // Default active is "List"
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    getAllTransactionData();
+  }
+
+  Future<void> getAllTransactionData() async{
+    try{
+      final data = await _transactionService.getAllTransaction();
+
+      setState((){
+        transactions = data;
+      });
+    }catch(e){
+      throw Exception('Error in getAllTransactionData : ${e.toString}');
+    }
   }
 
   @override
