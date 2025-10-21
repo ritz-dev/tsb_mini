@@ -8,6 +8,7 @@ class RewardDetailContent extends StatefulWidget {
   final String merchant;
   final int used;
   final int expired;
+  final int active ;
   final String redeemDate;
   final String pointsText;
   final String pointsValue;
@@ -19,6 +20,7 @@ class RewardDetailContent extends StatefulWidget {
     this.merchant = 'Starbucks',
     this.used = 0,
     this.expired = 0,
+    this.active = 1,
     this.redeemDate = '22 October 2024',
     this.pointsText = 'Redeemed with',
     this.pointsValue = '200 points',
@@ -192,8 +194,8 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
             children: [
               if (widget.used == 1)
                 _statusRow('Used')
-              else if (widget.expired == 1)
-                _statusRow('Expired')
+              else if (widget.active == 1)
+                _statusRow('Active')
               else
                 _statusRow('Expired'),
               const Spacer(),
@@ -246,8 +248,8 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
           _buildDescription(
             "About Merchant",
             "Content created by merchants for their online stores (like product descriptions, images, videos)?",
-          ),
-          const SizedBox(height: 24),
+          ),             // Scan Merchant QR button
+         const SizedBox(height: 24), 
         ],
       ),
     );

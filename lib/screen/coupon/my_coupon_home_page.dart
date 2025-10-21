@@ -6,7 +6,7 @@ import 'package:tsb_mini/screen/coupon/my_coupon_second_page.dart';
 import 'package:tsb_mini/screen/coupon/reward_merchant_scan.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
-import 'package:intl/intl.dart'; // <-- added for date formatting
+import 'package:intl/intl.dart';
 
 class MyRewardPage extends StatefulWidget {
   final String? startDate;
@@ -259,7 +259,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
                     vertical: 0,
                   ),
                   itemCount: coupons.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 16),
+                  separatorBuilder: (_, __) => const SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     final coupon = coupons[index];
 
@@ -272,15 +272,16 @@ class _MyRewardPageState extends State<MyRewardPage> {
 
                     // format expiry date if present
                     String valid = '';
-                    final expiry = coupon['expiry_date'];
-                    if (expiry != null) {
-                      try {
-                        final dt = DateTime.parse(expiry.toString());
-                        valid = 'Valid Until ${DateFormat('d MMMM y').format(dt)}';
-                      } catch (_) {
-                        valid = expiry.toString();
+                      final expiry = coupon['expiry_date'];
+                      if (expiry != null) {
+                        try {
+                          final dt = DateTime.parse(expiry.toString());
+                          valid =
+                              'Valid Until ${DateFormat('d MMM y').format(dt)}'; // e.g., 15 Dec 2025
+                        } catch (_) {
+                          valid = expiry.toString();
+                        }
                       }
-                    }
 
                     // compute duplicate count by slug (fallback to reward_name)
                     final key = (coupon['slug'] ?? coupon['reward_name']).toString();
@@ -335,8 +336,8 @@ class RewardCouponCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bgAsset = count > 1
-        ? "assets/image/reward_card_many.png"
-        : "assets/image/reward_card_one.png";
+        ? "assets/image/many_card.png"
+        : "assets/image/one_card.png";
 
     // Split title if longer than 30 chars
     String truncatedTitle;
@@ -349,7 +350,7 @@ class RewardCouponCard extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 140,
+      height: 130,
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
@@ -365,12 +366,12 @@ class RewardCouponCard extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
+        
                 image: DecorationImage(
                   image: PackageAssets.image(bgAsset, fit: BoxFit.fill).image,
                   fit: BoxFit.fill,
                 ),
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.white,
+                borderRadius: BorderRadius.circular(0),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -380,17 +381,20 @@ class RewardCouponCard extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: 56,
-                      child: Center(
-                        child: PackageAssets.image(
-                          image,
-                          width: 40,
-                          height: 40,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: SizedBox(
+                          width: 56,
+                          child: Center(
+                            child: PackageAssets.image(
+                              image,
+                              width: 40,
+                              height: 40,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
+                  ),
+                    const SizedBox(width: 10),
                     VerticalDashed(
                       height: 96,
                       dashHeight: 10,
@@ -590,7 +594,7 @@ class RewardCouponCard extends StatelessWidget {
                                       'Use',
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w800,
-                                        fontSize: 12,
+                                        fontSize: 14,
                                         color: const Color(0xFF2E3192),
                                       ),
                                     ),
@@ -616,20 +620,20 @@ class RewardCouponCard extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF2E3192),
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.12),
-                        blurRadius: 6,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
+                    // color: const Color(0xFFFFFFFF),
+                    // borderRadius: BorderRadius.circular(16),
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.black.withOpacity(0.12),
+                    //     blurRadius: 6,
+                    //     offset: const Offset(0, 3),
+                    //   ),
+                    // ],
                   ),
                   child: Text(
                     "x$count",
                     style: GoogleFonts.inter(
-                      color: Colors.white,
+                      color: Color(0xFF083F8C),
                       fontWeight: FontWeight.w700,
                       fontSize: 12,
                     ),
