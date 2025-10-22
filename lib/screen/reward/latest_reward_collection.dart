@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
-import 'package:tsb_mini/frame/body/reward/latest_reward_point_card.dart';
+import 'package:tsb_mini/frame/body/favourite/latest_reward_point_card.dart';
 import 'package:intl/intl.dart';
 import 'package:tsb_mini/frame/favourite/category_header.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';

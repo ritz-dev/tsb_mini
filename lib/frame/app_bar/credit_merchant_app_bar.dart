@@ -7,8 +7,7 @@ import 'package:tsb_mini/frame/button/heart_button.dart';
 import 'package:tsb_mini/frame/button/qr_scan_button.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
-class CreditMerchantAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class CreditMerchantAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   // Button actions
@@ -45,129 +44,160 @@ class CreditMerchantAppBar extends StatelessWidget
   });
 
   @override
-  Size get preferredSize => const Size.fromHeight(140); // increased for 2 rows
+  Size get preferredSize => const Size.fromHeight(115);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      // height: preferredSize.height,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/image/app_bar_bg.png'),
           fit: BoxFit.cover,
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Top Row: Back button, title, right buttons
-            Container(
+        child: Container(
+          decoration:BoxDecoration(
+            border: Border.all(color: Colors.cyanAccent ,  width: 1),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 15, bottom: 15),
+            child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.deepPurpleAccent, width: 1),
+                border: Border.all(color: Colors.purpleAccent , width: 1),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+                mainAxisSize:
+                    MainAxisSize.min, // Important to avoid taking full height
                 children: [
-                  if (enableBack)
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.orange , width: 1),
+                  // Top Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (enableBack)
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.limeAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: FrostedBackButton(onBack: onTapBack),
+                        ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.deepOrangeAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.inter(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textWhite,
+                            ),
+                          ),
+                        ),
                       ),
-                      child: FrostedBackButton(onBack: onTapBack))
-                  else
-                    const SizedBox(width: 40),
-              
-                  Expanded(
-                    child: Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textWhite,
-                      ),
-                    ),
+                      if (enableHeart)
+                        FrostedHeartButton(onNavigate: onTapHeart)
+                      else if (enableFilter)
+                        FilterButton(onFilter: onTapFilter)
+                      else if (enableScan)
+                        ScanButton(onScan: onTapScan)
+                      else if (enableFilterPoint)
+                        RewardFilterButton(onFilterPoint: onTapFilterPoint)
+                      else
+                        const SizedBox(width: 40),
+                    ],
                   ),
-              
-                  if (enableHeart)
-                    FrostedHeartButton(onNavigate: onTapHeart)
-                  else if (enableFilter)
-                    FilterButton(onFilter: onTapFilter)
-                  else if (enableScan)
-                    ScanButton(onScan: onTapScan)
-                  else if (enableFilterPoint)
-                    RewardFilterButton(onFilterPoint: onTapFilterPoint)
-                  else
-                    const SizedBox(width: 40),
+
+                  const SizedBox(height: 10),
+                       Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (enableBack)
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.limeAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: FrostedBackButton(onBack: onTapBack),
+                        ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.deepOrangeAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.inter(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textWhite,
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (enableHeart)
+                        FrostedHeartButton(onNavigate: onTapHeart)
+                      else if (enableFilter)
+                        FilterButton(onFilter: onTapFilter)
+                      else if (enableScan)
+                        ScanButton(onScan: onTapScan)
+                      else if (enableFilterPoint)
+                        RewardFilterButton(onFilterPoint: onTapFilterPoint)
+                      else
+                        const SizedBox(width: 40),
+                    ],
+                  ),
+                  // spacing between rows
+                  // New Row under the top row
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     Container(
+                  //       padding: const EdgeInsets.all(8),
+                  //       color: Colors.blueAccent,
+                  //       child: const Text(
+                  //         'Button 1',
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       padding: const EdgeInsets.all(8),
+                  //       color: Colors.greenAccent,
+                  //       child: const Text(
+                  //         'Button 2',
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       padding: const EdgeInsets.all(8),
+                  //       color: Colors.redAccent,
+                  //       child: const Text(
+                  //         'Button 3',
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
-
-            const SizedBox(height: 10),
-
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.deepPurpleAccent , width: 1),
-                ),
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (enableBack)
-                    FrostedBackButton(onBack: onTapBack)
-                  else
-                    const SizedBox(width: 40),
-                
-                  Expanded(
-                    child: Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textWhite,
-                      ),
-                    ),
-                  ),
-                
-                  if (enableHeart)
-                    FrostedHeartButton(onNavigate: onTapHeart)
-                  else if (enableFilter)
-                    FilterButton(onFilter: onTapFilter)
-                  else if (enableScan)
-                    ScanButton(onScan: onTapScan)
-                  else if (enableFilterPoint)
-                    RewardFilterButton(onFilterPoint: onTapFilterPoint)
-                  else
-                    const SizedBox(width: 40),
-                ],
-                            ),
-              ),
-            
-
-            
-            // spacing between rows
-            // Bottom Row: Optional search bar or other controls
-            // if (enableSearch)
-            //   Container(
-            //     height: 40,
-            //     padding: const EdgeInsets.symmetric(horizontal: 10),
-            //     decoration: BoxDecoration(
-            //       color: Colors.white.withOpacity(0.2),
-            //       borderRadius: BorderRadius.circular(10),
-            //     ),
-            //     child: TextField(
-            //       controller: searchController,
-            //       style: const TextStyle(color: Colors.white),
-            //       decoration: const InputDecoration(
-            //         hintText: "Search",
-            //         hintStyle: TextStyle(color: Colors.white70),
-            //         border: InputBorder.none,
-            //         icon: Icon(Icons.search, color: Colors.white),
-            //       ),
-            //     ),
-            //   ),
-          ],
+          ),
         ),
       ),
     );

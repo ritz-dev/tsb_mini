@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/merchant/credit_merchant.dart';
+import 'package:tsb_mini/screen/merchant/merchant.dart';
 
 class FamousMerchant extends StatefulWidget {
   const FamousMerchant({super.key});
@@ -50,7 +51,7 @@ class _FamousMerchantState extends State<FamousMerchant> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CreditMarchant(),
+                      builder: (context) => const MerchantPage(),
                     ),
                   );
                 },
