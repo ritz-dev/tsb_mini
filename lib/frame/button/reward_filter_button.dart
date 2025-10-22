@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/button/custom_elevated_button.dart';
-import 'package:tsb_mini/screen/merchant/reward_collection.dart';
+import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
@@ -45,7 +45,7 @@ class _RewardFilterButtonState extends State<RewardFilterButton> {
         child: Center(
           child: AppIcons.filterSvgIcon(
             color: AppColors.appBarIconColor,
-            size: 20,
+            size: 19,
           ),
         ),
       ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/app_bar/credit_merchant_app_bar.dart';
+import 'package:tsb_mini/frame/app_bar/merchat_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/merchant/reward_collection.dart';
+import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
 
 class CreditMarchant extends StatefulWidget {
   const CreditMarchant({super.key});
@@ -83,16 +85,17 @@ class _CreditMarchantState extends State<CreditMarchant> {
         .toList();
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(130),
-        child: CreditMerchantAppBar(
+      appBar: 
+        // preferredSize: const Size.fromHeight(130),
+        // child: 
+        CreditMerchantAppBar(
           title: 'Merchants',
           enableBack: true,
-          enableSearch: true,
-          searchController: _searchController,
+          // enableSearch: true,
         ),
-      ),
+      // ),
       body: Container(
+        color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: GridView.builder(
           itemCount: filteredMerchants.length,
