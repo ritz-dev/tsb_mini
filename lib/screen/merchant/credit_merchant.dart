@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_merchant_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/merchant/reward_merchant.dart';
+import 'package:tsb_mini/screen/merchant/reward_collection.dart';
 
 class CreditMarchant extends StatefulWidget {
   const CreditMarchant({super.key});
@@ -110,7 +110,7 @@ class _CreditMarchantState extends State<CreditMarchant> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        RewardMarchant(), // Go to merchant detail page
+                        RewardCollection(), // Go to merchant detail page
                   ),
                 );
               },

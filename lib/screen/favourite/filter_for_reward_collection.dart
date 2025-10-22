@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tsb_mini/frame/button/custom_elevated_button.dart';
 import 'package:tsb_mini/screen/favourite/favourite.dart';
+import 'package:tsb_mini/screen/merchant/reward_collection.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class FilterFavourite extends StatefulWidget {
@@ -78,7 +79,7 @@ class _FilterFavouriteState extends State<FilterFavourite> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: TextField(
-                    controller: _searchController, // ✅ Assign controller
+                    controller: _searchController, //  Assign controller
                     decoration: InputDecoration(
                       labelText: "Search...",
                       contentPadding: const EdgeInsets.symmetric(
@@ -189,7 +190,7 @@ class _FilterFavouriteState extends State<FilterFavourite> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => Favourite(
+                        builder: (_) => RewardCollection(
                           search: search,
                           minPoint: minValue,
                           maxPoint: maxValue,
@@ -226,6 +227,6 @@ class _FilterFavouriteState extends State<FilterFavourite> {
   
   @override
   Widget build(BuildContext context) {
-    return Favourite();
+    return RewardCollection();
   }
 }

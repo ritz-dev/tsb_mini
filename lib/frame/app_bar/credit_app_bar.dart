@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/button/back_button.dart';
 import 'package:tsb_mini/frame/button/filter_btn_button.dart';
-import 'package:tsb_mini/frame/button/frosted_filter_button.dart';
+import 'package:tsb_mini/frame/button/reward_filter_button.dart';
 import 'package:tsb_mini/frame/button/heart_button.dart';
 import 'package:tsb_mini/frame/button/qr_scan_button.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
@@ -37,7 +37,7 @@ class CreditHomeAppBar extends StatelessWidget
     this.enableHeart = false,
     this.enableFilter = false,
     this.enableScan = false,
-    this.enableFilterPoint = false,
+    this.enableFilterPoint = false, // For Reward Card 
   });
 
   @override
@@ -83,7 +83,7 @@ class CreditHomeAppBar extends StatelessWidget
             else if (enableScan)
               ScanButton(onScan: onTapScan)
             else if (enableFilterPoint)
-              FrostedFilterButton(onFilterPoint: onTapFilterPoint)
+              RewardFilterButton(onFilterPoint: onTapFilterPoint)
             else
               const SizedBox(width: 40),
           ],
