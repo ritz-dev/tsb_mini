@@ -45,7 +45,7 @@ class _TransferFormState extends State<TransferForm> {
             "Transfer To",
             style: GoogleFonts.inter(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
               color: const Color(0xFF083F8C),
             ),
           ),
@@ -62,7 +62,7 @@ class _TransferFormState extends State<TransferForm> {
             decoration: InputDecoration(
               hintText: "Please Enter Personal ID",
               hintStyle: GoogleFonts.inter(
-                fontSize: 14,
+                fontSize: 12,
                 color: Color(0xFFA6A6A6),
                 fontWeight: FontWeight.w500,
               ),
@@ -114,7 +114,7 @@ class _TransferFormState extends State<TransferForm> {
                   decoration: InputDecoration(
                     hintText: "Enter Amount",
                     hintStyle: GoogleFonts.inter(
-                      fontSize: 14,
+                      fontSize: 12,
                       color: Color(0xFFA6A6A6),
                       fontWeight: FontWeight.w500,
                     ),
@@ -185,7 +185,7 @@ class _TransferFormState extends State<TransferForm> {
             decoration: InputDecoration(
               hintText: "Add Notes",
               hintStyle: GoogleFonts.inter(
-                fontSize: 14,
+                fontSize: 12,
                 color: Color(0xFFA6A6A6),
                 fontWeight: FontWeight.w500,
               ),

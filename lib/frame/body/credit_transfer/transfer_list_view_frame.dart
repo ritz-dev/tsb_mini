@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
-class ListViewFrame extends StatelessWidget {
+class TransferListViewFrame extends StatelessWidget {
   final List<Map<String, dynamic>> items;
   final bool shrinkWrap; // NEW
   final ScrollPhysics? physics; // NEW
 
-  const ListViewFrame({
+  const TransferListViewFrame({
     super.key,
     required this.items,
     this.shrinkWrap = false, // default false
@@ -60,11 +60,19 @@ class ListViewFrame extends StatelessWidget {
             ],
           ),
           child: ListTile(
-            leading: items[index]['icon'] as Widget,
+            leading: Container(
+              width: 45,
+              height: 45,
+              decoration: BoxDecoration(
+                color: Color(0XFF083f8c), // background color
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(child: items[index]['icon'] as Widget),
+            ),
             title: Padding(
               padding: const EdgeInsets.symmetric(vertical: 3),
               child: Text(
-                items[index]['title'],
+                items[index]['from_name'],
                 style: GoogleFonts.inter(
                   fontSize: 13,
                   height: 1.5,
@@ -74,8 +82,12 @@ class ListViewFrame extends StatelessWidget {
               ),
             ),
             subtitle: Text(
-              items[index]['from_name'],
-              style: GoogleFonts.inter(fontSize: 12, color: AppColors.textGrey),
+              items[index]['id'],
+              style: GoogleFonts.inter(
+                fontSize: 12.5, 
+                color: AppColors.textLightFrosted,
+                fontWeight: FontWeight.w500,
+                ),
             ),
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -115,14 +127,14 @@ class ListViewFrame extends StatelessWidget {
                               : AppColors.textRed,
                         ),
                       ),
-                        TextSpan(
+                      TextSpan(
                         text: ' CC',
                         style: GoogleFonts.inter(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: items[index]['status'] == 'increase'
-                              ? AppColors.textgreen
-                              : AppColors.textRed, // You can change the color
+                           ? AppColors.textgreen
+                           : AppColors.textRed, // You can change the color
                         ),
                       ),
                     ],
