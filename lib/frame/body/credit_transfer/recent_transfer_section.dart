@@ -9,8 +9,9 @@ import 'package:tsb_mini/theme/icon_theme.dart';
 class RecentTransfer extends StatefulWidget {
   final String? startDate;
   final String? endDate;
+  final Function (String id)? onTapItem;
 
-  const RecentTransfer ({super.key, this.startDate, this.endDate});
+  const RecentTransfer ({super.key, this.startDate, this.endDate , this.onTapItem});
 
   @override
   State<RecentTransfer> createState() => _RecentTransferState();
@@ -58,46 +59,6 @@ class _RecentTransferState extends State<RecentTransfer> {
       'point': 500,
       'date': '10 Aug, 2025',
     },
-    {
-      'icon': HeroIcon(HeroIcons.user, color: Color(0XFFFFFFFF), size: 25),
-      'from_name': 'Ms. Olivia Davis',
-      'id': '10000001116',
-      'status': 'increase',
-      'point': 300,
-      'date': '09 Aug, 2025',
-    },
-    {
-      'icon': HeroIcon(HeroIcons.user, color: Color(0XFFFFFFFF), size: 25),
-      'from_name': 'Mr. William Johnson',
-      'id': '10000001117',
-      'status': 'increase',
-      'point': 420,
-      'date': '08 Aug, 2025',
-    },
-    {
-      'icon': HeroIcon(HeroIcons.user, color: Color(0XFFFFFFFF), size: 25),
-      'from_name': 'Ms. Sophia Wilson',
-      'id': '10000001118',
-      'status': 'increase',
-      'point': 275,
-      'date': '07 Aug, 2025',
-    },
-    {
-      'icon': HeroIcon(HeroIcons.user, color: Color(0XFFFFFFFF), size: 25),
-      'from_name': 'Mr. Daniel Martinez',
-      'id': '10000001119',
-      'status': 'increase',
-      'point': 360,
-      'date': '06 Aug, 2025',
-    },
-    {
-      'icon': HeroIcon(HeroIcons.user, color: Color(0XFFFFFFFF), size: 25),
-      'from_name': 'Ms. Isabella Taylor',
-      'id': '10000001120',
-      'status': 'increase',
-      'point': 490,
-      'date': '05 Aug, 2025',
-    },
   ];
 
   late List<Map<String, dynamic>> filteredItems;
@@ -139,7 +100,12 @@ class _RecentTransferState extends State<RecentTransfer> {
   return TransferListViewFrame(
       items: filteredItems,
       shrinkWrap: true, // important!
-      physics: NeverScrollableScrollPhysics(), // prevent inner scrolling
+      physics: NeverScrollableScrollPhysics(),
+      onTapItem: (Map<String, dynamic> item) {
+        if (widget.onTapItem != null) {
+          widget.onTapItem!(item['id']); // pass ID to parent
+        }
+      }, // prevent inner scrolling
     );
 
   }

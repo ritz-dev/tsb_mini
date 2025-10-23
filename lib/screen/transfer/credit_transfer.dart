@@ -22,6 +22,7 @@ class CreditTransferPage extends StatefulWidget {
 }
 
 class _CreditTransferPageState extends State<CreditTransferPage> {
+  final TextEditingController _idController =  TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +48,7 @@ class _CreditTransferPageState extends State<CreditTransferPage> {
                 CreditTransferHeader(),
 
                 // Transfer Form
-                TransferForm(),
+                TransferForm(idController: _idController),
 
                 const SizedBox(height: 5),
 
@@ -75,7 +76,12 @@ class _CreditTransferPageState extends State<CreditTransferPage> {
                   ),
                 ),
                 // Recent Transfers list
-                RecentTransfer(),
+                  RecentTransfer(
+                  onTapItem: (String id) {
+                    _idController.text = id; // auto fill the Personal ID input
+                  },
+                ),
+                
               ],
             ),
           ),

@@ -6,14 +6,18 @@ import 'package:tsb_mini/theme/icon_theme.dart';
 
 class TransferForm extends StatefulWidget {
   final VoidCallback? onCancelTransfer;
-  const TransferForm({super.key, this.onCancelTransfer});
+  final TextEditingController? idController;
+
+  const TransferForm({super.key, this.onCancelTransfer ,  this.idController});
 
   @override
   State<TransferForm> createState() => _TransferFormState();
 }
 
 class _TransferFormState extends State<TransferForm> {
-  final TextEditingController _idController = TextEditingController();
+  
+  late final TextEditingController _idController;
+  // final TextEditingController _idController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
 
@@ -24,7 +28,14 @@ class _TransferFormState extends State<TransferForm> {
 
   bool _isError = false;
 
-  final String noAccountData = "000011110000";
+  final String noAccountData = "1000000000";
+
+    @override
+  void initState() {
+    super.initState();
+    _idController =
+        widget.idController ?? TextEditingController(); // U""se passed controller
+  }
 
   void _validateAmount(String value) {
     final entered = int.tryParse(value.replaceAll(",", "")) ?? 0;
@@ -243,23 +254,42 @@ class _TransferFormState extends State<TransferForm> {
                     if (id == noAccountData) {
                       return NoAccountTransfer();
                     } else {
-                      final recipient = _idController.text.trim();
                       final amount =
                           int.tryParse(
                             _amountController.text.replaceAll(",", ""),
                           ) ??
                           0;
+
+                      // Find recipient name by matching entered ID with RecentTransfer data
+                      final List<Map<String, dynamic>> recentTransfers = [
+                        {'id': '10000001111', 'from_name': 'Mr. John Doe'},
+                        {'id': '10000001112', 'from_name': 'Ms. Jane Smith'},
+                        {'id': '10000001113', 'from_name': 'Mr. Alex Brown'},
+                        {'id': '10000001114', 'from_name': 'Ms. Emily Clark'},
+                        {'id': '10000001115', 'from_name': 'Mr. Michael Lee'},
+                      ];
+
+                      final recipientId = _idController.text.trim();
+                      final matchedUser = recentTransfers.firstWhere(
+                        (user) => user['id'] == recipientId,
+                        orElse: () => {'from_name': 'Unknown User'},
+                      );
+
+                      final recipientName = matchedUser['from_name'];
+
                       void onTransfer() {
                         // Implement transfer logic here
                       }
+
                       return ConfirmTransferSheet(
-                        recipient: recipient,
+                        recipient: recipientName,
                         amount: amount,
                         onTransfer: onTransfer,
                       );
                     }
                   },
                 );
+
               },
               child: Text(
                 "Continue",
