@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tsb_mini/frame/app_bar/credit_merchant_app_bar.dart';
+import 'package:tsb_mini/frame/app_bar/merchat_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/merchant/reward_merchant.dart';
+import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
 
-class CreditMarchant extends StatefulWidget {
-  const CreditMarchant({super.key});
+class MerchantPage extends StatefulWidget {
+  const MerchantPage({super.key});
 
   @override
-  State<CreditMarchant> createState() => _CreditMarchantState();
+  State<MerchantPage> createState() => _MerchantPagetState();
 }
 
-class _CreditMarchantState extends State<CreditMarchant> {
+class _MerchantPagetState extends State<MerchantPage> {
   final TextEditingController _searchController = TextEditingController();
   String searchText = "";
 
@@ -45,7 +45,6 @@ class _CreditMarchantState extends State<CreditMarchant> {
     {"name": "Cafe Amazon", "image": "assets/home_images/cafe_amazon.png"},
     {"name": "Adidas", "image": "assets/home_images/adidas.png"},
     {"name": "NIKE", "image": "assets/home_images/nike.png"},
-    // ...add more as needed
   ];
 
   @override
@@ -83,66 +82,67 @@ class _CreditMarchantState extends State<CreditMarchant> {
         .toList();
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(130),
-        child: CreditMerchantAppBar(
-          title: 'Merchants',
-          enableBack: true,
-          enableSearch: true,
-          searchController: _searchController,
-        ),
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        child: GridView.builder(
-          itemCount: filteredMerchants.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            mainAxisSpacing: 18,
-            crossAxisSpacing: 8,
-            childAspectRatio: 0.8,
+      body: Column(
+        children: [
+          MerchantAppBar(
+            title: 'Merchants', 
+            enableBack: true,
+            enableSearch: true,
+            searchController: _searchController,
           ),
-          itemBuilder: (context, index) {
-            final merchant = filteredMerchants[index];
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        RewardMarchant(), // Go to merchant detail page
-                  ),
-                );
-              },
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CircleAvatar(
-                    radius: 28,
-                    backgroundImage: PackageAssets.image(merchant["image"]).image,
-                    backgroundColor: Colors.white,
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    merchant["name"],
-                    style: GoogleFonts.inter(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
-                      color: Colors.black87,
+          Expanded(
+            child: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+              child: GridView.builder(
+                itemCount: filteredMerchants.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 18,
+                  crossAxisSpacing: 8,
+                  childAspectRatio: 0.8,
+                ),
+                itemBuilder: (context, index) {
+                  final merchant = filteredMerchants[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RewardCollection(),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          radius: 28,
+                          backgroundImage: PackageAssets.image(
+                            merchant["image"],
+                          ).image,
+                          backgroundColor: Colors.white,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          merchant["name"],
+                          style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                            color: Colors.black87,
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                        ),
+                      ],
                     ),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                  ),
-                ],
+                  );
+                },
               ),
-            );
-          },
-        ),
+            ),
+          ),
+        ],
       ),
-      // bottomNavigationBar: BottomNavBarFrame(
-      //   currentIndex: _selectedIndex,
-      //   onTap: _onItemTapped,
-      // ),
     );
   }
 }
@@ -160,11 +160,7 @@ class MerchantDetailPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            PackageAssets.image(
-              merchant["image"], 
-              width: 100, 
-              height: 100,
-            ),
+            PackageAssets.image(merchant["image"], width: 100, height: 100),
             const SizedBox(height: 20),
             Text(
               merchant["name"],

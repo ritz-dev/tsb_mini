@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
-import 'package:tsb_mini/frame/body/credit_transfer/recent_transfer.dart';
+import 'package:tsb_mini/frame/body/credit_transfer/recent_transfer_section.dart';
 import 'package:tsb_mini/frame/form/credit_transfer/transfer_form.dart';
 import 'package:tsb_mini/frame/header/credit_transfer/credit_transfer_header.dart';
-/// Credit Transfer Page
+
 class CreditTransferPage extends StatefulWidget {
   final String? startDate;
   final String? endDate;
@@ -21,76 +22,75 @@ class CreditTransferPage extends StatefulWidget {
 }
 
 class _CreditTransferPageState extends State<CreditTransferPage> {
-  
-  // int _selectedIndex = 3; // Default active is "List"
-
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
-
+  final TextEditingController _idController =  TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       backgroundColor: const Color(0xFF0D47A1),
-      // Need to be change a AppBar name from history to normal app bar name
-      appBar: CreditHomeAppBar(
-        title: 'Transfer', 
-        enableBack: true,
-        ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
+      appBar: CreditHomeAppBar(title: 'Transfer', enableBack: true),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-          child: Column(
-            children: [
-              CreditTransferHeader(),
-              Expanded(
-                child: SafeArea(
-                  bottom: true,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        TransferForm(),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: const Divider(
-                            height: 1,
-                            color: Color(0xFFE6E5E5),
-                          ),
+        ),
+        child: SafeArea(
+          bottom: true,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Header scrolls together
+                CreditTransferHeader(),
+
+                // Transfer Form
+                TransferForm(idController: _idController),
+
+                const SizedBox(height: 5),
+
+                // Divider
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Divider(height: 1, color: Color(0xFFE6E5E5)),
+                ),
+                const SizedBox(height: 5),
+                // Recent Transfers title
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Recent Transfers",
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFF083F8C),
                         ),
-                        const SizedBox(height: 20),
-                        //Add RecentTransfers here
-                        RecentTransfers(
-                          transfers: [
-                            {"name": "Customer One", "id": "10*****1111"},
-                            {"name": "Customer Two", "id": "10*****1112"},
-                            {"name": "Customer Three", "id": "10*****1113"},
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+                // Recent Transfers list
+                  RecentTransfer(
+                  onTapItem: (String id) {
+                    _idController.text = id; // auto fill the Personal ID input
+                  },
+                ),
+                
+              ],
+            ),
           ),
         ),
       ),
       // bottomNavigationBar: BottomNavBarFrame(
-      //   currentIndex: _selectedIndex,
-      //   onTap: _onItemTapped,
+      // //   currentIndex: _selectedIndex,
+      // //   onTap: _onItemTapped,
+      // // 
       // ),
     );
   }

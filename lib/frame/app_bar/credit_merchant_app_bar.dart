@@ -1,104 +1,203 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/button/back_button.dart';
-import 'package:tsb_mini/frame/button/filter_button.dart';
+import 'package:tsb_mini/frame/button/filter_btn_button.dart';
+import 'package:tsb_mini/frame/button/reward_filter_button.dart';
+import 'package:tsb_mini/frame/button/heart_button.dart';
+import 'package:tsb_mini/frame/button/qr_scan_button.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
-class CreditMerchantAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class CreditMerchantAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   // Button actions
   final VoidCallback? onTapBack;
+  final VoidCallback? onTapHeart;
   final VoidCallback? onTapFilter;
+  final VoidCallback? onTapScan;
+  final VoidCallback? onTapFilterPoint;
 
   // Controls
   final bool enableBack;
+  final bool enableHeart;
   final bool enableFilter;
-  final bool enableSearch; // NEW toggle for search box
+  final bool enableScan;
+  final bool enableFilterPoint;
+  final bool enableSearch;
   final TextEditingController? searchController;
 
   const CreditMerchantAppBar({
     super.key,
     required this.title,
     this.onTapBack,
+    this.onTapHeart,
     this.onTapFilter,
+    this.onTapScan,
+    this.onTapFilterPoint,
     this.enableBack = true,
+    this.enableHeart = false,
     this.enableFilter = false,
+    this.enableScan = false,
     this.enableSearch = false,
+    this.enableFilterPoint = false, // For Reward Card
     this.searchController,
   });
 
   @override
-  Size get preferredSize => Size.fromHeight(enableSearch ? 130 : 70); // taller if search enabled
+  Size get preferredSize => const Size.fromHeight(115);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: preferredSize.height,
+      // height: preferredSize.height,
       decoration: const BoxDecoration(
-        color: Color(0xFF0D47A1),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(15),
-          bottomRight: Radius.circular(15),
+        image: DecorationImage(
+          image: AssetImage('assets/image/app_bar_bg.png'),
+          fit: BoxFit.cover,
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+      padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
-        bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // --- Top row with Back / Title / Filter ---
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (enableBack)
-                  FrostedBackButton(onBack: onTapBack)
-                else
-                  const SizedBox(width: 40),
-
-                Expanded(
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textWhite,
-                    ),
-                  ),
-                ),
-
-                if (enableFilter)
-                  FilterButton(onFilter: onTapFilter)
-                else
-                  const SizedBox(width: 40),
-              ],
-            ),
-
-            // --- Search box below ---
-            if (enableSearch) ...[
-              const SizedBox(height: 15),
-              Container(
-                height: 42,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: TextField(
-                  controller: searchController,
-                  style: const TextStyle(fontSize: 14),
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.search, color: Colors.black54),
-                    hintText: "Search merchant",
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  ),
-                ),
+        child: Container(
+          decoration:BoxDecoration(
+            border: Border.all(color: Colors.cyanAccent ,  width: 1),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 15, bottom: 15),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.purpleAccent , width: 1),
               ),
-            ],
-          ],
+            child: Column(
+                mainAxisSize:
+                    MainAxisSize.min, // Important to avoid taking full height
+                children: [
+                  // Top Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (enableBack)
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.limeAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: FrostedBackButton(onBack: onTapBack),
+                        ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.deepOrangeAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.inter(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textWhite,
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (enableHeart)
+                        FrostedHeartButton(onNavigate: onTapHeart)
+                      else if (enableFilter)
+                        FilterButton(onFilter: onTapFilter)
+                      else if (enableScan)
+                        ScanButton(onScan: onTapScan)
+                      else if (enableFilterPoint)
+                        RewardFilterButton(onFilterPoint: onTapFilterPoint)
+                      else
+                        const SizedBox(width: 40),
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+                       Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (enableBack)
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.limeAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: FrostedBackButton(onBack: onTapBack),
+                        ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.deepOrangeAccent,
+                              width: 1,
+                            ),
+                          ),
+                          child: Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.inter(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textWhite,
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (enableHeart)
+                        FrostedHeartButton(onNavigate: onTapHeart)
+                      else if (enableFilter)
+                        FilterButton(onFilter: onTapFilter)
+                      else if (enableScan)
+                        ScanButton(onScan: onTapScan)
+                      else if (enableFilterPoint)
+                        RewardFilterButton(onFilterPoint: onTapFilterPoint)
+                      else
+                        const SizedBox(width: 40),
+                    ],
+                  ),
+                  // spacing between rows
+                  // New Row under the top row
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     Container(
+                  //       padding: const EdgeInsets.all(8),
+                  //       color: Colors.blueAccent,
+                  //       child: const Text(
+                  //         'Button 1',
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       padding: const EdgeInsets.all(8),
+                  //       color: Colors.greenAccent,
+                  //       child: const Text(
+                  //         'Button 2',
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       padding: const EdgeInsets.all(8),
+                  //       color: Colors.redAccent,
+                  //       child: const Text(
+                  //         'Button 3',
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 
-class RewardMerchantCard extends StatelessWidget {
+class RewardMerchantCard extends StatefulWidget {
   final String image;
   final String title;
   final String merchant;
@@ -10,7 +11,6 @@ class RewardMerchantCard extends StatelessWidget {
   final String point;
   final bool isFavorite;
   final VoidCallback? onTap;
-  final VoidCallback? onFavoriteTap;
 
   const RewardMerchantCard({
     required this.image,
@@ -20,15 +20,38 @@ class RewardMerchantCard extends StatelessWidget {
     required this.point,
     this.isFavorite = false,
     this.onTap,
-    this.onFavoriteTap,
     super.key,
   });
+
+  @override
+  _RewardMerchantCardState createState() => _RewardMerchantCardState();
+}
+
+class _RewardMerchantCardState extends State<RewardMerchantCard> {
+  late bool _isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFavorite = widget.isFavorite;
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      _isFavorite = !_isFavorite;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(12),
-      onTap: onTap,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RewardDetailTest()),
+        );
+      },
       child: Container(
         height: 120,
         decoration: BoxDecoration(
@@ -51,7 +74,7 @@ class RewardMerchantCard extends StatelessWidget {
                 bottomLeft: Radius.circular(12),
               ),
               child: PackageAssets.image(
-                image,
+                widget.image,
                 width: 110,
                 height: double.infinity,
                 fit: BoxFit.cover,
@@ -63,15 +86,16 @@ class RewardMerchantCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
-                  vertical: 10,
+                  vertical: 8,
                 ),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Title
                     Text(
-                      title,
+                      widget.title,
                       style: GoogleFonts.inter(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -87,7 +111,7 @@ class RewardMerchantCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '$point points',
+                          '${widget.point} points',
                           style: GoogleFonts.inter(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
@@ -105,7 +129,7 @@ class RewardMerchantCard extends StatelessWidget {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            merchant,
+                            widget.merchant,
                             style: GoogleFonts.inter(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
@@ -120,13 +144,13 @@ class RewardMerchantCard extends StatelessWidget {
 
                     const SizedBox(height: 8),
 
-                    // Validity line + Heart icon
+                    // Validity + Heart IconButton
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Text(
-                            valid,
+                            widget.valid,
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -136,10 +160,12 @@ class RewardMerchantCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: onFavoriteTap,
-                          child: Icon(
-                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                        IconButton(
+                          onPressed: _toggleFavorite,
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(), // remove extra IconButton spacing
+                          icon: Icon(
+                            _isFavorite ? Icons.favorite : Icons.favorite_border,
                             size: 20,
                             color: const Color(0xFF083F8C),
                           ),

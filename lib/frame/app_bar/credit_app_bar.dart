@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/button/back_button.dart';
 import 'package:tsb_mini/frame/button/filter_btn_button.dart';
-import 'package:tsb_mini/frame/button/frosted_filter_button.dart';
+import 'package:tsb_mini/frame/button/reward_filter_button.dart';
 import 'package:tsb_mini/frame/button/heart_button.dart';
 import 'package:tsb_mini/frame/button/qr_scan_button.dart';
 import 'package:tsb_mini/package_mode.dart';
@@ -25,6 +25,9 @@ class CreditHomeAppBar extends StatelessWidget
   final bool enableFilter;
   final bool enableScan;
   final bool enableFilterPoint;
+  final bool enableSearch;
+  final TextEditingController? searchController;
+
 
   const CreditHomeAppBar({
     super.key,
@@ -38,7 +41,9 @@ class CreditHomeAppBar extends StatelessWidget
     this.enableHeart = false,
     this.enableFilter = false,
     this.enableScan = false,
-    this.enableFilterPoint = false,
+    this.enableSearch = false,
+    this.enableFilterPoint = false, // For Reward Card 
+    this.searchController,
   });
 
   @override
@@ -60,38 +65,41 @@ class CreditHomeAppBar extends StatelessWidget
 
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // Back button (left side)
-            if (enableBack)
-              FrostedBackButton(onBack: onTapBack), // placeholder to keep spacing
-            // Title (centered)
-            Expanded(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textWhite,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 15 , bottom: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Back button (left side)
+              if (enableBack)
+                FrostedBackButton(onBack: onTapBack), // placeholder to keep spacing
+              // Title (centered)
+              Expanded(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textWhite,
+                  ),
                 ),
               ),
-            ),
-
-            // Filter button (right side)
-            if (enableHeart)
-              FrostedHeartButton(onNavigate: onTapHeart)
-            else if (enableFilter)
-              // for history page
-              FilterButton(onFilter: onTapFilter) // placeholder for symmetry
-            else if (enableScan)
-              ScanButton(onScan: onTapScan)
-            else if (enableFilterPoint)
-              FrostedFilterButton(onFilterPoint: onTapFilterPoint)
-            else
-              const SizedBox(width: 40),
-          ],
+          
+              // Filter button (right side)
+              if (enableHeart)
+                FrostedHeartButton(onNavigate: onTapHeart)
+              else if (enableFilter)
+                // for history page
+                FilterButton(onFilter: onTapFilter) // placeholder for symmetry
+              else if (enableScan)
+                ScanButton(onScan: onTapScan)
+              else if (enableFilterPoint)
+                RewardFilterButton(onFilterPoint: onTapFilterPoint)
+              else
+                const SizedBox(width: 40),
+            ],
+          ),
         ),
       ),
     );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
+import 'package:tsb_mini/screen/transfer/credit_transfer.dart';
+import 'package:tsb_mini/theme/color_theme.dart';
 
 /// Credit Transfer Page
 class TransferSuccessfulPage extends StatefulWidget {
@@ -16,10 +18,10 @@ class TransferSuccessfulPage extends StatefulWidget {
     super.key,
     this.recipient = "Mr.Jason",
     this.amount = 500,
-    this.transactionNo = "TRF-20250828-4B7F",
+    this.transactionNo = "TRF-20250828",
     this.transactionDate = "30 Aug 2025 12:30",
     this.transactionPerson = "10*****0000",
-    this.note = "",
+    this.note = "-",
   });
 
   @override
@@ -40,11 +42,7 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
     return Scaffold(
       extendBody: true,
       backgroundColor: const Color(0xFF0D47A1),
-      // Need to be change a AppBar name from history to normal app bar name
-      appBar: CreditHomeAppBar(
-        title: 'Transfer', 
-        enableBack: true
-        ),
+      appBar: CreditHomeAppBar(title: 'Transfer', enableBack: true),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
         child: Container(
@@ -57,55 +55,73 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
             ),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(height: 32),
-              PackageAssets.image("assets/image/success_icon.png"),
-              const SizedBox(height: 18),
-              Text(
-                "Transfer Successfully",
-                style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 10),
-              Text(
-                "You sent ${widget.amount} carbon credit to ${widget.recipient}.",
-                style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 24),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+                padding: const EdgeInsets.only(top: 20),
                 child: Column(
                   children: [
-                    _TransferInfoRow(
-                      label: "Amount",
-                      value: "-${widget.amount} CC",
+                    const SizedBox(height: 32),
+                    PackageAssets.image("assets/image/success_icon.png"),
+                    const SizedBox(height: 18),
+                    Text(
+                      "Transfer Successfully",
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    _TransferInfoRow(
-                      label: "Transaction No",
-                      value: widget.transactionNo,
+                    const SizedBox(height: 24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        children: [
+                          _TransferInfoRow(
+                            label: "Amount",
+                            value: "-${widget.amount} CC",
+                          ),
+                          _TransferInfoRow(
+                            label: "Transaction No",
+                            value: widget.transactionNo,
+                          ),
+                          _TransferInfoRow(
+                            label: "Date & Time",
+                            value: widget.transactionDate,
+                          ),
+                          _TransferInfoRow(
+                            label: "Person",
+                            valueWidget: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  widget.recipient, // Name
+                                  style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                    color: AppColors.textBlack,
+                                  ),
+                                ),
+                                Text(
+                                  widget.transactionPerson, // ID
+                                  style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: AppColors.textGrey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          _TransferInfoRow(label: "Note", value: widget.note),
+                        ],
+                      ),
                     ),
-                    _TransferInfoRow(
-                      label: "Transaction Date",
-                      value: widget.transactionDate,
-                    ),
-                    _TransferInfoRow(
-                      label: "Transaction Person",
-                      value: widget.transactionPerson,
-                    ),
-                    _TransferInfoRow(label: "Note", value: widget.note),
                   ],
                 ),
               ),
-              const Spacer(),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 32,
@@ -123,8 +139,14 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
                           ),
                           side: const BorderSide(color: Color(0xFF0A4DA2)),
                         ),
-                        onPressed: () {
-                          // TODO: Implement view history navigation
+                         onPressed: () {
+                          // Navigate to Transfer History page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CreditTransferPage(),
+                            ),
+                          );
                         },
                         child: Text(
                           "View History",
@@ -173,8 +195,10 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
 
 class _TransferInfoRow extends StatelessWidget {
   final String label;
-  final String value;
-  const _TransferInfoRow({required this.label, required this.value});
+  final String? value;
+  final Widget? valueWidget;
+
+  const _TransferInfoRow({required this.label, this.value, this.valueWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -188,22 +212,24 @@ class _TransferInfoRow extends StatelessWidget {
               label,
               style: GoogleFonts.inter(
                 fontWeight: FontWeight.w500,
-                fontSize: 15,
-                color: Colors.grey[700],
+                fontSize: 14,
+                color: AppColors.textGrey,
               ),
             ),
           ),
           Expanded(
             flex: 3,
-            child: Text(
-              value,
-              style: GoogleFonts.inter(
-                fontWeight: FontWeight.w600,
-                fontSize: 15,
-                color: Colors.black,
-              ),
-              textAlign: TextAlign.right,
-            ),
+            child:
+                valueWidget ??
+                Text(
+                  value ?? "",
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: AppColors.textBlack,
+                  ),
+                  textAlign: TextAlign.right,
+                ),
           ),
         ],
       ),

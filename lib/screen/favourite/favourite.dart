@@ -1,99 +1,114 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/body/favourite/favourite_card.dart';
 import 'package:tsb_mini/frame/favourite/category_header.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
 class Favourite extends StatefulWidget {
-
   final String? search;
   final double? minPoint;
   final double? maxPoint;
 
-  const Favourite({
-    super.key,
-    this.search,
-    this.minPoint,
-    this.maxPoint,
-  });
+  const Favourite({super.key, this.search, this.minPoint, this.maxPoint});
 
   @override
   State<Favourite> createState() => _FavouriteState();
 }
 
 class _FavouriteState extends State<Favourite> {
-    final List<Map<String, dynamic>> categories = [
+  final List<Map<String, dynamic>> categories = [
     {"icon": AppIcons.allPngPath, "name": "All"},
     {"icon": AppIcons.drinkPngPath, "name": "Drink"},
     {"icon": AppIcons.foodPngPath, "name": "Food"},
     {"icon": AppIcons.shoppingPngPath, "name": "Shopping"},
     {"icon": AppIcons.fashionPngPath, "name": "Fashion"},
-    {"icon": AppIcons.drinkPngPath, "name": "Drink"},
-    {"icon": AppIcons.foodPngPath, "name": "Food"},
-    {"icon": AppIcons.shoppingPngPath, "name": "Shopping"},
-    {"icon": AppIcons.fashionPngPath, "name": "Fashion"},
   ];
-  
-  List<Map<String, dynamic>> data = [
+
+  final List<Map<String, dynamic>> data = [
+     {
+      "image": "assets/home_images/kfc2_latest_reward.png",
+      "message": "Buy One Get One Free",
+      "point": "150",
+      "name": "KFC",
+      "date": "2025-12-10",
+      "status": "Active",
+    },
+    {
+      "image": "assets/home_images/mc_latest_reward.png",
+      "message": "Free Fries With Meal",
+      "point": "90",
+      "name": "McDonald's",
+      "date": "2025-12-20",
+      "status": "Active",
+    },
     {
       "image": "assets/home_images/starbucks_latest_reward.png",
       "message": "Free Handcrafted Drink",
       "point": "100",
       "name": "Starbucks",
-      "date": "October 27, 2024",
-      "status": "End",
-      "icon" : "assets/icon/favourite.png"
+      "date": "2025-12-15",
+      "status": "Active",
     },
     {
       "image": "assets/home_images/kfc_latest_reward.png",
       "message": "Free Bucket On Us",
-      "point": "100",
+      "point": "120",
       "name": "KFC",
-      "date": "October 27, 2024",
-      "status": "End",
-      "icon" : "assets/icon/favourite.png"
+      "date": "2025-12-25",
+      "status": "Active",
     },
     {
       "image": "assets/home_images/amazon_latest_reward.png",
       "message": "Buy 9 Cups, Get 1 Free",
-      "point": "100",
+      "point": "110",
       "name": "Cafe Amazon",
-      "date": "October 22, 2024",
+      "date": "2025-10-20",
       "status": "Expired",
-      "icon" : "assets/icon/favourite.png"
     },
-
     {
       "image": "assets/home_images/kfc2_latest_reward.png",
       "message": "Buy One Get One Free",
-      "point": "100",
+      "point": "150",
       "name": "KFC",
-      "date": "November 11, 2024",
-      "status": "End",
-      "icon" : "assets/icon/favourite.png"
+      "date": "2025-12-10",
+      "status": "Active",
     },
-
     {
       "image": "assets/home_images/mc_latest_reward.png",
-      "message": "Free Handcrafted Drink",
-      "point": "100",
+      "message": "Free Fries With Meal",
+      "point": "90",
       "name": "McDonald's",
-      "date": "November 11, 2024",
-      "status": "End",
-      "icon" : "assets/icon/favourite.png"
+      "date": "2025-12-20",
+      "status": "Active",
     },
     {
       "image": "assets/home_images/starbucks2_latest_reward.png",
       "message": "60% Off One Time",
-      "point": "100",
+      "point": "130",
       "name": "Starbucks",
-      "date": "November 11, 2024",
-      "status": "End",
-      "icon" : "assets/icon/favourite.png"
+      "date": "2025-12-30",
+      "status": "Active",
     },
   ];
 
-  final int selected = 0;
+  int selected = 0;
+
+  /// Format date dynamically (e.g. “End on 25 Dec 2025” or “Expired on 22 Oct 2025”)
+  String formatDate(String dateStr) {
+    try {
+      final date = DateTime.parse(dateStr);
+      final formattedDate = DateFormat("dd MMM yyyy").format(date);
+
+      if (date.isBefore(DateTime.now())) {
+        return "Expired on $formattedDate";
+      } else {
+        return "End on $formattedDate";
+      }
+    } catch (e) {
+      return dateStr;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,11 +117,41 @@ class _FavouriteState extends State<Favourite> {
         children: [
           CreditHomeAppBar(title: "Favourite", enableFilterPoint: true),
           CategoryHeader(categories: categories, selected: selected),
-          FavouriteCard(
-            data: data,
-            search: widget.search,
-            minPoint: widget.minPoint,
-            maxPoint: widget.maxPoint,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Container(
+                width: double.infinity,
+                color: Colors.white,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 16,
+                  ),
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    final item = data[index];
+                    final validDate = item["date"] != null
+                        ? formatDate(item["date"])
+                        : '';
+
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: FavouriteCard(
+                        image: item["image"],
+                        title: item["message"],
+                        merchant: item["name"],
+                        valid: validDate,
+                        point: item["point"],
+                        onTap: () {
+                          // Navigate to reward detail if needed
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
           ),
         ],
       ),

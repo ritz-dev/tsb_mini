@@ -33,15 +33,15 @@ class CreditHomeQrCard extends StatelessWidget {
             PackageAssets.image("assets/image/qrcard.png", fit: BoxFit.cover),
 
             // gradient overlay on top of image
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.black.withOpacity(0.3), Colors.transparent],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-            ),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     gradient: LinearGradient(
+            //       colors: [Colors.black.withOpacity(0.3), Colors.transparent],
+            //       begin: Alignment.topCenter,
+            //       end: Alignment.bottomCenter,
+            //     ),
+            //   ),
+            // ),
 
             // overlay content
             Padding(
