@@ -8,7 +8,7 @@ class ScanButton extends StatelessWidget {
 
   const ScanButton({super.key, this.onScan});
 
-  @override
+  // @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
