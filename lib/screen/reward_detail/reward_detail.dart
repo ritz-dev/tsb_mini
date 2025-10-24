@@ -51,7 +51,7 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
-                            child: Image.asset(
+                            child: PackageAssets.image(
                               'assets/icon/starbuck_detail.png',
                               fit: BoxFit.contain,
                             ),

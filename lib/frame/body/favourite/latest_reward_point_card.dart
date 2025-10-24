@@ -160,16 +160,39 @@ class _RewardMerchantCardState extends State<RewardMerchantCard> {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        IconButton(
-                          onPressed: _toggleFavorite,
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(), // remove extra IconButton spacing
-                          icon: Icon(
-                            _isFavorite ? Icons.favorite : Icons.favorite_border,
-                            size: 20,
-                            color: const Color(0xFF083F8C),
+                        Material(
+                          color: Colors
+                              .transparent, // Keeps the container background white
+                          shape: const CircleBorder(),
+                          clipBehavior: Clip.antiAlias,
+                          child: IconButton(
+                            onPressed: _toggleFavorite,
+                            icon: Icon(
+                              _isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              size: 22,
+                              color: const Color(0xFF083F8C),
+                            ),
+                            splashRadius: 22,
+                            splashColor: const Color(
+                              0x33083F8C,
+                            ), // soft ripple color
+                            highlightColor: Colors
+                                .transparent, // disable harsh highlight glow
                           ),
                         ),
+
+                        // IconButton(
+                        //   onPressed: _toggleFavorite,
+                        //   padding: EdgeInsets.zero,
+                        //   constraints: const BoxConstraints(), // remove extra IconButton spacing
+                        //   icon: Icon(
+                        //     _isFavorite ? Icons.favorite : Icons.favorite_border,
+                        //     size: 20,
+                        //     color: const Color(0xFF083F8C),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],

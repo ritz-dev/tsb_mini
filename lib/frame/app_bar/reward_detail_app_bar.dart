@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tsb_main/package_mode.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/button/reward_back_button.dart';
 import 'package:tsb_mini/package_mode.dart';
@@ -23,13 +24,18 @@ class RewardDetailAppBar extends StatelessWidget
         // Background image
         Container(
           height: preferredSize.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/image/starbucks_main.png'),
-              fit: BoxFit.cover,
-            ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              PackageAssets.image(
+                'assets/image/starbucks_main.png',
+                fit: BoxFit.cover,
+              ),
+              // Your foreground content here (if any)
+            ],
           ),
         ),
+
 
         // Sticky back button
         if (enableBack)
