@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/reward_detail_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail_content.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
+import 'package:tsb_mini/frame/button/reward_back_button.dart';
 
 class RewardDetailTest extends StatefulWidget {
   const RewardDetailTest({super.key});
@@ -15,29 +17,22 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Use Stack to make button sticky at the bottom
       body: Stack(
         children: [
+          // Scrollable content
           SafeArea(
             top: false,
             child: CustomScrollView(
               slivers: [
-                // App bar + floating logo
+                // App bar + floating circular logo
                 SliverToBoxAdapter(
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
                       // App bar background
-                      SizedBox(
-                        height: 230,
-                        child: RewardDetailAppBar(
-                          onTapBack: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ),
+                      SizedBox(height: 230, child: const RewardDetailAppBar()),
 
-                      // Floating circular logo (on top)
+                      // Floating circular logo
                       Positioned(
                         left: 20,
                         bottom: -30,
@@ -53,8 +48,7 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
                             ),
                             child: PackageAssets.image(
                               'assets/icon/starbuck_detail.png',
-                              fit: BoxFit
-                                  .contain, // Keeps the image inside the circle
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
@@ -71,10 +65,7 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
                       topRight: Radius.circular(22),
                     ),
                     child: Container(
-                      padding: const EdgeInsets.only(
-                        top: 40,
-                        bottom: 60,
-                      ), // extra bottom padding for button
+                      padding: const EdgeInsets.only(top: 40, bottom: 60),
                       color: Colors.white,
                       child: const RewardDetailContent(),
                     ),
@@ -84,7 +75,22 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
             ),
           ),
 
-          // Sticky button at bottom
+          // Sticky back button (fixed position)
+          Positioned(
+            top: 15,
+            left: 20,
+            child: SafeArea(
+              bottom: false,
+              child: RewardBackButton(
+                onBack: () {
+                  Navigator.of(context).pop();
+                },
+                localize: AppLocalizations.of(context)!,
+              ),
+            ),
+          ),
+
+          // Sticky bottom button
           Positioned(
             left: 0,
             right: 0,
