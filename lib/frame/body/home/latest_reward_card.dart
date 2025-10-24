@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/merchant/reward_merchant.dart';
-import 'package:tsb_mini/screen/reward/reward_detail.dart';
+import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
+import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
+import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class LatestRewardCard extends StatefulWidget {
@@ -84,7 +85,7 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RewardMarchant(),
+                        builder: (context) => const RewardCollection(),
                       ),
                     );
                   },
@@ -115,7 +116,7 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => RewardDetail()),
+                      MaterialPageRoute(builder: (_) => RewardDetailTest()),
                     );
                   },
                   child: Container(

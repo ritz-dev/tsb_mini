@@ -52,7 +52,7 @@ class ConfirmTransferSheet extends StatelessWidget {
             "* Please review the details carefully before continuing.",
             style: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
-              fontSize: 14,
+              fontSize: 12,
               color: Color(0XFFE63063),
               letterSpacing: 1,
             ),
@@ -67,7 +67,7 @@ class ConfirmTransferSheet extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 18),
+                padding: const EdgeInsets.symmetric(vertical: 12),
               ),
               onPressed: () {
                 Navigator.push(
@@ -97,7 +97,7 @@ class ConfirmTransferSheet extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 side: BorderSide(color: Colors.grey.shade300),
-                padding: const EdgeInsets.symmetric(vertical: 18),
+                padding: const EdgeInsets.symmetric(vertical: 12),
               ),
               // ...existing code...
               onPressed: () {

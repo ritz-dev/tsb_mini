@@ -256,7 +256,7 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
                                       text: NumberFormat.decimalPattern().format(totalEarn),
                                       style: GoogleFonts.inter(
                                         color: AppColors.textWhite,
-                                        fontSize: 18,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 1,
                                       ),
@@ -266,7 +266,7 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
                                       text: "CC",
                                       style: GoogleFonts.inter(
                                         color: AppColors.textWhite,
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         letterSpacing: 1,
                                       ),
@@ -343,7 +343,7 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
                                       text: NumberFormat.decimalPattern().format(totalUse),
                                       style: GoogleFonts.inter(
                                         color: AppColors.textWhite,
-                                        fontSize: 18,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -352,7 +352,7 @@ class _CreditEarnUseState extends State<CreditEarnUse> {
                                       text: "CC",
                                       style: GoogleFonts.inter(
                                         color: AppColors.textWhite,
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),

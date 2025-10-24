@@ -12,18 +12,18 @@ class ScanButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:
-          onScan ??
-          () async {
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const RewardMarchantScan(),
-              ),
-            );
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const MyCouponPage()),
-            );
-          },
+      // onTap:
+      //     onScan ??
+      //     () async {
+      //       await Navigator.of(context).push(
+      //         MaterialPageRoute(
+      //           builder: (context) => const RewardMarchantScan(),
+      //         ),
+      //       );
+      //       Navigator.of(context).push(
+      //         MaterialPageRoute(builder: (context) => const MyCouponPage()),
+      //       );
+      //     },
       borderRadius: BorderRadius.circular(30),
       child: Container(
         width: 50,

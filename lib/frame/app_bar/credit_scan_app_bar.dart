@@ -27,7 +27,7 @@ class CreditScanAppBar extends StatelessWidget
   });
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(115);
 
   @override
   Widget build(BuildContext context) {

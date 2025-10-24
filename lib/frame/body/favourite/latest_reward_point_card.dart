@@ -3,7 +3,7 @@ import 'package:tsb_mini/package_mode.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 
-class FavouriteCard extends StatefulWidget {
+class RewardMerchantCard extends StatefulWidget {
   final String image;
   final String title;
   final String merchant;
@@ -12,22 +12,22 @@ class FavouriteCard extends StatefulWidget {
   final bool isFavorite;
   final VoidCallback? onTap;
 
-  const FavouriteCard({
+  const RewardMerchantCard({
     required this.image,
     required this.title,
     required this.merchant,
     required this.valid,
     required this.point,
-    this.isFavorite = true, // ✅ Default: filled heart
+    this.isFavorite = false,
     this.onTap,
     super.key,
   });
 
   @override
-  _FavouriteCardState createState() => _FavouriteCardState();
+  _RewardMerchantCardState createState() => _RewardMerchantCardState();
 }
 
-class _FavouriteCardState extends State<FavouriteCard> {
+class _RewardMerchantCardState extends State<RewardMerchantCard> {
   late bool _isFavorite;
 
   @override
@@ -144,7 +144,7 @@ class _FavouriteCardState extends State<FavouriteCard> {
 
                     const SizedBox(height: 8),
 
-                    // Validity + Heart Icon
+                    // Validity + Heart IconButton
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -163,11 +163,9 @@ class _FavouriteCardState extends State<FavouriteCard> {
                         IconButton(
                           onPressed: _toggleFavorite,
                           padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
+                          constraints: const BoxConstraints(), // remove extra IconButton spacing
                           icon: Icon(
-                            _isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border,
+                            _isFavorite ? Icons.favorite : Icons.favorite_border,
                             size: 20,
                             color: const Color(0xFF083F8C),
                           ),
