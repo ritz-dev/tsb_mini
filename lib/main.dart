@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<LanguageBloc, LanguageState>(
       builder: (context, state) {
         return MaterialApp(
-          debugShowCheckedModeBanner: true,
+          debugShowCheckedModeBanner: false,
           title: 'TSB MINI APP',
           locale: Locale(state.locale),
           supportedLocales: const [Locale('en'), Locale('th')],
