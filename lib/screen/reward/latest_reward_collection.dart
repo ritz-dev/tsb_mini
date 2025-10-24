@@ -110,7 +110,7 @@ class _RewardCollectionState extends State<RewardCollection> {
   },
   {
     "image": "assets/home_images/amazon_latest_reward.png",
-    "message": "Free Coffee Mug",
+    "message": "Free Coffee ",
     "point": "200",
     "name": "Cafe Amazon",
     "date": "2025-12-22",
