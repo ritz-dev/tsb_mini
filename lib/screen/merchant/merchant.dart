@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/merchat_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
-import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
+import 'package:tsb_mini/screen/merchant/merchant_items.dart';
 
 class MerchantPage extends StatefulWidget {
   const MerchantPage({super.key});
@@ -109,7 +109,7 @@ class _MerchantPagetState extends State<MerchantPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RewardCollection(),
+                          builder: (context) => MerchantItems(),
                         ),
                       );
                     },
