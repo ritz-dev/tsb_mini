@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/app_bar/reward_detail_app_bar.dart';
+import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail_content.dart';
 
 class RewardDetailTest extends StatefulWidget {
@@ -50,7 +51,7 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
-                            child: Image.asset(
+                            child: PackageAssets.image(
                               'assets/icon/starbuck_detail.png',
                               fit: BoxFit.contain,
                             ),
