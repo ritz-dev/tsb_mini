@@ -36,7 +36,7 @@
       final localize = widget.localize;
 
       return Scaffold(
-        backgroundColor: const Color(0xFF0A4DA2),
+        backgroundColor: Colors.white,
         appBar: CreditHomeAppBar(
           title: localize.translate('rewards'),
           // title: 'Rewards',
@@ -56,7 +56,7 @@
         body: SafeArea(
           child: Container(
             decoration: const BoxDecoration(
-              color: Colors.white,
+              // color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),

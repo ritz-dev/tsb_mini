@@ -5,6 +5,7 @@ import 'package:tsb_mini/frame/button/filter_btn_button.dart';
 import 'package:tsb_mini/frame/button/reward_filter_button.dart';
 import 'package:tsb_mini/frame/button/heart_button.dart';
 import 'package:tsb_mini/frame/button/qr_scan_button.dart';
+import 'package:tsb_mini/frame/button/scanner.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class CreditHomeAppBar extends StatelessWidget
@@ -88,7 +89,8 @@ class CreditHomeAppBar extends StatelessWidget
                 // for history page
                 FilterButton(onFilter: onTapFilter) // placeholder for symmetry
               else if (enableScan)
-                ScanButton(onScan: onTapScan)
+                // ScanButton(onScan: onTapScan)
+                Scanner(onScan: onTapScan)
               else if (enableFilterPoint)
                 RewardFilterButton(onFilterPoint: onTapFilterPoint)
               else

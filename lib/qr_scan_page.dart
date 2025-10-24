@@ -54,7 +54,7 @@ class _QRScannerPageState extends State<QRScannerPage>
           // Dimmed background overlay outside scan area
           ColorFiltered(
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.1),
+              Colors.black.withOpacity(0.05),
               BlendMode.color,
             ),
             child: Stack(
@@ -72,9 +72,9 @@ class _QRScannerPageState extends State<QRScannerPage>
                     child: CustomPaint(
                       painter: QRCornersPainter(
                         color: Colors.white,
-                        strokeWidth: 4,
-                        cornerLength: 30,
-                        borderRadius: 8,
+                        strokeWidth: 5,
+                        cornerLength: 50,
+                        borderRadius: 20,
                       ),
                     ),
                   ),

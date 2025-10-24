@@ -201,10 +201,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      sha256: "53385261521cc4a0c4658fd0ad07a7d14591cf8fc33abbceae306ddb974888dc"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.7"
+    version: "0.7.2"
   leak_tracker:
     dependency: transitive
     description:
@@ -503,7 +503,7 @@ packages:
     description:
       path: "."
       ref: tree_circle_progress
-      resolved-ref: d5c5402c91f279f42e3ac5d06576799659d0332e
+      resolved-ref: ebac8b1dc9c8569b894d6af1881adb8a00e441c1
       url: "https://github.com/ritz-dev/tree_circle_progress.git"
     source: git
     version: "1.0.0"
@@ -512,7 +512,7 @@ packages:
     description:
       path: "."
       ref: staging
-      resolved-ref: ac66cf2eadafb238de167c74417f41c3b211fff2
+      resolved-ref: "378d61d5e527ad4a6aa25751f794787a751ab340"
       url: "https://github.com/ritz-dev/tsb_main.git"
     source: git
     version: "1.0.0+1"
