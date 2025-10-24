@@ -38,7 +38,7 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
                       ),
 
                       // Floating circular logo (on top)
-                      Positioned(
+                     Positioned(
                         left: 20,
                         bottom: -30,
                         child: Material(
@@ -53,7 +53,8 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
                             ),
                             child: PackageAssets.image(
                               'assets/icon/starbuck_detail.png',
-                              fit: BoxFit.contain,
+                              fit: BoxFit
+                                  .contain, // Keeps the image inside the circle
                             ),
                           ),
                         ),
