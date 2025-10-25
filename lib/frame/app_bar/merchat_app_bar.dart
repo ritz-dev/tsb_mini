@@ -5,6 +5,7 @@ import 'package:tsb_mini/frame/button/filter_btn_button.dart';
 import 'package:tsb_mini/frame/button/reward_filter_button.dart';
 import 'package:tsb_mini/frame/button/heart_button.dart';
 import 'package:tsb_mini/frame/button/qr_scan_button.dart';
+import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class MerchantAppBar extends StatelessWidget {
@@ -47,9 +48,12 @@ class MerchantAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity, // make background full width
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/image/app_bar_01.png'),
+          image: PackageAssets.image(
+            'assets/image/app_bar_01.png',
+            fit: BoxFit.cover,
+          ).image, // <-- important: access the .image property
           fit: BoxFit.cover,
         ),
       ),
