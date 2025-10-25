@@ -23,24 +23,27 @@ class RewardDetailAppBar extends StatelessWidget
         // Background image
         Container(
           height: preferredSize.height,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/image/starbucks_main.png'),
+              image: PackageAssets.image(
+                'assets/image/starbucks_main.png',
+              ).image, // .image is required
               fit: BoxFit.cover,
             ),
           ),
         ),
 
+
         // Sticky back button
-        if (enableBack)
-          Positioned(
-            top: 15,
-            left: 20,
-            child: SafeArea(
-              bottom: false,
-              child: RewardBackButton(onBack: onTapBack, localize: localize),
-            ),
-          ),
+        // if (enableBack)
+        //   Positioned(
+        //     top: 15,
+        //     left: 20,
+        //     child: SafeArea(
+        //       bottom: false,
+        //       child: RewardBackButton(onBack: onTapBack, localize: localize),
+        //     ),
+        //   ),
       ],
     );
   }

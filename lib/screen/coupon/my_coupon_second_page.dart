@@ -294,7 +294,7 @@ class _MyCouponPageState extends State<MyCouponPage> {
                     if (expiry != null) {
                       try {
                         final dt = DateTime.parse(expiry.toString());
-                        valid = 'Valid Until ${DateFormat('d MMMM y').format(dt)}';
+                        valid = 'Valid Until ${DateFormat('d MMM y').format(dt)}';
                       } catch (_) {
                         valid = expiry.toString();
                       }
@@ -414,7 +414,7 @@ class RewardCouponCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 5),
+                      padding: const EdgeInsets.only(left: 10),
                       child: SizedBox(
                         width: 56,
                         child: Center(
@@ -445,7 +445,7 @@ class RewardCouponCard extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w500,
                               fontSize: 16,
                               color: Colors.black,
                             ),
@@ -497,7 +497,7 @@ class RewardCouponCard extends StatelessWidget {
                                       'Use',
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w800,
-                                        fontSize: 12,
+                                        fontSize: 14,
                                         color: const Color(0xFF2E3192),
                                       ),
                                     ),

@@ -190,7 +190,7 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
           const SizedBox(height: 20),
 
           // Status chip and heart with toggle
-          Row(
+         Row(
             children: [
               if (widget.used == 1)
                 _statusRow('Used')
@@ -202,7 +202,7 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    isHeartFull = !isHeartFull; // toggle heart
+                    isHeartFull = !isHeartFull; // toggle heart icon
                   });
                   if (widget.onTapRedeem != null) {
                     widget.onTapRedeem!(); // optional callback
@@ -213,16 +213,16 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
                   height: 40,
                   decoration: const BoxDecoration(shape: BoxShape.circle),
                   padding: const EdgeInsets.all(8),
-                  child: PackageAssets.image(
-                    isHeartFull
-                        ? 'assets/reward/heart_full.png'
-                        : 'assets/reward/heart.png',
-                    fit: BoxFit.contain,
+                  child: Icon(
+                    isHeartFull ? Icons.favorite : Icons.favorite_border,
+                    size: 24,
+                    color: const Color(0xFF083F8C),
                   ),
                 ),
               ),
             ],
           ),
+
 
           const SizedBox(height: 12),
           const Divider(color: AppColors.divider, thickness: 0.5),
