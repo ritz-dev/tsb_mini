@@ -64,7 +64,7 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 0),
+                padding: const EdgeInsets.only(top: 20),
                 child: const QuickActionMenu(),
               ),
               Padding(
@@ -153,10 +153,11 @@ class _CategorySelectorState extends State<_CategorySelector> {
                           context,
                         )!.translate(category["name"] ?? ''),
                         style: GoogleFonts.inter(
-                          fontSize: 13,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                           color: isSelected
-                              ? const Color(0XFF000000)
-                              : Colors.grey[700],
+                              ? const Color(0XFF083F8C)
+                              : Color(0XFF083F8C)
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
