@@ -389,7 +389,8 @@ class RewardCouponCard extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RewardDetailTest()),
+                MaterialPageRoute(builder: 
+                (context) => RewardDetailTest()),
               );
             },
         child: Stack(

@@ -8,6 +8,7 @@ import 'package:tsb_mini/frame/button/reward_back_button.dart';
 
 class RewardDetailTest extends StatefulWidget {
   const RewardDetailTest({super.key});
+  
 
   @override
   State<RewardDetailTest> createState() => _RewardDetailTestState();

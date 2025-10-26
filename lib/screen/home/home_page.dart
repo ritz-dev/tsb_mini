@@ -80,15 +80,14 @@
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 12),
                           LatestRewardCard(
                             title: localize.translate('latest_rewards'),
                           ),
+                          const SizedBox(height: 16),
                           const FamousMerchant(),
                           const SizedBox(height: 16),
                           FoodSlideCard(
                             title: localize.translate('food')),
-                          const SizedBox(height: 24),
                         ],
                       ),
                     ),

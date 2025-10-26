@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
+import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class FoodSlideCard extends StatefulWidget {
@@ -59,8 +60,9 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Title Row
         Container(
-          margin: const EdgeInsets.only(bottom: 30),
+          margin: const EdgeInsets.only(bottom: 14),
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -68,10 +70,9 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  // 'Food',
-                    widget.title != null
-                        ? AppLocalizations.of(context)!.translate(widget.title!)
-                        : '',
+                  widget.title != null
+                      ? AppLocalizations.of(context)!.translate(widget.title!)
+                      : '',
                   style: GoogleFonts.inter(
                     color: const Color(0XFF000000),
                     fontSize: 16,
@@ -88,7 +89,6 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
                     );
                   },
                   child: Text(
-                    // 'See more',
                     AppLocalizations.of(context)!.translate('see_more'),
                     style: GoogleFonts.inter(
                       color: const Color(0XFF1F258D),
@@ -102,140 +102,157 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
           ),
         ),
 
+        // Reward Card List
         Container(
-          margin: const EdgeInsets.only(bottom: 30),
-          child: SizedBox(
-            height: 230, // card height
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: cardImages.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (_) => RewardDetail()),
-                    // );
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(
-                      left: index == 0 ? 20 : 10,
-                      right: 10,
-                      top: 0,
-                      bottom: 0,
-                    ),
-                    width: 240, // card width
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.06),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                      color: Colors.white,
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        PackageAssets.image(
-                          cardImages[index]["image"],
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(0),
-                              bottomRight: Radius.circular(0),
+          // color: Colors.purple,
+          margin: const EdgeInsets.only(bottom: 15),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: SizedBox(
+              height: 240,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: cardImages.length,
+                itemBuilder: (context, index) {
+                  final item = cardImages[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: 
+                        (_) => RewardDetailTest()),
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        left: index == 0 ? 20 : 10,
+                        right: 10,
+                        bottom: 10,
+                      ),
+                      child: Container(
+                        width: 240,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.15),
+                              blurRadius: 4,
+                              offset: const Offset(0, 4), // shadow goes below
                             ),
-                            child: ClipRect(
-                              child: BackdropFilter(
-                                filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                                child: Container(
-                                  color: AppColors.cardBackground.withOpacity(
-                                    0.6,
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 6,
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        // cardImages[index]["message"] ?? "",
-                                        AppLocalizations.of(context)!.translate(
-                                          cardImages[index]["message"] ?? "",
-                                        ),
-                                        style: GoogleFonts.inter(
-                                          color: const Color(0xFF083F8B),
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              // Background image
+                              PackageAssets.image(
+                                item["image"],
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+
+                              // Bottom blur info
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: RepaintBoundary(
+                                  // Added to improve performance and prevent flicker
+                                  child: ClipRect(
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                        sigmaX: 8,
+                                        sigmaY: 8,
                                       ),
-                                      const SizedBox(height: 8),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  AppColors.scaffoldBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            margin: const EdgeInsets.symmetric(
-                                              horizontal: 0,
-                                              vertical: 0,
-                                            ),
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 12,
-                                              vertical: 6,
-                                            ),
-                                            child: Text(
-                                              // "${cardImages[index]["point"]} points",
-                                              "${cardImages[index]["point"]} ${AppLocalizations.of(context)!.translate('points')}",
+                                      child: Container(
+                                        color: AppColors.cardBackground
+                                            .withOpacity(0.6),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 6,
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.translate(
+                                                item["message"] ?? "",
+                                              ),
                                               style: GoogleFonts.inter(
-                                                color: const Color(0xFF083F8B),
-                                                fontSize: 11,
-                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.textBlack,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Expanded(
-                                            child: Text(
-                                              cardImages[index]["name"] ?? "",
-                                              style: GoogleFonts.inter(
-                                                color: const Color(0XFF000000),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                letterSpacing: 0.5,
-                                              ),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
+                                            const SizedBox(height: 8),
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors
+                                                        .scaffoldBackground,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          20,
+                                                        ),
+                                                  ),
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 12,
+                                                        vertical: 6,
+                                                      ),
+                                                  child: Text(
+                                                    "${item["point"]} ${AppLocalizations.of(context)!.translate('points')}",
+                                                    style: GoogleFonts.inter(
+                                                      color: const Color(
+                                                        0xFF083F8B,
+                                                      ),
+                                                      fontSize: 11,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 10),
+                                                Expanded(
+                                                  child: Text(
+                                                    item["name"] ?? "",
+                                                    style: GoogleFonts.inter(
+                                                      color: const Color(
+                                                        0XFF000000,
+                                                      ),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      letterSpacing: 0.5,
+                                                    ),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ),

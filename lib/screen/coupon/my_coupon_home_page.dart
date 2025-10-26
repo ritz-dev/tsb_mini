@@ -295,6 +295,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
                       merchant: merchant,
                       valid: valid,
                       count: count,
+                      status: (coupon['status'] ?? 'expired'), // pass status
                     );
                   },
                 ),
@@ -319,6 +320,7 @@ class RewardCouponCard extends StatelessWidget {
   final String merchant;
   final String valid;
   final int count;
+  final String status;
 
   /// New callback for when the card is tapped
   final VoidCallback? onTap;
@@ -329,6 +331,7 @@ class RewardCouponCard extends StatelessWidget {
     required this.merchant,
     required this.valid,
     required this.count,
+    required this.status,
     this.onTap,
     super.key,
   });
@@ -354,9 +357,12 @@ class RewardCouponCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          Navigator.push(
+         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => RewardDetailTest()),
+            MaterialPageRoute(
+              builder: (context) =>
+                  RewardDetailTest(), // use 'status' here
+            ),
           );
         },
         child: Stack(

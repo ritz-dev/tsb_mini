@@ -10,6 +10,7 @@ class FavouriteCard extends StatefulWidget {
   final String valid;
   final String point;
   final bool isFavorite;
+  final String status;
   final VoidCallback? onTap;
 
   const FavouriteCard({
@@ -18,7 +19,8 @@ class FavouriteCard extends StatefulWidget {
     required this.merchant,
     required this.valid,
     required this.point,
-    this.isFavorite = true, // ✅ Default: filled heart
+    required this.status,
+    this.isFavorite = true, // Default: filled heart
     this.onTap,
     super.key,
   });
@@ -170,6 +172,7 @@ class _FavouriteCardState extends State<FavouriteCard> {
                                 : Icons.favorite_border,
                             size: 20,
                             color: const Color(0xFF083F8C),
+                            
                           ),
                         ),
                       ],

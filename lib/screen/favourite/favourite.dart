@@ -135,7 +135,7 @@ class _FavouriteState extends State<Favourite> {
                         ? formatDate(item["date"])
                         : '';
 
-                    return Padding(
+                   return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
                       child: FavouriteCard(
                         image: item["image"],
@@ -143,6 +143,7 @@ class _FavouriteState extends State<Favourite> {
                         merchant: item["name"],
                         valid: validDate,
                         point: item["point"],
+                        status: (item['status'] ?? 'used'), // 
                         onTap: () {
                           // Navigate to reward detail if needed
                         },

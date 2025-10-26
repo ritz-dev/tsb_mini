@@ -30,7 +30,7 @@ class _FamousMerchantState extends State<FamousMerchant> {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(bottom: 14),
           color: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
