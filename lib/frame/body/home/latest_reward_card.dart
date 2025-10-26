@@ -119,7 +119,7 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => RewardDetailTest()),
+                        MaterialPageRoute(builder: (_) => RewardDetailTest(status: "Used",)),
                       );
                     },
                     child: Container(

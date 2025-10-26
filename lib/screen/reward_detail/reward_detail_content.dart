@@ -43,9 +43,9 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
   Widget _statusRow(String text) {
     Color bgColor;
     if (text == "Used") {
-      bgColor = Colors.grey;
+      bgColor = AppColors.textGreenPoint;
     } else if (text == "Expired") {
-      bgColor = Colors.redAccent;
+      bgColor = AppColors.filterButtonBackground;
     } else {
       bgColor = AppColors.filterButtonBackground;
     }
@@ -172,31 +172,105 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
 
           const SizedBox(height: 20),
 
-          // Status + Heart
-          Row(
-            children: [
-              _statusRow(statusText),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isHeartFull = !isHeartFull;
-                  });
-                  widget.onTapRedeem?.call();
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  padding: const EdgeInsets.all(8),
-                  child: Icon(
-                    isHeartFull ? Icons.favorite : Icons.favorite_border,
-                    size: 24,
-                    color: const Color(0xFF083F8C),
+        // Status + Heart
+        // Conditional layout based on status
+      if (statusText == "Used")
+            // 🔹 Show progress bar + points + heart for Used
+         
+             Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // 🔹 Left side: progress + text column
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Progress bar
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: LinearProgressIndicator(
+                            value: 190 / 200, // Progress percentage
+                            backgroundColor: AppColors.divider,
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                              Color(0xFF083F8C),
+                            ),
+                            minHeight: 6,
+                          ),
+                        ),
+            
+                        const SizedBox(height: 6),
+            
+                        // Text below the progress bar
+                        Text(
+                          "190 / 200 points",
+                          style: GoogleFonts.inter(
+                            fontSize: 13,
+                            color: AppColors.textGrey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+            
+                  const SizedBox(width: 10),
+            
+                  // 🔹 Right side: Heart icon
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isHeartFull = !isHeartFull;
+                          });
+                          widget.onTapRedeem?.call();
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          padding: const EdgeInsets.all(8),
+                          alignment: Alignment.center,
+                          child: Icon(
+                            isHeartFull ? Icons.favorite : Icons.favorite_border,
+                            size: 24,
+                            color: const Color(0xFF083F8C),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+          else
+            // 🔹 Show status row + heart for Active / Expired
+            Row(
+              children: [
+                _statusRow(statusText),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isHeartFull = !isHeartFull;
+                    });
+                    widget.onTapRedeem?.call();
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(
+                      isHeartFull ? Icons.favorite : Icons.favorite_border,
+                      size: 24,
+                      color: const Color(0xFF083F8C),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+
 
           const SizedBox(height: 12),
           const Divider(color: AppColors.divider, thickness: 0.5),

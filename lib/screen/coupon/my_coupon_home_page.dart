@@ -361,7 +361,7 @@ class RewardCouponCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  RewardDetailTest(), // use 'status' here
+                  RewardDetailTest(status: "Active",)// use 'status' here
             ),
           );
         },

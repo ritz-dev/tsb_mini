@@ -7,8 +7,10 @@ import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/button/reward_back_button.dart';
 
 class RewardDetailTest extends StatefulWidget {
-  const RewardDetailTest({super.key});
-  
+ 
+  final String status; // <-- Add this line
+
+  const RewardDetailTest({super.key, this.status = "Active"});
 
   @override
   State<RewardDetailTest> createState() => _RewardDetailTestState();
@@ -69,7 +71,11 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
                     child: Container(
                       padding: const EdgeInsets.only(top: 40, bottom: 60),
                       color: Colors.white,
-                      child: const RewardDetailContent(),
+                      child:  RewardDetailContent(
+                        used: widget.status == "Used" ? 1 : 0,
+                        expired: widget.status == "Expired" ? 1 : 0,
+                        active: widget.status == "Active" ? 1 : 0,
+                      ),
                     ),
                   ),
                 ),
