@@ -21,6 +21,11 @@ dependencies:
   equatable: ^2.0.5
   shared_preferences: ^2.3.2
   path_provider: ^2.1.3
+  mobile_scanner: ^3.5.7
+
+  
+
+
 
   tree_circle_progress:
     git:
@@ -31,6 +36,9 @@ dependencies:
     git:
       url: https://github.com/ritz-dev/tsb_main.git
       ref: staging
+
+
+    
 
 
 

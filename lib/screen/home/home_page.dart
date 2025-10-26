@@ -36,7 +36,7 @@
       final localize = widget.localize;
 
       return Scaffold(
-        backgroundColor: const Color(0xFF0A4DA2),
+        backgroundColor: Color(0xff083f8c),
         appBar: CreditHomeAppBar(
           title: localize.translate('rewards'),
           // title: 'Rewards',

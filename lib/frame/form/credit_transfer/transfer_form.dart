@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/body/credit_transfer/confirm_transfer_sheet.dart';
 import 'package:tsb_mini/frame/body/credit_transfer/no_account_transfer.dart';
+import 'package:tsb_mini/qr_scan_page.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
 class TransferForm extends StatefulWidget {
@@ -81,12 +82,29 @@ class _TransferFormState extends State<TransferForm> {
                 vertical: 14,
                 horizontal: 16,
               ),
+              // suffixIcon: IconButton(
+              //   icon: AppIcons.scanPngIcon(),
+              //   onPressed: () {
+              //     // Handle scan action
+              //   },
+              // ),
               suffixIcon: IconButton(
                 icon: AppIcons.scanPngIcon(),
-                onPressed: () {
-                  // Handle scan action
+                onPressed: () async {
+                  // Navigate to QR scanner page
+                  final scannedValue = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const QRScannerPage()),
+                  );
+
+                  if (scannedValue != null) {
+                    setState(() {
+                      _idController.text = scannedValue;
+                    });
+                  }
                 },
               ),
+
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: const BorderSide(color: Colors.grey),

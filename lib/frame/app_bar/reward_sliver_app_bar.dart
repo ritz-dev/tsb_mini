@@ -10,17 +10,17 @@ class RewardAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 450,
+      expandedHeight: 480,
       floating: false,
       pinned: false,
-      backgroundColor: Colors.transparent, // Make sure this is transparent
+      backgroundColor: Colors.white, // Make sure this is transparent
       elevation: 0, // Remove shadow if you want a flat look
       systemOverlayStyle: SystemUiOverlayStyle.light,
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 0),
           decoration: const BoxDecoration(
-            color: Colors.transparent, // No color here
+            color: Colors.white, // No color here
           ),
           child: SafeArea(
             top: false,
@@ -30,10 +30,11 @@ class RewardAppBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 12),
+                    padding: const EdgeInsets.only(top: 0),
                     child: TreeCirclePointProgressCard(
                       treesPlanted: 30,
                       pointsRemaining: 495,
+                      assetPackage: 'tree_circle_progress',
                     ),
                     // child: TreeCirclePointProgressCard(
                     //   treesPlanted: 30,
@@ -43,7 +44,7 @@ class RewardAppBar extends StatelessWidget {
                   const CreditHomeQrCard(),
                 ],
               ),
-            ),
+            ),  
           ),
         ),
       ),

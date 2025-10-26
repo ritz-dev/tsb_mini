@@ -35,15 +35,15 @@ class RewardDetailAppBar extends StatelessWidget
 
 
         // Sticky back button
-        if (enableBack)
-          Positioned(
-            top: 15,
-            left: 20,
-            child: SafeArea(
-              bottom: false,
-              child: RewardBackButton(onBack: onTapBack, localize: localize),
-            ),
-          ),
+        // if (enableBack)
+        //   Positioned(
+        //     top: 15,
+        //     left: 20,
+        //     child: SafeArea(
+        //       bottom: false,
+        //       child: RewardBackButton(onBack: onTapBack, localize: localize),
+        //     ),
+        //   ),
       ],
     );
   }
