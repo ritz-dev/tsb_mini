@@ -100,13 +100,13 @@ class _QuickActionCard extends StatelessWidget {
             //   color: Color.fromARGB(130, 236, 236, 236),
             //   width: 1,
             // ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 2,
-                offset: const Offset(1, 1),
-              ),    
-            ],
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.black.withOpacity(0.1),
+            //     blurRadius: 2,
+            //     offset: const Offset(1, 1),
+            //   ),    
+            // ],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
