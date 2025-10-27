@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/body/history/credit_list.dart';
 import 'package:tsb_mini/frame/header/history/credit_earn_use.dart';
-import 'package:tsb_mini/models/transactions/transaction.dart';
+import 'package:tsb_mini/models/transactions/transaction_model.dart';
 import 'package:tsb_mini/services/transactions/transaction_service.dart';
 
 class CarbonHistoryPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class CarbonHistoryPage extends StatefulWidget {
 
 class _CarbonHistoryPageState extends State<CarbonHistoryPage> {
 
-  List<Transaction>? transactions = [];
+  List<TransactionModel>? transactions = [];
 
   final TransactionService _transactionService = TransactionService();
 

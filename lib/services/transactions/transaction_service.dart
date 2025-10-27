@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tsb_mini/models/transactions/transaction.dart';
+import 'package:tsb_mini/models/transactions/transaction_model.dart';
 import 'package:tsb_mini/utils/config/base_url.dart';
 import 'package:tsb_mini/utils/storage/web_auth_storage.dart';
 
@@ -28,7 +28,7 @@ class TransactionService {
     }
   }
   
-  Future<List<Transaction>> getAllTransaction() async{
+  Future<List<TransactionModel>> getAllTransaction() async{
     final String? userSlug = await _storage.getUserSlug();
 
     debugPrint("User Slug is $userSlug");
@@ -56,11 +56,11 @@ class TransactionService {
         final dynamic jsonData = data is List ? data : data['data'] ?? [];
         final transaction = jsonData.map((json){
           try{
-            return Transaction.fromJson(json);
+            return TransactionModel.fromJson(json);
           }catch(e){
             return null;
           }
-        }).whereType<Transaction>()
+        }).whereType<TransactionModel>()
           .toList();
 
           debugPrint('$transaction');

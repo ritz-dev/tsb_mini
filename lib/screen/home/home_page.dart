@@ -8,6 +8,8 @@
   import 'package:tsb_mini/frame/body/home/food_slide.dart';
   import 'package:tsb_mini/frame/body/home/latest_reward_card.dart';
   import 'package:tsb_mini/frame/header/home/credit_reward_filter_header.dart';
+  import 'package:tsb_mini/models/categories/category_model.dart';
+  import 'package:tsb_mini/services/categories/category_service.dart';
 
   class RewardPage extends StatefulWidget {
     const RewardPage({super.key,
@@ -23,10 +25,35 @@
   class _RewardPageState extends State<RewardPage> {
     int _selectedIndex = 2;
 
+    List<CategoryModel>? categories = [];
+
+    final CategoryService _categoryService = CategoryService();
+
     void _onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
       });
+    }
+
+    @override
+    void initState(){
+      super.initState();
+      getAllTransactionData();
+    }
+
+    Future<void> getAllTransactionData() async{
+      try{
+        final data = await _categoryService.getAllCategory();
+
+        debugPrint('Category() data is $data');
+
+        setState((){
+          categories = data;
+        });
+
+      }catch(e){
+        throw Exception('Error in getAllTransactionData : ${e.toString}');
+      }
     }
 
     @override

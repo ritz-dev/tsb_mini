@@ -1,6 +1,6 @@
 import 'package:tsb_mini/models/pagination_model.dart';
 
-class Transaction {
+class TransactionModel {
   final PaginationModel pagination;
   final String slug;
   final String type;
@@ -10,7 +10,7 @@ class Transaction {
   final String title;
   final String relatedId;
 
-  Transaction({
+  TransactionModel({
     required this.pagination,
     required this.slug,
     required this.type,
@@ -21,8 +21,8 @@ class Transaction {
     required this.relatedId,
   });
 
-  factory Transaction.fromJson(Map<String, dynamic> json) {
-    return Transaction(
+  factory TransactionModel.fromJson(Map<String, dynamic> json) {
+    return TransactionModel(
       pagination: json['pagination'] is Map
           ? PaginationModel.fromJson(json['pagination'])
           : PaginationModel.empty(),

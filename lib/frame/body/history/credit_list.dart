@@ -324,9 +324,9 @@ List<Map<String, dynamic>> items = [
     super.initState();
     filteredItems = _applyFilter();
 
-    for (var fil in filteredItems) {
-      debugPrint(fil['status'].toString());
-    }
+    // for (var fil in filteredItems) {
+    //   debugPrint(fil['status'].toString());
+    // }
 
     // for (var item in items) {
     //   debugPrint(item['status'].toString());
@@ -334,7 +334,7 @@ List<Map<String, dynamic>> items = [
   }
 
   List<Map<String, dynamic>> _applyFilter() {
-    debugPrint("Widget Start Date is ${widget.startDate}");
+    // debugPrint("Widget Start Date is ${widget.startDate}");
 
     if (widget.startDate == null || widget.endDate == null) return items;
 
