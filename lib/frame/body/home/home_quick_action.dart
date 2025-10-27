@@ -18,7 +18,7 @@ class QuickActionMenu extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _QuickActionCard(
-            icon: AppIcons.ticketPngIcon(size: 20, color: Color(0XFF083F8C)),
+            icon: AppIcons.ticketPngIcon(size: 30, color: Color(0XFF083F8C)),
             // label: 'My Coupons',
             label: AppLocalizations.of(context)!.translate('my_coupon'),
             onTap: () {
@@ -30,7 +30,7 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: AppIcons.tierPngIcon(size: 20, color: Color(0XFF083F8C)),
+            icon: AppIcons.tierPngIcon(size: 30, color: Color(0XFF083F8C)),
             // label: 'Tier',
             label: AppLocalizations.of(context)!.translate('tier'),
             onTap: () {
@@ -44,7 +44,7 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: AppIcons.transferSvgIcon(size: 20, color: Color(0XFF083F8C)),
+            icon: AppIcons.leftRight3d(size: 30, color: Color(0XFF083F8C)),
             // label: 'Transfer',
             label: AppLocalizations.of(context)!.translate('transfer'),
             onTap: () {
@@ -56,7 +56,7 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: AppIcons.logSvgIcon(size: 20, color: Color(0XFF083F8C)),
+            icon: AppIcons.history3d(size: 30, color: Color(0XFF083F8C)),
             // label: 'History',
             label: AppLocalizations.of(context)!.translate('history'),
             onTap: () {
