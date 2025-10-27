@@ -86,7 +86,7 @@ class _CategoryHeaderState extends State<CategoryHeader> {
                         fontWeight: isSelected
                             ? FontWeight.bold
                             : FontWeight.normal,
-                        color: isSelected ? Colors.black : Colors.grey[700],
+                        color: isSelected ? Color(0XFF083F8C) : Color(0XFF083F8C),
                         fontSize: 13,
                       ),
                       maxLines: 1,
@@ -102,7 +102,7 @@ class _CategoryHeaderState extends State<CategoryHeader> {
                     height: 2,
                     width: isSelected ? 40 : 0,
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Color(0XFF083F8C),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),

@@ -199,7 +199,7 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
                           ),
                         ),
             
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 14),
             
                         // Text below the progress bar
                         Text(
@@ -208,6 +208,7 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
                             fontSize: 13,
                             color: AppColors.textGrey,
                             fontWeight: FontWeight.w500,
+                          
                           ),
                         ),
                       ],
