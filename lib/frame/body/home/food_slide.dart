@@ -119,8 +119,9 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: 
-                        (_) => RewardDetailTest()),
+                        MaterialPageRoute(
+                          builder: (_) => RewardDetailTest(status: "Used"),
+                        ),
                       );
                     },
                     child: Container(
@@ -162,12 +163,12 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
                                   child: ClipRect(
                                     child: BackdropFilter(
                                       filter: ImageFilter.blur(
-                                        sigmaX: 8,
-                                        sigmaY: 8,
+                                        sigmaX: 10,
+                                        sigmaY: 10,
                                       ),
                                       child: Container(
                                         color: AppColors.cardBackground
-                                            .withOpacity(0.6),
+                                            .withOpacity(0.4),
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 16,
                                           vertical: 6,

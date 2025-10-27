@@ -103,7 +103,7 @@ class _CategorySelectorState extends State<_CategorySelector> {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      physics: const BouncingScrollPhysics(), // smooth scroll
+      physics: const ClampingScrollPhysics(), // no BouncingScrollPhysics effect  scroll
       itemCount: widget.categories.length,
       itemBuilder: (context, index) {
         final category = widget.categories[index];
@@ -153,11 +153,11 @@ class _CategorySelectorState extends State<_CategorySelector> {
                           context,
                         )!.translate(category["name"] ?? ''),
                         style: GoogleFonts.inter(
-                          fontSize: 14,
+                          fontSize: 13,
                           fontWeight: FontWeight.w500,
                           color: isSelected
-                              ? const Color(0XFF083F8C)
-                              : Color(0XFF083F8C)
+                              ? AppColors.textdarkblack
+                              : AppColors.textdarkblack
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

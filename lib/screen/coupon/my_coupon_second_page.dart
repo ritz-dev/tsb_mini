@@ -230,7 +230,7 @@ class _MyCouponPageState extends State<MyCouponPage> {
       appBar: CreditHomeAppBar(
         title: 'My Coupons',
         enableBack: true,
-        enableScan: true,
+        // enableScan: false,
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),

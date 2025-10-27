@@ -6,8 +6,6 @@ import 'package:tsb_mini/screen/history/history_page.dart';
 import 'package:tsb_mini/screen/tier/credit_tier.dart';
 import 'package:tsb_mini/screen/transfer/credit_transfer.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 
 class QuickActionMenu extends StatelessWidget {
   const QuickActionMenu({super.key});
@@ -20,7 +18,7 @@ class QuickActionMenu extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _QuickActionCard(
-            icon: AppIcons.ticketPngIcon(size: 30, color: Color(0XFF083F8C)),
+            icon: AppIcons.ticketPngIcon(size: 25, color: Color(0XFF083F8C)),
             // label: 'My Coupons',
             label: AppLocalizations.of(context)!.translate('my_coupon'),
             onTap: () {
@@ -32,7 +30,7 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: AppIcons.tierPngIcon(size: 30, color: Color(0XFF083F8C)),
+            icon: AppIcons.tierPngIcon(size: 25, color: Color(0XFF083F8C)),
             // label: 'Tier',
             label: AppLocalizations.of(context)!.translate('tier'),
             onTap: () {
@@ -46,7 +44,7 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: AppIcons.leftRight3d(size: 30, color: Color(0XFF083F8C)),
+            icon: AppIcons.transferSvgIcon(size: 25, color: Color(0XFF083F8C)),
             // label: 'Transfer',
             label: AppLocalizations.of(context)!.translate('transfer'),
             onTap: () {
@@ -58,7 +56,7 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: AppIcons.history3d(size: 30, color: Color(0XFF083F8C)),
+            icon: AppIcons.logSvgIcon(size: 25, color: Color(0XFF083F8C)),
             // label: 'History',
             label: AppLocalizations.of(context)!.translate('history'),
             onTap: () {

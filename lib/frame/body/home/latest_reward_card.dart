@@ -160,11 +160,11 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                                 child: ClipRect(
                                   child: BackdropFilter(
                                     filter: ImageFilter.blur(
-                                      sigmaX: 8,
-                                      sigmaY: 8,
+                                      sigmaX: 10,
+                                      sigmaY: 10,
                                     ),
                                     child: Container(
-                                      color: AppColors.cardBackground.withOpacity(0.6),
+                                      color: AppColors.cardBackground.withOpacity(0.4),
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 16,
                                         vertical: 6,

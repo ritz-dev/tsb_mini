@@ -76,14 +76,14 @@ class SuccessGetRewardSheet extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.pop(context); // Close sheet first
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RewardPage(
-                      localize: localize, // Correct instance
-                    ),
-                  ),
-                );
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => RewardPage(
+                //       localize: localize, // Correct instance
+                //     ),
+                //   ),
+                // );
               },
               child: Text(
                 "Back To Reward",
