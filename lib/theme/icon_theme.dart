@@ -2,6 +2,8 @@ import 'package:tsb_mini/package_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class AppIcons {
   // Heroicons and SVG icons
@@ -158,7 +160,7 @@ class AppIcons {
 
    //TransferSvgIcon
   static Widget leftRight3d({double size = 28, Color? color}) {
-    return PackageAssets.svg(
+    return SvgPicture.asset(
       leftRightArrowPath,
       width: size,
       height: size,
