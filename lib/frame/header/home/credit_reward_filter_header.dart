@@ -63,7 +63,7 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(top: 0),
                 child: QuickActionMenu(),
               ),
               Padding(

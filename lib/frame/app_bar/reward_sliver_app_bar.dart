@@ -30,7 +30,7 @@ class RewardAppBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 15),
+                    padding: const EdgeInsets.only(top: 20),
                     child: TreeCirclePointProgressCard(
                       treesPlanted: 30,
                       pointsRemaining: 495,
