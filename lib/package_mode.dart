@@ -15,7 +15,7 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ? 'tsb_mini' : null,
+      package: _isInPackage ? null : 'tsb_mini',
     );
   }
 
@@ -30,7 +30,7 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ? 'tsb_mini' : null,
+      package: _isInPackage ? null : 'tsb_mini',
     );
   }
 
