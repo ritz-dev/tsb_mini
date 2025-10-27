@@ -503,7 +503,7 @@ packages:
     description:
       path: "."
       ref: tree_circle_progress
-      resolved-ref: aa4c0b0653b7c08d2cb3bf097f2112a9ae9e1ee2
+      resolved-ref: "3010152407e65ec18970d92ddce030e9cefb827a"
       url: "https://github.com/ritz-dev/tree_circle_progress.git"
     source: git
     version: "1.0.0"
