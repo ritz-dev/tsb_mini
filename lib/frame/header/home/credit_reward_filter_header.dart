@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/body/home/home_quick_action.dart';
 import 'package:tsb_mini/package_mode.dart';
+import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
@@ -86,7 +87,8 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class _CategorySelector extends StatefulWidget {
-  final List<Map<String, dynamic>> categories;
+
+  final List<Map<String, dynamic>> categories; 
 
   const _CategorySelector({required this.categories});
 
@@ -112,7 +114,17 @@ class _CategorySelectorState extends State<_CategorySelector> {
             setState(() {
               selectedIndex = index;
             });
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => RewardCollection(
+                  selectedIndex: index, //  Pass tapped category index
+                ),
+              ),
+            );
           },
+
           child: SizedBox(
             width: 80,
             child: Column(
@@ -148,10 +160,10 @@ class _CategorySelectorState extends State<_CategorySelector> {
                     duration: const Duration(milliseconds: 250),
                     curve: Curves.easeInOut,
                     style: GoogleFonts.inter(
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: isSelected
-                          ? const Color(0xFF083F8C)
+                          ? AppColors.textdarkblack
                           : AppColors.textdarkblack,
                     ),
                     child: Text(

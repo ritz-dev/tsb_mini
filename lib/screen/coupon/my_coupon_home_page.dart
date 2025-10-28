@@ -45,7 +45,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
       "merchant_logo": "assets/home_images/tm.png",
       "merchant_name": "Starbucks",
       "reward_name": "Free Handcrafted Drink with Extra Shot and Syrup",
-    },
+    },  
 
     // === TRUE (3 duplicates) ===
     {
@@ -579,18 +579,201 @@ class RewardCouponCard extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Material(
+                             Material(
                                 color: Colors.transparent,
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(6),
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MyCouponPage(),
-                                      ),
-                                    );
-                                  },
+                                onTap: () {
+                                  // === Show QR modal ===
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    enableDrag: true,
+                                    useSafeArea: true,
+                                    backgroundColor: Colors.transparent,
+                                    barrierColor: AppColors.barrierBackgroundColor.withOpacity(0.7),
+                                    builder: (context) {
+                                      return DraggableScrollableSheet(
+                                        expand: false,
+                                        initialChildSize: 0.45,
+                                        minChildSize: 0.3,
+                                        maxChildSize: 0.9,
+                                        builder: (context, scrollController) {
+                                          return Container(
+                                            decoration: const BoxDecoration(
+                                              color: AppColors.cardBackground,
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(43),
+                                                topRight: Radius.circular(43),
+                                              ),
+                                            ),
+                                            child: SingleChildScrollView(
+                                              controller: scrollController,
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                  left: 20,
+                                                  right: 20,
+                                                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                                                  top: 0,
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    // === Reward name with tooltip (centered on screen) ===
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(bottom: 6, top: 20),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          final overlay = Overlay.of(context);
+                                                          if (overlay != null) {
+                                                            late OverlayEntry entry;
+                                                            entry = OverlayEntry(
+                                                              builder: (context) => Stack(
+                                                                children: [
+                                                                  // Dim background (optional)
+                                                                  Positioned.fill(
+                                                                    child: GestureDetector(
+                                                                      onTap: () => entry.remove(),
+                                                                      child: Container(
+                                                                        color: Colors.black.withOpacity(0.1),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  // Centered tooltip
+                                                                  Center(
+                                                                    child: Material(
+                                                                      color: Colors.transparent,
+                                                                      child: Container(
+                                                                        margin: const EdgeInsets.symmetric(horizontal: 30),
+                                                                        padding: const EdgeInsets.symmetric(
+                                                                          horizontal: 16,
+                                                                          vertical: 10,
+                                                                        ),
+                                                                        decoration: BoxDecoration(
+                                                                          color: const Color(0xFF083F8C),
+                                                                          borderRadius: BorderRadius.circular(12),
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.black.withOpacity(0.2),
+                                                                              blurRadius: 8,
+                                                                              offset: const Offset(0, 3),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        child: Text(
+                                                                          title,
+                                                                          textAlign: TextAlign.center,
+                                                                          style: GoogleFonts.inter(
+                                                                            fontSize: 16,
+                                                                            color: Colors.white,
+                                                                            fontWeight: FontWeight.w500,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            );
+
+                                                            overlay.insert(entry);
+                                                            Future.delayed(const Duration(seconds: 2))
+                                                                .then((_) => entry.remove());
+                                                          }
+                                                        },
+                                                        child: Text(
+                                                          title.length > 25
+                                                              ? '${title.substring(0, 25)}...'
+                                                              : title,
+                                                          textAlign: TextAlign.center,
+                                                          style: GoogleFonts.inter(
+                                                            fontSize: 18,
+                                                            color: const Color(0XFF262628),
+                                                            fontWeight: FontWeight.w700,
+                                                          ),
+                                                          overflow: TextOverflow.ellipsis,
+                                                          maxLines: 1,
+                                                        ),
+                                                      ),
+                                                    ),
+
+                                                    // === Merchant name ===
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(bottom: 20),
+                                                      child: Text(
+                                                        merchant,
+                                                        textAlign: TextAlign.center,
+                                                        style: GoogleFonts.inter(
+                                                          fontSize: 16,
+                                                          color: const Color(0XFF083F8C),
+                                                          fontWeight: FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ),
+
+                                                    // === QR Image ===
+                                                   Padding(
+                                                      padding: const EdgeInsets.only(bottom: 15),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          // Close the bottom sheet first
+                                                          Navigator.pop(context);
+
+                                                          // Navigate to your target page
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) => MyCouponPage(),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: PackageAssets.image(
+                                                          "assets/image/qr_scan.png",
+                                                          height: 150,
+                                                          width: 150,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
+
+                                                    // === Save Image Button ===
+                                                    Center(
+                                                      child: SizedBox(
+                                                        width: 150,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            // Add save image logic
+                                                          },
+                                                          style: ElevatedButton.styleFrom(
+                                                            backgroundColor: const Color(0xFF083F8C),
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(20),
+                                                            ),
+                                                            padding: const EdgeInsets.symmetric(vertical: 5),
+                                                            elevation: 0,
+                                                          ),
+                                                          child: Text(
+                                                            'Save Image',
+                                                            style: GoogleFonts.inter(
+                                                              fontSize: 16,
+                                                              fontWeight: FontWeight.w600,
+                                                              color: Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
+                                },
+
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0,

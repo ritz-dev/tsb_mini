@@ -252,12 +252,15 @@ class _TierInfoSectionState extends State<TierInfoSection> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+    
         _TierProgressBar(
           currentPoints: widget.currentPoints,
           selectedTier: selectedTier,
           onTierSelected: _onTierSelected,
         ),
+      
         const SizedBox(height: 15),
+
         SizedBox(
           height: 270,
           child: PageView.builder(
@@ -415,7 +418,7 @@ class _TierInfoCard extends StatelessWidget {
               behavior: HitTestBehavior.translucent,
               child: CustomPaint(
                 size: const Size(20, 10),
-                painter: _TrianglePainter(color: Colors.white),
+                painter: _TrianglePainter(color: Colors.black),
               ),
             ),
           ),
@@ -626,14 +629,14 @@ class _TierProgressBar extends StatelessWidget {
               GestureDetector(
                 onTap: () => onTierSelected(state.name),
                 child: Container(
-                  width: 45,
+                  width: 38,
                   height: 45,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isSelected ? state.color.withOpacity(0.15) : null,
                     border: Border.all(color: state.color, width: 2),
                   ),
-                  padding: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(8),
                   child: Image.asset(state.iconAsset),
                 ),
               ),

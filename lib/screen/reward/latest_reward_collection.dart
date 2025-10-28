@@ -9,8 +9,15 @@ class RewardCollection extends StatefulWidget {
   final String? search;
   final double? minPoint;
   final double? maxPoint;
+  final int selectedIndex; 
 
-  const RewardCollection({super.key, this.search, this.minPoint, this.maxPoint});
+  const RewardCollection({
+    super.key, 
+    this.search, 
+    this.minPoint, 
+    this.maxPoint,
+    this.selectedIndex = 0
+    });
 
   @override
   State<RewardCollection> createState() => _RewardCollectionState();
@@ -138,7 +145,13 @@ class _RewardCollectionState extends State<RewardCollection> {
 ];
 
 
-  int selected = 0;
+  late int selected;
+
+  @override
+  void initState() {
+    super.initState();
+    selected = widget.selectedIndex; //  initialize with value from navigation
+  }
 
   /// Format date to "dd MMM yyyy" (e.g. 27 Oct 2025)
   /// and show "Expired on" if already past
@@ -163,20 +176,14 @@ class _RewardCollectionState extends State<RewardCollection> {
     return Scaffold(
       body: Column(
         children: [
-          CreditHomeAppBar(title: "Rewards", enableFilterPoint: true),
+         const CreditHomeAppBar(title: "Rewards", enableFilterPoint: true),
           CategoryHeader(categories: categories, selected: selected),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  // borderRadius: BorderRadius.only(
-                  //   topLeft: Radius.circular(20),
-                  //   topRight: Radius.circular(20),
-                  // ),
-                ),
+                color: Colors.white,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(
                     vertical: 12,
@@ -197,10 +204,7 @@ class _RewardCollectionState extends State<RewardCollection> {
                         merchant: item["name"],
                         valid: validDate,
                         point: item["point"],
-                        // icon: item["icon"],
-                        onTap: () {
-                          // Navigate to detail page if needed
-                        },
+                        onTap: () {},
                       ),
                     );
                   },
