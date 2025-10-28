@@ -36,7 +36,7 @@ class _CreditTransferPageState extends State<CreditTransferPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: const Color(0xFF0D47A1),
+      backgroundColor: const Color(0xff083f8c),
       appBar: CreditHomeAppBar(title: 'Transfer', enableBack: true),
       body: Container(
         width: double.infinity,

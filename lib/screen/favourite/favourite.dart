@@ -122,6 +122,7 @@ class _FavouriteState extends State<Favourite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff083f8c),
       body: Column(
         children: [
           CreditHomeAppBar(title: "Favourite", enableFilterPoint: true),

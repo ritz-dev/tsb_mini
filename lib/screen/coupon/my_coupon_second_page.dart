@@ -201,14 +201,14 @@ class _MyCouponPageState extends State<MyCouponPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: const Color(0xFF0D47A1),
+      backgroundColor: const Color(0xff083f8c),
       appBar: CreditHomeAppBar(
         title: 'My Coupons',
         enableBack: true,
         enableScan: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Container(
           width: double.infinity,
           height: double.infinity,

@@ -145,6 +145,7 @@ class _MerchantItemsState extends State<MerchantItems> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff083f8c),
       body: Column(
         children: [
           CreditHomeAppBar(
@@ -157,10 +158,10 @@ class _MerchantItemsState extends State<MerchantItems> {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  // borderRadius: BorderRadius.only(
-                  //   topLeft: Radius.circular(20),
-                  //   topRight: Radius.circular(20),
-                  // ),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
                 ),
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(

@@ -32,7 +32,7 @@ class _RewardPageState extends State<RewardPage> {
     final localize = widget.localize;
 
     return Scaffold(
-      // backgroundColor: const Color(0xff083f8c),
+      backgroundColor: const Color(0xff083f8c),
       appBar: CreditHomeAppBar(
         title: localize.translate('rewards'),
         enableBack: true,

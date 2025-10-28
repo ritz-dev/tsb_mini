@@ -183,6 +183,7 @@ class _RewardCollectionState extends State<RewardCollection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff083f8c),
       body: Column(
         children: [
          const CreditHomeAppBar(title: "Rewards", enableFilterPoint: true),

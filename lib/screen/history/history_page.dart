@@ -34,7 +34,7 @@ class _CarbonHistoryPageState extends State<CarbonHistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      // backgroundColor: const Color(0xFF0D47A1),
+      backgroundColor: const Color(0xff083f8c),
       appBar: CreditHomeAppBar(
         title: 'History',
         enableBack: true,

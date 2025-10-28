@@ -84,6 +84,7 @@ class _MerchantPagetState extends State<MerchantPage> {
         .toList();
 
     return Scaffold(
+      // backgroundColor: const Color(0XFF083F8C),
       body: Column(
         children: [
           MerchantAppBar(

@@ -33,8 +33,21 @@ class _CategoryHeaderState extends State<CategoryHeader> {
     }
 
     return Container(
-      color: Colors.white,
-      height: 100,
+      height: 120,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20), // rounded top left
+          topRight: Radius.circular(20), // rounded top right
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 6,
+            offset: Offset(0, -2),
+          ),
+        ],
+      ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
@@ -86,7 +99,7 @@ class _CategoryHeaderState extends State<CategoryHeader> {
                         fontWeight: isSelected
                             ? FontWeight.bold
                             : FontWeight.normal,
-                        color: isSelected ? Color(0XFF083F8C) : Color(0XFF083F8C),
+                        color: const Color(0XFF083F8C),
                         fontSize: 13,
                       ),
                       maxLines: 1,
@@ -95,14 +108,14 @@ class _CategoryHeaderState extends State<CategoryHeader> {
                     ),
                   ),
                   // Animated Underline
-                  const SizedBox(height: 4), // always reserve space
+                  const SizedBox(height: 4),
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 250),
                     curve: Curves.easeInOut,
                     height: 2,
                     width: isSelected ? 40 : 0,
                     decoration: BoxDecoration(
-                      color: Color(0XFF083F8C),
+                      color: const Color(0XFF083F8C),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
