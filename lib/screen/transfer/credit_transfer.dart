@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/body/credit_transfer/recent_transfer_section.dart';
 import 'package:tsb_mini/frame/form/credit_transfer/transfer_form.dart';
 import 'package:tsb_mini/frame/header/credit_transfer/credit_transfer_header.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class CreditTransferPage extends StatefulWidget {
   final String? startDate;
@@ -23,11 +25,18 @@ class CreditTransferPage extends StatefulWidget {
 
 class _CreditTransferPageState extends State<CreditTransferPage> {
   final TextEditingController _idController =  TextEditingController();
+  int _selectedIndex = 2;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: const Color(0xFF0D47A1),
+      backgroundColor: const Color(0xff083f8c),
       appBar: CreditHomeAppBar(title: 'Transfer', enableBack: true),
       body: Container(
         width: double.infinity,
@@ -92,6 +101,13 @@ class _CreditTransferPageState extends State<CreditTransferPage> {
       // //   onTap: _onItemTapped,
       // // 
       // ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
+      ),
     );
   }
 }

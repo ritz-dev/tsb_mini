@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/coupon/my_coupon_second_page.dart';
@@ -7,6 +8,7 @@ import 'package:tsb_mini/screen/coupon/reward_merchant_scan.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:intl/intl.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class MyRewardPage extends StatefulWidget {
   final String? startDate;
@@ -26,7 +28,7 @@ class MyRewardPage extends StatefulWidget {
 }
 
 class _MyRewardPageState extends State<MyRewardPage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -201,7 +203,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: const Color(0xFF0D47A1),
+      backgroundColor: const Color(0xff083f8c),
       appBar: CreditHomeAppBar(
         title: 'My Coupons',
         enableBack: true,
@@ -209,7 +211,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
         // need to be change with qr scan
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Container(
           width: double.infinity,
           height: double.infinity,
@@ -304,10 +306,18 @@ class _MyRewardPageState extends State<MyRewardPage> {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomNavBarFrame(
+      // bottomNavigationBar: BottomNavigationFrame(
       //   currentIndex: _selectedIndex,
       //   onTap: _onItemTapped,
       // ),
+      // add bottom navigation bar
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
+      ),
     );
   }
 }
@@ -600,6 +610,7 @@ class RewardCouponCard extends StatelessWidget {
                                         maxChildSize: 0.9,
                                         builder: (context, scrollController) {
                                           return Container(
+                                            width: double.infinity,
                                             decoration: const BoxDecoration(
                                               color: AppColors.cardBackground,
                                               borderRadius: BorderRadius.only(
@@ -713,7 +724,7 @@ class RewardCouponCard extends StatelessWidget {
 
                                                     // === QR Image ===
                                                    Padding(
-                                                      padding: const EdgeInsets.only(bottom: 15),
+                                                      padding: const EdgeInsets.only(top: 20),
                                                       child: GestureDetector(
                                                         onTap: () {
                                                           // Close the bottom sheet first
@@ -729,40 +740,40 @@ class RewardCouponCard extends StatelessWidget {
                                                         },
                                                         child: PackageAssets.image(
                                                           "assets/image/qr_scan.png",
-                                                          height: 150,
-                                                          width: 150,
+                                                          height: 160,
+                                                          width: 160,
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
                                                     ),
 
                                                     // === Save Image Button ===
-                                                    Center(
-                                                      child: SizedBox(
-                                                        width: 150,
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            // Add save image logic
-                                                          },
-                                                          style: ElevatedButton.styleFrom(
-                                                            backgroundColor: const Color(0xFF083F8C),
-                                                            shape: RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(20),
-                                                            ),
-                                                            padding: const EdgeInsets.symmetric(vertical: 5),
-                                                            elevation: 0,
-                                                          ),
-                                                          child: Text(
-                                                            'Save Image',
-                                                            style: GoogleFonts.inter(
-                                                              fontSize: 16,
-                                                              fontWeight: FontWeight.w600,
-                                                              color: Colors.white,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    // Center(
+                                                    //   child: SizedBox(
+                                                    //     width: 150,
+                                                    //     child: ElevatedButton(
+                                                    //       onPressed: () {
+                                                    //         // Add save image logic
+                                                    //       },
+                                                    //       style: ElevatedButton.styleFrom(
+                                                    //         // backgroundColor: const Color(0xFF083F8C),
+                                                    //         shape: RoundedRectangleBorder(
+                                                    //           borderRadius: BorderRadius.circular(20),
+                                                    //         ),
+                                                    //         padding: const EdgeInsets.symmetric(vertical: 5),
+                                                    //         elevation: 0,
+                                                    //       ),
+                                                    //       child: Text(
+                                                    //         '',
+                                                    //         style: GoogleFonts.inter(
+                                                    //           fontSize: 16,
+                                                    //           fontWeight: FontWeight.w600,
+                                                    //           color: Colors.white,
+                                                    //         ),
+                                                    //       ),
+                                                    //     ),
+                                                    //   ),
+                                                    // ),
                                                   ],
                                                 ),
                                               ),
@@ -833,6 +844,7 @@ class RewardCouponCard extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
 

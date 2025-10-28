@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/transfer/credit_transfer.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 /// Credit Transfer Page
 class TransferSuccessfulPage extends StatefulWidget {
@@ -29,7 +31,7 @@ class TransferSuccessfulPage extends StatefulWidget {
 }
 
 class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
-  int _selectedIndex = 3; // Default active is "List"
+  int _selectedIndex = 2; // Default active is "List"
 
   void _onItemTapped(int index) {
     setState(() {
@@ -122,11 +124,11 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 12,
-                ),
+             Container(
+                margin: const EdgeInsets.only(
+                  bottom: 90,
+                ), // ← add margin to lift buttons above BottomNavigationFrame
+                padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Column(
                   children: [
                     SizedBox(
@@ -139,7 +141,7 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
                           ),
                           side: const BorderSide(color: Color(0xFF0A4DA2)),
                         ),
-                         onPressed: () {
+                        onPressed: () {
                           // Navigate to Transfer History page
                           Navigator.push(
                             context,
@@ -185,8 +187,16 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
                   ],
                 ),
               ),
+
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
         ),
       ),
     );

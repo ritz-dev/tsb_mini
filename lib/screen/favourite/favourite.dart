@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/body/favourite/favourite_card.dart';
 import 'package:tsb_mini/frame/favourite/category_header.dart';
@@ -92,7 +94,14 @@ class _FavouriteState extends State<Favourite> {
     },
   ];
 
-  int selected = 0;
+   int selected = 0;
+  int _selectedIndex = 2;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   /// Format date dynamically (e.g. “End on 25 Dec 2025” or “Expired on 22 Oct 2025”)
   String formatDate(String dateStr) {
@@ -113,6 +122,7 @@ class _FavouriteState extends State<Favourite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff083f8c),
       body: Column(
         children: [
           CreditHomeAppBar(title: "Favourite", enableFilterPoint: true),
@@ -155,6 +165,13 @@ class _FavouriteState extends State<Favourite> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
       ),
     );
   }

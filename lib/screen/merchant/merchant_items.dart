@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/body/favourite/latest_reward_point_card.dart';
 import 'package:intl/intl.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class MerchantItems extends StatefulWidget {
   final String? search;
@@ -20,6 +22,7 @@ class MerchantItems extends StatefulWidget {
 }
 
 class _MerchantItemsState extends State<MerchantItems> {
+  int _selectedIndex = 2;
 
   final List<Map<String, dynamic>> data = [
     {
@@ -115,8 +118,6 @@ class _MerchantItemsState extends State<MerchantItems> {
     },
   ];
 
-  int selected = 0;
-
   /// Format date to "dd MMM yyyy" (e.g. 27 Oct 2025)
   /// and show "Expired on" if already past
   String formatDate(String dateStr) {
@@ -135,9 +136,16 @@ class _MerchantItemsState extends State<MerchantItems> {
     }
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff083f8c),
       body: Column(
         children: [
           CreditHomeAppBar(
@@ -150,10 +158,10 @@ class _MerchantItemsState extends State<MerchantItems> {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  // borderRadius: BorderRadius.only(
-                  //   topLeft: Radius.circular(20),
-                  //   topRight: Radius.circular(20),
-                  // ),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
                 ),
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(
@@ -187,6 +195,13 @@ class _MerchantItemsState extends State<MerchantItems> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
       ),
     );
   }

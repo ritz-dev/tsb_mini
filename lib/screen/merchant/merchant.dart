@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/merchat_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/merchant/merchant_items.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class MerchantPage extends StatefulWidget {
   const MerchantPage({super.key});
@@ -57,7 +59,7 @@ class _MerchantPagetState extends State<MerchantPage> {
     });
   }
 
-  int _selectedIndex = 0; // Default active is "List"
+  int _selectedIndex = 2; // Default active is "List"
 
   void _onItemTapped(int index) {
     setState(() {
@@ -82,6 +84,7 @@ class _MerchantPagetState extends State<MerchantPage> {
         .toList();
 
     return Scaffold(
+      // backgroundColor: const Color(0XFF083F8C),
       body: Column(
         children: [
           MerchantAppBar(
@@ -142,6 +145,13 @@ class _MerchantPagetState extends State<MerchantPage> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
       ),
     );
   }

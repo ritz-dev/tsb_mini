@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/coupon/comfirm_and_success_sheet.dart';
@@ -7,6 +8,7 @@ import 'package:tsb_mini/screen/coupon/my_coupon_home_page.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:intl/intl.dart'; // For date formatting
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class MyCouponPage extends StatefulWidget {
   final String? startDate;
@@ -20,7 +22,7 @@ class MyCouponPage extends StatefulWidget {
 }
 
 class _MyCouponPageState extends State<MyCouponPage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -75,15 +77,6 @@ class _MyCouponPageState extends State<MyCouponPage> {
       "merchant_name": "Starbucks",
       "reward_name": "Free Handcrafted Drink",
     },
-    // {
-    //   "slug": "c1006",
-    //   "status": "active",
-    //   "datetime": "2025-08-05T14:15:00Z",
-    //   "expiry_date": "2025-12-05T23:59:59Z",
-    //   "merchant_logo": "assets/home_images/zara.png",
-    //   "merchant_name": "Zara",
-    //   "reward_name": "10% Off Select Items",
-    // },
     {
       "slug": "c1007",
       "status": "expired",
@@ -111,15 +104,6 @@ class _MyCouponPageState extends State<MyCouponPage> {
       "merchant_name": "KFC",
       "reward_name": "Free Drink with Meal",
     },
-    // {
-    //   "slug": "c1010",
-    //   "status": "active",
-    //   "datetime": "2025-06-25T09:00:00Z",
-    //   "expiry_date": "2025-11-30T23:59:59Z",
-    //   "merchant_logo": "assets/home_images/zara.png",
-    //   "merchant_name": "Zara",
-    //   "reward_name": "20% Off New Collection",
-    // },
     {
       "slug": "c1011",
       "status": "active",
@@ -201,15 +185,6 @@ class _MyCouponPageState extends State<MyCouponPage> {
       "merchant_name": "Adidas",
       "reward_name": "20% Off Sportswear",
     },
-    // {
-    //   "slug": "c1020",
-    //   "status": "active",
-    //   "datetime": "2025-07-25T12:00:00Z",
-    //   "expiry_date": "2025-12-20T23:59:59Z",
-    //   "merchant_logo": "assets/home_images/zara.png",
-    //   "merchant_name": "Zara",
-    //   "reward_name": "Free Scarf With Purchase",
-    // },
     {
       "slug": "c1021",
       "status": "active",
@@ -226,14 +201,14 @@ class _MyCouponPageState extends State<MyCouponPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: const Color(0xFF0D47A1),
+      backgroundColor: const Color(0xff083f8c),
       appBar: CreditHomeAppBar(
         title: 'My Coupons',
         enableBack: true,
-        // enableScan: false,
+        enableScan: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Container(
           width: double.infinity,
           height: double.infinity,
@@ -311,44 +286,20 @@ class _MyCouponPageState extends State<MyCouponPage> {
                       merchant: merchant,
                       valid: valid,
                       count: count,
-                      onTap: () {
-                        // showModalBottomSheet(
-                        //   context: context,
-                        //   isScrollControlled: true,
-                        //   backgroundColor: Colors.transparent,
-                        //   builder: (_) => ConfirmCouponSheet(
-                        //     onUse: () {
-                        //       Navigator.of(context).pop(); // Close Confirm sheet
-                        //       showModalBottomSheet(
-                        //         context: context,
-                        //         isScrollControlled: true,
-                        //         backgroundColor: Colors.transparent,
-                        //         builder: (_) => SuccessCouponSheet(
-                        //           onGoToReward: () {
-                        //             Navigator.of(context).pop();
-                        //             // Navigate to MyRewardPage
-                        //             Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(
-                        //                 builder: (_) => MyRewardPage(),
-                        //               ),
-                        //             );
-                        //           },
-                        //           onUseAgain: () {
-                        //             Navigator.of(context).pop(); // Close Success sheet
-                        //           },
-                        //         ),
-                        //       );
-                        //     },
-                        //   ),
-                        // );
-                      },
+                      onTap: () {},
                     );
                   },
                 ),
               ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
         ),
       ),
     );
@@ -389,8 +340,7 @@ class RewardCouponCard extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: 
-                (context) => RewardDetailTest()),
+                MaterialPageRoute(builder: (context) => RewardDetailTest()),
               );
             },
         child: Stack(
@@ -483,6 +433,7 @@ class RewardCouponCard extends StatelessWidget {
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(6),
                                   onTap: () {
+                                    // Open the Confirm Coupon sheet
                                     showModalBottomSheet(
                                       context: context,
                                       isScrollControlled: true,
@@ -499,7 +450,6 @@ class RewardCouponCard extends StatelessWidget {
                                             builder: (_) => SuccessCouponSheet(
                                               onGoToReward: () {
                                                 Navigator.of(context).pop();
-                                                // Navigate to MyRewardPage
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
