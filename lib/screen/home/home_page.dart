@@ -45,7 +45,7 @@
       try{
         final data = await _categoryService.getAllCategory();
 
-        debugPrint('Category() data is $data');
+        // debugPrint('Category() data is $data');
 
         setState((){
           categories = data;

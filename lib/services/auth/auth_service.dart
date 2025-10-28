@@ -25,12 +25,12 @@ class AuthService {
 
     final data = jsonDecode(response.body);
 
-    debugPrint('Response body: ${response.body}');
+    // debugPrint('Response body: ${response.body}');
 
     if(response.statusCode == 200){
       final authUser = User.fromJson(data);
 
-      debugPrint('Response body: $data');
+      // debugPrint('Response body: $data');
 
       await _storage.saveToken(authUser.token);
       await _storage.saveUserSlug(authUser.slug);

@@ -21,7 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       final authResponse = await authService.login(email: event.email,password: event.password);
 
-      debugPrint('Token is $authResponse');
+      // debugPrint('Token is $authResponse');
 
       emit(Authenticated(authResponse.token,authResponse.slug));
 

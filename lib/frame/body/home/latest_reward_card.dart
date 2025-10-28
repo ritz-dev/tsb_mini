@@ -2,15 +2,21 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
+import 'package:tsb_mini/models/rewards/reward_model.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
+import 'package:tsb_mini/services/rewards/reward_service.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
 class LatestRewardCard extends StatefulWidget {
   final String? title;
-  const LatestRewardCard({super.key, this.title});
+  
+  const LatestRewardCard({
+    super.key, 
+    this.title,
+  });
 
   @override
   State<LatestRewardCard> createState() => _LatestRewardCardState();
@@ -56,6 +62,48 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
       "name": "Starbucks",
     },
   ];
+
+  List<RewardModel> rewards = [];
+
+  RewardModel? rewardDetailData;
+
+  final RewardService _rewardService = RewardService();
+
+  @override
+  void initState(){
+    super.initState();
+    // getAllRewardData();
+    // getRewardDetailData();
+  }
+
+  Future<void> getAllRewardData() async{
+    try{
+      final data = await _rewardService.getAllReward();
+
+      setState((){
+        rewards = data;
+      });
+
+      debugPrint("Rewards Screen Data are $data");
+    }catch(e){
+      throw Exception("getAllRewardData() : ${e.toString()}");
+    }
+  }
+
+  Future<void> getRewardDetailData() async{
+    try{
+      final data = await _rewardService.getRewardDetail("1000100010001000");
+
+      setState((){
+        rewardDetailData = data;
+      });
+
+      debugPrint("Reward Detail Data $rewardDetailData");
+
+    }catch(e){
+      throw Exception("getRewardDetailData() : ${e.toString()}");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
