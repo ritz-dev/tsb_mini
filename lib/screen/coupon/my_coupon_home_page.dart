@@ -600,6 +600,7 @@ class RewardCouponCard extends StatelessWidget {
                                         maxChildSize: 0.9,
                                         builder: (context, scrollController) {
                                           return Container(
+                                            width: double.infinity,
                                             decoration: const BoxDecoration(
                                               color: AppColors.cardBackground,
                                               borderRadius: BorderRadius.only(
@@ -713,7 +714,7 @@ class RewardCouponCard extends StatelessWidget {
 
                                                     // === QR Image ===
                                                    Padding(
-                                                      padding: const EdgeInsets.only(bottom: 15),
+                                                      padding: const EdgeInsets.only(top: 20),
                                                       child: GestureDetector(
                                                         onTap: () {
                                                           // Close the bottom sheet first
@@ -729,40 +730,40 @@ class RewardCouponCard extends StatelessWidget {
                                                         },
                                                         child: PackageAssets.image(
                                                           "assets/image/qr_scan.png",
-                                                          height: 150,
-                                                          width: 150,
+                                                          height: 160,
+                                                          width: 160,
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
                                                     ),
 
                                                     // === Save Image Button ===
-                                                    Center(
-                                                      child: SizedBox(
-                                                        width: 150,
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            // Add save image logic
-                                                          },
-                                                          style: ElevatedButton.styleFrom(
-                                                            backgroundColor: const Color(0xFF083F8C),
-                                                            shape: RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(20),
-                                                            ),
-                                                            padding: const EdgeInsets.symmetric(vertical: 5),
-                                                            elevation: 0,
-                                                          ),
-                                                          child: Text(
-                                                            'Save Image',
-                                                            style: GoogleFonts.inter(
-                                                              fontSize: 16,
-                                                              fontWeight: FontWeight.w600,
-                                                              color: Colors.white,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    // Center(
+                                                    //   child: SizedBox(
+                                                    //     width: 150,
+                                                    //     child: ElevatedButton(
+                                                    //       onPressed: () {
+                                                    //         // Add save image logic
+                                                    //       },
+                                                    //       style: ElevatedButton.styleFrom(
+                                                    //         // backgroundColor: const Color(0xFF083F8C),
+                                                    //         shape: RoundedRectangleBorder(
+                                                    //           borderRadius: BorderRadius.circular(20),
+                                                    //         ),
+                                                    //         padding: const EdgeInsets.symmetric(vertical: 5),
+                                                    //         elevation: 0,
+                                                    //       ),
+                                                    //       child: Text(
+                                                    //         '',
+                                                    //         style: GoogleFonts.inter(
+                                                    //           fontSize: 16,
+                                                    //           fontWeight: FontWeight.w600,
+                                                    //           color: Colors.white,
+                                                    //         ),
+                                                    //       ),
+                                                    //     ),
+                                                    //   ),
+                                                    // ),
                                                   ],
                                                 ),
                                               ),
