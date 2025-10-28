@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/body/history/credit_list.dart';
 import 'package:tsb_mini/frame/header/history/credit_earn_use.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class CarbonHistoryPage extends StatefulWidget {
   final String? startDate;
@@ -20,7 +22,7 @@ class CarbonHistoryPage extends StatefulWidget {
 }
 
 class _CarbonHistoryPageState extends State<CarbonHistoryPage> {
-  int _selectedIndex = 4; // Default active is "List"
+  int _selectedIndex = 2; // Default active is "List"
 
   void _onItemTapped(int index) {
     setState(() {
@@ -70,10 +72,13 @@ class _CarbonHistoryPageState extends State<CarbonHistoryPage> {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomNavBarFrame(
-      //   currentIndex: _selectedIndex,
-      //   onTap: _onItemTapped,
-      // ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!, // ✅ fixed here
+        ),
+      ),
     );
   }
 }

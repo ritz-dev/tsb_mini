@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/reward_detail_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/qr_scan_page.dart';
@@ -19,6 +20,14 @@ class RewardDetailTest extends StatefulWidget {
 }
 
 class _RewardDetailTestState extends State<RewardDetailTest> {
+  int _selectedIndex = 2;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Determine button text based on status
@@ -163,6 +172,13 @@ class _RewardDetailTestState extends State<RewardDetailTest> {
               ),
             ),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
       ),
     );
   }

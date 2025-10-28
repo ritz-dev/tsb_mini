@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/button/tire_back_button.dart';
 import 'package:tsb_mini/package_mode.dart';
@@ -15,6 +16,7 @@ class CarbonTierStateCard extends StatefulWidget {
 
 class _CarbonTierStateCardState extends State<CarbonTierStateCard> {
   late _TierData currentTier;
+  int _selectedIndex = 2;
 
   @override
   void initState() {
@@ -25,6 +27,12 @@ class _CarbonTierStateCardState extends State<CarbonTierStateCard> {
   void updateTier(_TierData newTier) {
     setState(() {
       currentTier = newTier;
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
     });
   }
 
@@ -123,6 +131,13 @@ class _CarbonTierStateCardState extends State<CarbonTierStateCard> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
       ),
     );
   }

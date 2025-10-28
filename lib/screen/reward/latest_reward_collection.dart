@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/body/favourite/latest_reward_point_card.dart';
 import 'package:intl/intl.dart';
 import 'package:tsb_mini/frame/favourite/category_header.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class RewardCollection extends StatefulWidget {
   final String? search;
@@ -146,6 +148,13 @@ class _RewardCollectionState extends State<RewardCollection> {
 
 
   late int selected;
+  int _navSelectedIndex = 2;
+
+  void _onNavItemTapped(int index) {
+    setState(() {
+      _navSelectedIndex = index;
+    });
+  }
 
   @override
   void initState() {
@@ -213,6 +222,13 @@ class _RewardCollectionState extends State<RewardCollection> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _navSelectedIndex,
+          onItemTapped: _onNavItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
       ),
     );
   }

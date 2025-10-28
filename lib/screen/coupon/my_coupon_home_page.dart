@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/coupon/my_coupon_second_page.dart';
@@ -7,6 +8,7 @@ import 'package:tsb_mini/screen/coupon/reward_merchant_scan.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:intl/intl.dart';
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class MyRewardPage extends StatefulWidget {
   final String? startDate;
@@ -26,7 +28,7 @@ class MyRewardPage extends StatefulWidget {
 }
 
 class _MyRewardPageState extends State<MyRewardPage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -308,6 +310,14 @@ class _MyRewardPageState extends State<MyRewardPage> {
       //   currentIndex: _selectedIndex,
       //   onTap: _onItemTapped,
       // ),
+      // add bottom navigation bar
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
+        ),
+      ),
     );
   }
 }

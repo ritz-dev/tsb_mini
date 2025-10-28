@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/coupon/comfirm_and_success_sheet.dart';
@@ -7,6 +8,7 @@ import 'package:tsb_mini/screen/coupon/my_coupon_home_page.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:intl/intl.dart'; // For date formatting
+import 'package:tsb_main/utils/localization/app_localizations.dart';
 
 class MyCouponPage extends StatefulWidget {
   final String? startDate;
@@ -20,7 +22,7 @@ class MyCouponPage extends StatefulWidget {
 }
 
 class _MyCouponPageState extends State<MyCouponPage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -284,44 +286,20 @@ class _MyCouponPageState extends State<MyCouponPage> {
                       merchant: merchant,
                       valid: valid,
                       count: count,
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (_) => ConfirmCouponSheet(
-                            onUse: () {
-                              Navigator.of(context).pop(); // Close Confirm sheet
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                builder: (_) => SuccessCouponSheet(
-                                  onGoToReward: () {
-                                    Navigator.of(context).pop();
-                                    // Navigate to MyRewardPage
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => MyRewardPage(),
-                                      ),
-                                    );
-                                  },
-                                  onUseAgain: () {
-                                    Navigator.of(context).pop(); // Close Success sheet
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      },
+                      onTap: () {},
                     );
                   },
                 ),
               ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: BottomNavigationFrame(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+          localize: AppLocalizations.of(context)!,
         ),
       ),
     );
@@ -450,14 +428,44 @@ class RewardCouponCard extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Material(
+                             Material(
                                 color: Colors.transparent,
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(6),
                                   onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('Use tapped for: $title'),
+                                    // Open the Confirm Coupon sheet
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (_) => ConfirmCouponSheet(
+                                        onUse: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(); // Close Confirm sheet
+                                          showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            builder: (_) => SuccessCouponSheet(
+                                              onGoToReward: () {
+                                                Navigator.of(context).pop();
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        MyRewardPage(),
+                                                  ),
+                                                );
+                                              },
+                                              onUseAgain: () {
+                                                Navigator.of(
+                                                  context,
+                                                ).pop(); // Close Success sheet
+                                              },
+                                            ),
+                                          );
+                                        },
                                       ),
                                     );
                                   },
@@ -477,6 +485,7 @@ class RewardCouponCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
+
                             ],
                           ),
                         ],

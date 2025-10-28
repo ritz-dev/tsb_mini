@@ -279,17 +279,17 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
 
           _buildSection(
             "Description",
-            "New Starbucks Rewards members who join by Sept 28, 2025 get a one-time coupon for a free handcrafted drink (up to 100THB)...",
+            "New Starbucks Rewards members who join by Sept 28, 2025 get a one-time coupon for a free handcrafted drink (up to 100THB) at participating stores. The coupon appears in the app within 48 hours, is valid for one week after joining, and requires a qualifying purchase (excluding alcohol, gift cards, and reloads). Not valid for delivery or combined offers.",
           ),
           const Divider(color: AppColors.divider, thickness: 0.5),
           _buildSection(
             "Terms and Conditions",
-            "You agree to use the Service only for lawful purposes...",
+            "You agree to use the Service only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the Service.",
           ),
           const Divider(color: AppColors.divider, thickness: 0.5),
           _buildSection(
             "About Merchant",
-            "Content created by merchants for their online stores...",
+            "Content created by merchants for their online stores (like product descriptions, images, videos)?",
           ),
         ],
       ),
