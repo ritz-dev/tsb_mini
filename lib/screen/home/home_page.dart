@@ -90,13 +90,17 @@ class _RewardPageState extends State<RewardPage> {
           ),
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: BottomNavigationFrame(
-          selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped,
-          localize: widget.localize,
+     bottomNavigationBar: SafeArea(
+        child: Container(
+          color: Colors.white, // Makes bottom bar area solid white
+          child: BottomNavigationFrame(
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+            localize: widget.localize,
+          ),
         ),
       ),
+
     );
   }
 }

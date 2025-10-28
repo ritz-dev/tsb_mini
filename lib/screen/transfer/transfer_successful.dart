@@ -192,11 +192,14 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
           ),
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: BottomNavigationFrame(
-          selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped,
-          localize: AppLocalizations.of(context)!,
+        bottomNavigationBar: SafeArea(
+        child: Container(
+          color: Colors.white, // Makes bottom bar area solid white
+          child: BottomNavigationFrame(
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+            localize: AppLocalizations.of(context)!,
+          ),
         ),
       ),
     );

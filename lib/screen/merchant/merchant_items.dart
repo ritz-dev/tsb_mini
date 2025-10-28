@@ -197,10 +197,13 @@ class _MerchantItemsState extends State<MerchantItems> {
         ],
       ),
       bottomNavigationBar: SafeArea(
-        child: BottomNavigationFrame(
-          selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped,
-          localize: AppLocalizations.of(context)!,
+        child: Container(
+          color: Colors.white, // Makes bottom bar area solid white
+          child: BottomNavigationFrame(
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+            localize: AppLocalizations.of(context)!,
+          ),
         ),
       ),
     );

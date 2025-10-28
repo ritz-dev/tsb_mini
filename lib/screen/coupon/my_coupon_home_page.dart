@@ -311,11 +311,14 @@ class _MyRewardPageState extends State<MyRewardPage> {
       //   onTap: _onItemTapped,
       // ),
       // add bottom navigation bar
-      bottomNavigationBar: SafeArea(
-        child: BottomNavigationFrame(
-          selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped,
-          localize: AppLocalizations.of(context)!,
+       bottomNavigationBar: SafeArea(
+        child: Container(
+          color: Colors.white, // Makes bottom bar area solid white
+          child: BottomNavigationFrame(
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+            localize: AppLocalizations.of(context)!,
+          ),
         ),
       ),
     );

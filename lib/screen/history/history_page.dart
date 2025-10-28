@@ -73,10 +73,13 @@ class _CarbonHistoryPageState extends State<CarbonHistoryPage> {
         ),
       ),
       bottomNavigationBar: SafeArea(
-        child: BottomNavigationFrame(
-          selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped,
-          localize: AppLocalizations.of(context)!, // ✅ fixed here
+        child: Container(
+          color: Colors.white, // Makes bottom bar area solid white
+          child: BottomNavigationFrame(
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+            localize: AppLocalizations.of(context)!,
+          ),
         ),
       ),
     );
