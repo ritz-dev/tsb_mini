@@ -10,7 +10,7 @@ class RewardAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 500,
+      expandedHeight: 520,
       floating: false,
       pinned: false,
       backgroundColor: Colors.white, // Make sure this is transparent
