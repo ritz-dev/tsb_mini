@@ -367,10 +367,14 @@ class _TierInfoSectionState extends State<TierInfoSection> {
 class _TierInfoCard extends StatelessWidget {
   final _TierData tierData;
   final int userPoints;
+  final bool showPointer;
+  final VoidCallback? onPointerTap;
 
   const _TierInfoCard({
     required this.tierData,
     required this.userPoints,
+    this.showPointer = false,
+    this.onPointerTap,
   });
 
   @override
@@ -398,59 +402,50 @@ class _TierInfoCard extends StatelessWidget {
         leftPoints = tierData.minPoints;
     }
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+    return Stack(
+      clipBehavior: Clip.none,
+      alignment: Alignment.topCenter,
+      children: [
+        // Triangle pointer - only visible for active card; tappable to move forward
+        if (showPointer)
+          Positioned(
+            top: -10,
+            child: GestureDetector(
+              onTap: onPointerTap,
+              behavior: HitTestBehavior.translucent,
+              child: CustomPaint(
+                size: const Size(20, 10),
+                painter: _TrianglePainter(color: Colors.white),
+              ),
+            ),
           ),
-        ],
-      ),
-      // Make the main column respect available height and allow the benefits area to scroll
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+
+        // Main card
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+          margin: const EdgeInsets.only(top: 8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(22),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start, // align left
-                  children: [
-                    Text(
-                      leftTitle,
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                        color: Colors.grey[600],
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                        "$leftPoints points",
-                        style: GoogleFonts.inter(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              Container(width: 1, height: 38, color: Colors.grey[300]),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start, // align left
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Total",
+                          leftTitle,
                           style: GoogleFonts.inter(
                             fontSize: 16,
                             color: Colors.grey[600],
@@ -459,61 +454,114 @@ class _TierInfoCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                            "$userPoints points",
-                            style: GoogleFonts.inter(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
+                          "$leftPoints points",
+                          style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
                           ),
+                        ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 18),
-          // Use Flexible + SingleChildScrollView so the benefits list won't overflow the card
-          Flexible(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: tierData.benefits
-                    .map(
-                      (b) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Row(
+                  ),
+                  Container(width: 1, height: 38, color: Colors.grey[300]),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "• ",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
+                            Text(
+                              "Total",
+                              style: GoogleFonts.inter(
+                                fontSize: 16,
+                                color: Colors.grey[600],
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                            Expanded(
-                              child: Text(
-                                b,
-                                style: GoogleFonts.inter(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                ),
+                            const SizedBox(height: 4),
+                            Text(
+                              "$userPoints points",
+                              style: GoogleFonts.inter(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    )
-                    .toList(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ),
+              const SizedBox(height: 18),
+              Flexible(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: tierData.benefits
+                        .map(
+                          (b) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "• ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    b,
+                                    style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
+
+// Custom painter for the top triangle pointer
+class _TrianglePainter extends CustomPainter {
+  final Color color;
+
+  _TrianglePainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color = color;
+    final path = Path();
+    path.moveTo(0, size.height);
+    path.lineTo(size.width / 2, 0);
+    path.lineTo(size.width, size.height);
+    path.close();
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
 
 // ==========  Progress Bar ==========
 
@@ -667,7 +715,7 @@ class _TierInfoDescriptionCard extends StatelessWidget {
             "How Do I Get Carbon Credit Points?",
             style: GoogleFonts.inter(
               fontSize: 16,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w600,
               color: Colors.black,
             ),
           ),
@@ -678,6 +726,62 @@ class _TierInfoDescriptionCard extends StatelessWidget {
               fontSize: 14,
               height: 1.4,
               color: Colors.black87,
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          Text(
+            "Ways to Earn",
+            style: GoogleFonts.inter(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          // Bulleted list
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildBullet(
+                "Ride an EV Bus – Every trip you take helps reduce emissions and earns you points.",
+              ),
+              _buildBullet(
+                "Support the Upcycle Program – Purchase or wear Thai Smile Upcycle products made from recycled materials to collect bonus points.",
+              ),
+              _buildBullet(
+                "Refer a Friend – Invite your friends to ride Thai Smile Buses and earn extra points when they join the movement.",
+              ),
+              _buildBullet(
+                "Complete Monthly Challenges – Participate in eco-missions and unlock bonuses and multipliers.",
+              ),
+              _buildBullet(
+                "Special Promotions – Watch out for seasonal events with limited-time multipliers and rewards.",
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBullet(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("• ", style: TextStyle(fontSize: 14)),
+          Expanded(
+            child: Text(
+              text,
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                color: Colors.black87,
+                height: 1.4,
+              ),
             ),
           ),
         ],
