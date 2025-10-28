@@ -139,7 +139,7 @@ class _CarbonTierStateCardState extends State<CarbonTierStateCard> {
       case "BRONZE":
         return _TierData(
           label: "BRONZE",
-          badgeAsset: "assets/tier/bronze_card.png",
+          badgeAsset: "assets/tier/1.svg",
           color: const Color(0xFFD19C5B),
           minPoints: 0,
           maxPoints: 2000,
@@ -153,7 +153,7 @@ class _CarbonTierStateCardState extends State<CarbonTierStateCard> {
       case "SILVER":
         return _TierData(
           label: "SILVER",
-          badgeAsset: "assets/tier/silver_card.png",
+          badgeAsset: "assets/tier/2.svg",
           color: const Color(0xFFD7D7D7),
           minPoints: 2000,
           maxPoints: 5000,
@@ -167,7 +167,7 @@ class _CarbonTierStateCardState extends State<CarbonTierStateCard> {
       case "GOLD":
         return _TierData(
           label: "GOLD",
-          badgeAsset: "assets/tier/gold_card.png",
+          badgeAsset: "assets/tier/3.svg",
           color: const Color(0xFFFFD700),
           minPoints: 5000,
           maxPoints: 8000,
@@ -181,7 +181,7 @@ class _CarbonTierStateCardState extends State<CarbonTierStateCard> {
       default:
         return _TierData(
           label: "DIAMOND",
-          badgeAsset: "assets/tier/diamond_card.png",
+          badgeAsset: "assets/tier/4.svg",
           color: const Color(0xFF7F7AED),
           minPoints: 8000,
           maxPoints: 999999,
@@ -588,10 +588,10 @@ class _TierProgressBar extends StatelessWidget {
     final defaultConnector = const Color(0xFFF2ECDA);
 
     final states = [
-      _TierState("BRONZE", "assets/tier/bronze1.png", bronzeColor),
-      _TierState("SILVER", "assets/tier/silver2.png", silverColor),
-      _TierState("GOLD", "assets/tier/gold1.png", goldColor),
-      _TierState("DIAMOND", "assets/tier/diamond1.png", diamondColor),
+      _TierState("BRONZE", "assets/tier/b1.svg", bronzeColor),
+      _TierState("SILVER", "assets/tier/s1.svg", silverColor),
+      _TierState("GOLD", "assets/tier/g1.svg", goldColor),
+      _TierState("DIAMOND", "assets/tier/d1.svg", diamondColor),
     ];
 
     List<Color> connectorColors = [
@@ -609,11 +609,10 @@ class _TierProgressBar extends StatelessWidget {
         connectorColors[1] = silverColor;
         break;
       case "GOLD":
-        connectorColors[0] = bronzeColor;
-        connectorColors[1] = goldColor;
+        connectorColors = [bronzeColor, silverColor, goldColor];
         break;
       case "DIAMOND":
-        connectorColors = [bronzeColor, goldColor, diamondColor];
+        connectorColors = [bronzeColor, silverColor, goldColor];
         break;
     }
 
@@ -637,7 +636,7 @@ class _TierProgressBar extends StatelessWidget {
                     border: Border.all(color: state.color, width: 2),
                   ),
                   padding: const EdgeInsets.all(8),
-                  child: Image.asset(state.iconAsset),
+                  child: PackageAssets.svg(state.iconAsset),
                 ),
               ),
               if (index < states.length - 1)
@@ -688,8 +687,8 @@ class _TierBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PackageAssets.image(asset, width: 180, height: 145),
-        const SizedBox(height: 8),
+        PackageAssets.svg(asset, width: 180, height: 145),
+        const SizedBox(height: 8),  
         Text(
           label,
           style: GoogleFonts.inter(

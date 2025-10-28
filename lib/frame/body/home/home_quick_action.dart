@@ -8,7 +8,11 @@ import 'package:tsb_mini/screen/transfer/credit_transfer.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
 class QuickActionMenu extends StatelessWidget {
-  const QuickActionMenu({super.key});
+  const QuickActionMenu({
+    super.key,
+    
+    });
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +26,11 @@ class QuickActionMenu extends StatelessWidget {
             // label: 'My Coupons',
             label: AppLocalizations.of(context)!.translate('my_coupon'),
             onTap: () {
-              //My reward page or coupons page
+              //    My reward page or coupons page
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  MyRewardPage()),
+                MaterialPageRoute(builder: (context) =>  MyRewardPage(
+                )),
               );
             },
           ),

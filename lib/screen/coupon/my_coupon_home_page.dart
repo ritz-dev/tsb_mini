@@ -304,7 +304,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomNavBarFrame(
+      // bottomNavigationBar: BottomNavigationFrame(
       //   currentIndex: _selectedIndex,
       //   onTap: _onItemTapped,
       // ),
@@ -833,6 +833,7 @@ class RewardCouponCard extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
 
