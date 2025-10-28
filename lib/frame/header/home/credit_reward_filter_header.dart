@@ -29,10 +29,10 @@ class RewardFilterHeader extends StatelessWidget {
 
 class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
-  double get minExtent => 190;
+  double get minExtent => 180;
 
   @override
-  double get maxExtent => 190;
+  double get maxExtent => 180;
 
   @override
   Widget build(
@@ -67,7 +67,7 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
                 child: QuickActionMenu(),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10, top: 10),
+                padding: const EdgeInsets.only(left: 10, top: 5),
                 child: SizedBox(
                   height: 90,
                   child: _CategorySelector(categories: categories),
