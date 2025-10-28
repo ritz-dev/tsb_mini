@@ -10,7 +10,7 @@ class RewardAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 480,
+      expandedHeight: 500,
       floating: false,
       pinned: false,
       backgroundColor: Colors.white, // Make sure this is transparent
@@ -18,7 +18,7 @@ class RewardAppBar extends StatelessWidget {
       systemOverlayStyle: SystemUiOverlayStyle.light,
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
-          margin: const EdgeInsets.only(top: 0),
+          margin: const EdgeInsets.only(top: 15),
           decoration: const BoxDecoration(
             color: Colors.white, // No color here
           ),
@@ -30,7 +30,7 @@ class RewardAppBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 0),
+                    padding: const EdgeInsets.only(top: 10),
                     child: TreeCirclePointProgressCard(
                       treesPlanted: 30,
                       pointsRemaining: 495,

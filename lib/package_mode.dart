@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class PackageAssets {
-  
   static Image image(
     String path, {
     BoxFit? fit,
@@ -16,7 +15,7 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ? null : 'tsb_mini',
+      package: _isInPackage ?  'tsb_mini' : null,
     );
   }
 
@@ -31,7 +30,7 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ? null : 'tsb_mini',
+      package: _isInPackage ? 'tsb_mini' : null ,
     );
   }
 
@@ -40,6 +39,4 @@ class PackageAssets {
     'PACKAGE_MODE',
     defaultValue: false, // set to false when running sub project standalone
   );
-
-  
 }

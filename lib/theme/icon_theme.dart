@@ -2,6 +2,8 @@ import 'package:tsb_mini/package_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class AppIcons {
   // Heroicons and SVG icons
@@ -50,6 +52,15 @@ class AppIcons {
   static const String foodPngPath = "assets/icon/food_icon.png";
   static const String shoppingPngPath = "assets/icon/shopping_icon.png";
   static const String fashionPngPath = "assets/icon/fashion_icon.png";
+
+
+  static const String leftRightArrowPath = "assets/icon/transfer_3d.svg";
+  static const String historyClockPath = "assets/icon/history_3d.svg";
+
+
+
+
+
 
   // Optional: Helper method to create a HeroIcon widget with size/color
   // *********Normal using HeroIcon and FontAwesomeIcon*********
@@ -141,6 +152,27 @@ class AppIcons {
   static Widget transferSvgIcon({double size = 28, Color? color}) {
     return PackageAssets.svg(
       transferSvgPath,
+      width: size,
+      height: size,
+      color: color,
+    );
+  }
+
+   //TransferSvgIcon
+  static Widget leftRight3d({double size = 28, Color? color}) {
+    return SvgPicture.asset(
+      leftRightArrowPath,
+      width: size,
+      height: size,
+      color: color,
+    );
+  }
+
+
+   //TransferSvgIcon
+  static Widget history3d({double size = 28, Color? color}) {
+    return PackageAssets.svg(
+      historyClockPath,
       width: size,
       height: size,
       color: color,

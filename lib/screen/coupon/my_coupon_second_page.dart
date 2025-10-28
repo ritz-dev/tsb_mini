@@ -230,7 +230,7 @@ class _MyCouponPageState extends State<MyCouponPage> {
       appBar: CreditHomeAppBar(
         title: 'My Coupons',
         enableBack: true,
-        enableScan: true,
+        // enableScan: false,
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
@@ -312,36 +312,36 @@ class _MyCouponPageState extends State<MyCouponPage> {
                       valid: valid,
                       count: count,
                       onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (_) => ConfirmCouponSheet(
-                            onUse: () {
-                              Navigator.of(context).pop(); // Close Confirm sheet
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                builder: (_) => SuccessCouponSheet(
-                                  onGoToReward: () {
-                                    Navigator.of(context).pop();
-                                    // Navigate to MyRewardPage
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => MyRewardPage(),
-                                      ),
-                                    );
-                                  },
-                                  onUseAgain: () {
-                                    Navigator.of(context).pop(); // Close Success sheet
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                        );
+                        // showModalBottomSheet(
+                        //   context: context,
+                        //   isScrollControlled: true,
+                        //   backgroundColor: Colors.transparent,
+                        //   builder: (_) => ConfirmCouponSheet(
+                        //     onUse: () {
+                        //       Navigator.of(context).pop(); // Close Confirm sheet
+                        //       showModalBottomSheet(
+                        //         context: context,
+                        //         isScrollControlled: true,
+                        //         backgroundColor: Colors.transparent,
+                        //         builder: (_) => SuccessCouponSheet(
+                        //           onGoToReward: () {
+                        //             Navigator.of(context).pop();
+                        //             // Navigate to MyRewardPage
+                        //             Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                 builder: (_) => MyRewardPage(),
+                        //               ),
+                        //             );
+                        //           },
+                        //           onUseAgain: () {
+                        //             Navigator.of(context).pop(); // Close Success sheet
+                        //           },
+                        //         ),
+                        //       );
+                        //     },
+                        //   ),
+                        // );
                       },
                     );
                   },
@@ -389,7 +389,8 @@ class RewardCouponCard extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RewardDetailTest()),
+                MaterialPageRoute(builder: 
+                (context) => RewardDetailTest()),
               );
             },
         child: Stack(
@@ -477,14 +478,44 @@ class RewardCouponCard extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Material(
+                             Material(
                                 color: Colors.transparent,
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(6),
                                   onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('Use tapped for: $title'),
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (_) => ConfirmCouponSheet(
+                                        onUse: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(); // Close Confirm sheet
+                                          showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            builder: (_) => SuccessCouponSheet(
+                                              onGoToReward: () {
+                                                Navigator.of(context).pop();
+                                                // Navigate to MyRewardPage
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        MyRewardPage(),
+                                                  ),
+                                                );
+                                              },
+                                              onUseAgain: () {
+                                                Navigator.of(
+                                                  context,
+                                                ).pop(); // Close Success sheet
+                                              },
+                                            ),
+                                          );
+                                        },
                                       ),
                                     );
                                   },
@@ -504,6 +535,7 @@ class RewardCouponCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
+
                             ],
                           ),
                         ],

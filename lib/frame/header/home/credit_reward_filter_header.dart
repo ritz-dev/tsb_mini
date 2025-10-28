@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/body/home/home_quick_action.dart';
 import 'package:tsb_mini/package_mode.dart';
+import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
-import 'package:tsb_mini/theme/icon_theme.dart'; // for AppColors.filterButtonBackground
+import 'package:tsb_mini/theme/icon_theme.dart';
 
 // Example categories (icon path + name)
 final List<Map<String, dynamic>> categories = [
-  // The "name" field is a translation key, not a visible string!
   {"icon": AppIcons.allPngPath, "name": "all"},
   {"icon": AppIcons.drinkPngPath, "name": "drink"},
   {"icon": AppIcons.foodPngPath, "name": "food"},
@@ -30,10 +30,10 @@ class RewardFilterHeader extends StatelessWidget {
 
 class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
-  double get minExtent => 190;
+  double get minExtent => 180;
 
   @override
-  double get maxExtent => 190;
+  double get maxExtent => 180;
 
   @override
   Widget build(
@@ -53,7 +53,7 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
         height: currentExtent,
         child: Container(
           decoration: const BoxDecoration(
-            color: Colors.white, // or your gradient
+            color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
@@ -63,12 +63,12 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 0),
-                child: const QuickActionMenu(),
+              const Padding(
+                padding: EdgeInsets.only(top: 0),
+                child: QuickActionMenu(),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10, top: 10),
+                padding: const EdgeInsets.only(left: 10, top: 5),
                 child: SizedBox(
                   height: 90,
                   child: _CategorySelector(categories: categories),
@@ -86,9 +86,9 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
       true;
 }
 
-/// Stateful widget for category selection
 class _CategorySelector extends StatefulWidget {
-  final List<Map<String, dynamic>> categories;
+
+  final List<Map<String, dynamic>> categories; 
 
   const _CategorySelector({required this.categories});
 
@@ -103,7 +103,7 @@ class _CategorySelectorState extends State<_CategorySelector> {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      physics: const BouncingScrollPhysics(), // smooth scroll
+      physics: const ClampingScrollPhysics(),
       itemCount: widget.categories.length,
       itemBuilder: (context, index) {
         final category = widget.categories[index];
@@ -114,56 +114,67 @@ class _CategorySelectorState extends State<_CategorySelector> {
             setState(() {
               selectedIndex = index;
             });
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => RewardCollection(
+                  selectedIndex: index, //  Pass tapped category index
+                ),
+              ),
+            );
           },
+
           child: SizedBox(
-            width: 80, // increased width for longer text
-            child: Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.center,
+            width: 80,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 2),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                            AppColors.filterButtonBackground,
-                            const Color.fromARGB(255, 64, 135, 234),
-                          ],
-                        ),
-                      ),
-                      child: PackageAssets.image(
-                        category["icon"] ?? '',
-                        width: 25,
-                        height: 25,
-                        fit: BoxFit.contain,
-                        color: Colors.white,
-                      ),
+                // Icon area (no animation)
+                Container(
+                  margin: const EdgeInsets.only(bottom: 2),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        AppColors.filterButtonBackground,
+                        const Color.fromARGB(255, 64, 135, 234),
+                      ],
                     ),
-                    Flexible(
-                      child: Text(
-                        // 'category["name"]',
-                        AppLocalizations.of(
-                          context,
-                        )!.translate(category["name"] ?? ''),
-                        style: GoogleFonts.inter(
-                          fontSize: 13,
-                          color: isSelected
-                              ? const Color(0XFF000000)
-                              : Colors.grey[700],
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                      ),
+                  ),
+                  child: PackageAssets.image(
+                    category["icon"] ?? '',
+                    width: 25,
+                    height: 25,
+                    fit: BoxFit.contain,
+                    color: Colors.white,
+                  ),
+                ),
+
+                // Text area (only animated color transition)
+                Flexible(
+                  child: AnimatedDefaultTextStyle(
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.easeInOut,
+                    style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: isSelected
+                          ? AppColors.textdarkblack
+                          : AppColors.textdarkblack,
                     ),
-                  ],
+                    child: Text(
+                      AppLocalizations.of(
+                        context,
+                      )!.translate(category["name"] ?? ''),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
               ],
             ),
