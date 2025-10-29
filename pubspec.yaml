@@ -53,11 +53,15 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/bottom_navigation/
+    - assets/category/
     - assets/home_images/
     - assets/icon/
     - assets/image/
+    - assets/lang/
     - assets/logo/
+    - assets/merchant/
+    - assets/quick_icon/
     - assets/reward/
     - assets/tier/
-    - assets/lang/
 

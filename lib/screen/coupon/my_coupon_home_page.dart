@@ -817,7 +817,7 @@ class RewardCouponCard extends StatelessWidget {
             ),
          if (count > 1)
               Positioned(
-                top: 2,
+                top: 6,
                 right: -10,
                 child: SizedBox(
                   height: 30,

@@ -8,12 +8,22 @@ import 'package:tsb_mini/theme/color_theme.dart';
 import 'package:tsb_mini/theme/icon_theme.dart';
 
 // Example categories (icon path + name)
+// final List<Map<String, dynamic>> categories = [
+//   {"icon": AppIcons.allPngPath, "name": "all"},
+//   {"icon": AppIcons.drinkPngPath, "name": "drink"},
+//   {"icon": AppIcons.foodPngPath, "name": "food"},
+//   {"icon": AppIcons.shoppingPngPath, "name": "shopping"},
+//   {"icon": AppIcons.fashionPngPath, "name": "fashion"},
+// ];
+
+
+
 final List<Map<String, dynamic>> categories = [
-  {"icon": AppIcons.allPngPath, "name": "all"},
-  {"icon": AppIcons.drinkPngPath, "name": "drink"},
-  {"icon": AppIcons.foodPngPath, "name": "food"},
-  {"icon": AppIcons.shoppingPngPath, "name": "shopping"},
-  {"icon": AppIcons.fashionPngPath, "name": "fashion"},
+  {"icon": "assets/category/all.svg", "name": "all"},
+  {"icon": "assets/category/drink.svg", "name": "drink"},
+  {"icon": "assets/category/food.svg", "name": "food"},
+  {"icon": "assets/category/shopping.svg", "name": "shopping"},
+  {"icon": "assets/category/fashion.svg", "name": "fashion"},
 ];
 
 class RewardFilterHeader extends StatelessWidget {
@@ -145,7 +155,7 @@ class _CategorySelectorState extends State<_CategorySelector> {
                       ],
                     ),
                   ),
-                  child: PackageAssets.image(
+                  child: PackageAssets.svg(
                     category["icon"] ?? '',
                     width: 25,
                     height: 25,
