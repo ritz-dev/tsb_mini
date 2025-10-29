@@ -97,11 +97,18 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
           // Date info
           Row(
             children: [
-              PackageAssets.image(
-                'assets/reward/time.png',
-                width: 30,
-                height: 30,
-                fit: BoxFit.contain,
+               Container(
+                width: 32,
+                height: 32,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF083F8C),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.access_time,
+                  size: 23,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -138,11 +145,14 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
           // Points info
           Row(
             children: [
-              PackageAssets.image(
-                'assets/reward/star.png',
-                width: 30,
-                height: 30,
-                fit: BoxFit.contain,
+               Container(
+                width: 32,
+                height: 32,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF083F8C),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.star_rounded, size: 23, color: Colors.white),
               ),
               const SizedBox(width: 10),
               Expanded(

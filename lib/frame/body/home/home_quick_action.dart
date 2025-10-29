@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/screen/coupon/my_coupon_home_page.dart';
 import 'package:tsb_mini/screen/history/history_page.dart';
 import 'package:tsb_mini/screen/tier/credit_tier.dart';
 import 'package:tsb_mini/screen/transfer/credit_transfer.dart';
+import 'package:tsb_mini/theme/icon_theme.dart';
 
 class QuickActionMenu extends StatelessWidget {
   const QuickActionMenu({super.key});
@@ -17,12 +18,12 @@ class QuickActionMenu extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _QuickActionCard(
+        _QuickActionCard(
             icon: SvgPicture.asset(
-              'assets/quick_icon/my_coupon.svg',
-              width: 25,
-              height: 25,
-              color: const Color(0xFF083F8C),
+              'assets/quick_icon/c1.svg',
+              width: 38,
+              height: 38,
+              // color: const Color(0xFF083F8C),
             ),
             label: AppLocalizations.of(context)!.translate('my_coupon'),
             onTap: () {
@@ -34,9 +35,9 @@ class QuickActionMenu extends StatelessWidget {
           ),
           _QuickActionCard(
             icon: SvgPicture.asset(
-              'assets/quick_icon/tier.svg',
-              width: 25,
-              height: 25,
+              'assets/tier/d1.svg',
+              width: 38,
+              height: 38,
               // color: const Color(0xFF083F8C),
             ),
             label: AppLocalizations.of(context)!.translate('tier'),
@@ -51,10 +52,10 @@ class QuickActionMenu extends StatelessWidget {
           ),
           _QuickActionCard(
             icon: SvgPicture.asset(
-              'assets/quick_icon/transfer.svg',
-              width: 25,
-              height: 25,
-              color: const Color(0xFF083F8C),
+              'assets/quick_icon/tr1.svg',
+              width: 38,
+              height: 38,
+              // color: const Color(0xFF083F8C),
             ),
             label: AppLocalizations.of(context)!.translate('transfer'),
             onTap: () {
@@ -66,10 +67,10 @@ class QuickActionMenu extends StatelessWidget {
           ),
           _QuickActionCard(
             icon: SvgPicture.asset(
-              'assets/quick_icon/history.svg',
-              width: 25,
-              height: 25,
-              color: const Color(0xFF083F8C),
+              'assets/quick_icon/rc1.svg',
+              width: 38,
+              height: 38,
+              // color: const Color(0xFF083F8C),
             ),
             label: AppLocalizations.of(context)!.translate('history'),
             onTap: () {
@@ -88,7 +89,7 @@ class QuickActionMenu extends StatelessWidget {
 class _QuickActionCard extends StatelessWidget {
   final Widget icon;
   final String label;
-  final VoidCallback onTap;
+  final VoidCallback onTap; // added
 
   const _QuickActionCard({
     required this.icon,
@@ -100,33 +101,37 @@ class _QuickActionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
-        onTap: onTap,
+        onTap: onTap, // added
         borderRadius: BorderRadius.circular(16),
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          height: 60,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              icon,
-              const SizedBox(height: 4),
-              Text(
-                label,
-                style: GoogleFonts.inter(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w500,
-                  color: const Color(0xFF000000),
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(vertical: 8), // gives some spacing
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min, // <<< important
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                icon,
+                const SizedBox(height: 4),
+                Flexible( // <<< prevents overflow
+                  child: Text(
+                    label,
+                    style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0XFF000000),
+                    ),
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
-}

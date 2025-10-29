@@ -16,15 +16,14 @@ import 'package:tsb_mini/theme/icon_theme.dart';
 //   {"icon": AppIcons.fashionPngPath, "name": "fashion"},
 // ];
 
-
-
 final List<Map<String, dynamic>> categories = [
   {"icon": "assets/category/all.svg", "name": "all"},
   {"icon": "assets/category/dr1.svg", "name": "drink"},
   {"icon": "assets/category/fo1.svg", "name": "food"},
-  {"icon": "assets/category/Fashion.svg", "name": "shopping"},
-  {"icon": "assets/category/Cloth.svg", "name": "fashion"},
+  {"icon": "assets/category/f1.svg", "name": "shopping"},
+  {"icon": "assets/category/fashion.svg", "name": "fashion"},
 ];
+
 
 class RewardFilterHeader extends StatelessWidget {
   const RewardFilterHeader({super.key});
@@ -40,10 +39,10 @@ class RewardFilterHeader extends StatelessWidget {
 
 class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
-  double get minExtent => 220;
+  double get minExtent => 180;
 
   @override
-  double get maxExtent => 220;
+  double get maxExtent => 180;
 
   @override
   Widget build(
