@@ -7,16 +7,35 @@ import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
 import 'package:tsb_mini/screen/reward_detail/reward_detail.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
 
-class FoodSlideCard extends StatefulWidget {
+class DrinkSlide extends StatefulWidget {
   final String? title;
-  const FoodSlideCard({super.key, this.title});
+  const DrinkSlide({super.key, this.title});
 
   @override
-  State<FoodSlideCard> createState() => _FoodSlideCardState();
+  State<DrinkSlide> createState() => _DrinkSlideState();
 }
 
-class _FoodSlideCardState extends State<FoodSlideCard> {
+class _DrinkSlideState extends State<DrinkSlide> {
   List<Map<String, dynamic>> cardImages = [
+     {
+      "image": "assets/home_images/starbucks2_latest_reward.png",
+      "message": "sixty_percent_off",
+      "point": "100",
+      "name": "Starbucks",
+    },
+    {
+      "image": "assets/home_images/amazon_latest_reward.png",
+      "message": "buy_9_get_1",
+      "point": "100",
+      "name": "Cafe Amazon",
+    },
+     {
+      "image": "assets/home_images/starbucks_latest_reward.png",
+      "message": "free_drink",
+      "point": "100",
+      "name": "Starbucks",
+      "link": 1,
+    },
     {
       "image": "assets/home_images/kfc2_latest_reward.png",
       "message": "buy_one_get_one",
@@ -34,27 +53,7 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
       "message": "free_drink",
       "point": "100",
       "name": "McDonald's",
-    },
-    
-    {
-      "image": "assets/home_images/starbucks_latest_reward.png",
-      "message": "free_drink",
-      "point": "100",
-      "name": "Starbucks",
-      "link": 1,
-    },
-    {
-      "image": "assets/home_images/amazon_latest_reward.png",
-      "message": "buy_9_get_1",
-      "point": "100",
-      "name": "Cafe Amazon",
-    },
-    {
-      "image": "assets/home_images/starbucks2_latest_reward.png",
-      "message": "sixty_percent_off",
-      "point": "100",
-      "name": "Starbucks",
-    },
+    },   
   ];
 
   @override

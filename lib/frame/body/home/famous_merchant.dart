@@ -58,7 +58,7 @@ class _FamousMerchantState extends State<FamousMerchant> {
                 child: Text(
                   AppLocalizations.of(context)!.translate('see_more'),
                   style: GoogleFonts.inter(
-                    color: const Color(0XFF1F258D),
+                    color: const Color(0XFF083F8C),
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),

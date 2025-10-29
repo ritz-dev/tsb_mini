@@ -419,7 +419,7 @@ class _TierInfoCard extends StatelessWidget {
         leftPoints = tierData.minPoints;
         break;
       default:
-        leftTitle = "Complete";
+        leftTitle = "Completed";
         leftPoints = tierData.minPoints;
     }
 

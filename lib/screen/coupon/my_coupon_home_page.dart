@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/frame/navigation/bottom_navigation_frame.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
@@ -210,6 +211,7 @@ class _MyRewardPageState extends State<MyRewardPage> {
         enableScan: true,
         // need to be change with qr scan
       ),
+      
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Container(
@@ -813,33 +815,41 @@ class RewardCouponCard extends StatelessWidget {
                 ),
               ),
             ),
-            if (count > 1)
+         if (count > 1)
               Positioned(
                 top: 2,
-                right: 2,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    // color: const Color(0xFFFFFFFF),
-                    // borderRadius: BorderRadius.circular(16),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.black.withOpacity(0.12),
-                    //     blurRadius: 6,
-                    //     offset: const Offset(0, 3),
-                    //   ),
-                    // ],
-                  ),
-                  child: Text(
-                    "x$count",
-                    style: GoogleFonts.inter(
-                      color: Color(0xFF083F8C),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 12,
-                    ),
+                right: -10,
+                child: SizedBox(
+                  height: 30,
+                  width: 45,
+                  child: Stack(
+                    children: [
+                      // Background badge SVG
+                      PackageAssets.svg(
+                        'assets/reward/top_badge.svg',
+                        height: 30,
+                        width: 45,
+                        // fit: BoxFit.contain,
+                      ),
+
+                      // Perfectly centered text
+                      Align(
+                        alignment: const Alignment(
+                          0,
+                          -0.5,
+                        ), //  slight vertical offset
+                        child: Text(
+                          "x$count",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.5,
+                            height: 1.0,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

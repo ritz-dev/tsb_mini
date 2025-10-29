@@ -18,16 +18,16 @@ class LatestRewardCard extends StatefulWidget {
 class _LatestRewardCardState extends State<LatestRewardCard> {
   List<Map<String, dynamic>> cardImages = [
     {
-      "image": "assets/home_images/kfc_latest_reward.png",
-      "message": "free_bucket",
-      "point": "100",
-      "name": "KFC",
-    },
-    {
       "image": "assets/home_images/mc_latest_reward.png",
       "message": "free_drink",
       "point": "100",
       "name": "McDonald's",
+    },
+    {
+      "image": "assets/home_images/starbucks_latest_reward.png",
+      "message": "free_drink",
+      "point": "100",
+      "name": "Starbucks",
     },
     {
       "image": "assets/home_images/kfc2_latest_reward.png",
@@ -36,11 +36,16 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
       "name": "KFC",
     },
     {
-      "image": "assets/home_images/starbucks_latest_reward.png",
-      "message": "free_drink",
+      "image": "assets/home_images/starbucks2_latest_reward.png",
+      "message": "sixty_percent_off",
       "point": "100",
       "name": "Starbucks",
-      "link": 1,
+    },
+    {
+      "image": "assets/home_images/kfc_latest_reward.png",
+      "message": "free_bucket",
+      "point": "100",
+      "name": "KFC",
     },
     {
       "image": "assets/home_images/amazon_latest_reward.png",
@@ -48,19 +53,13 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
       "point": "100",
       "name": "Cafe Amazon",
     },
-    {
-      "image": "assets/home_images/starbucks2_latest_reward.png",
-      "message": "sixty_percent_off",
-      "point": "100",
-      "name": "Starbucks",
-    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Title Row
+        /// ---- Title Row ----
         Container(
           margin: const EdgeInsets.only(bottom: 14),
           color: Colors.white,
@@ -91,7 +90,7 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                   child: Text(
                     AppLocalizations.of(context)!.translate('see_more'),
                     style: GoogleFonts.inter(
-                      color: const Color(0XFF1F258D),
+                      color: const Color(0XFF083F8C),
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
@@ -102,9 +101,8 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
           ),
         ),
 
-        // Reward Card List
+        /// ---- Reward Card List ----
         Container(
-          // color: Colors.purple,
           margin: const EdgeInsets.only(bottom: 15),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),
@@ -112,6 +110,7 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
               height: 240,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
+                addRepaintBoundaries: true, // ✅ smooth scrolling performance
                 itemCount: cardImages.length,
                 itemBuilder: (context, index) {
                   final item = cardImages[index];
@@ -119,7 +118,9 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => RewardDetailTest(status: "Used",)),
+                        MaterialPageRoute(
+                          builder: (_) => RewardDetailTest(status: "Used"),
+                        ),
                       );
                     },
                     child: Container(
@@ -131,21 +132,21 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                       child: Container(
                         width: 240,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.15),
                               blurRadius: 4,
-                              offset: const Offset(0, 4), // shadow goes below
+                              offset: const Offset(0, 4),
                             ),
                           ],
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(10),
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              // Background image
+                              /// ---- Background Image ----
                               PackageAssets.image(
                                 item["image"],
                                 fit: BoxFit.cover,
@@ -153,80 +154,97 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                                 height: double.infinity,
                               ),
 
-                              // Bottom blur info
-                             Align(
-                              alignment: Alignment.bottomCenter,
-                              child: RepaintBoundary( // Added to improve performance and prevent flicker
-                                child: ClipRect(
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                      sigmaX: 10,
-                                      sigmaY: 10,
-                                    ),
-                                    child: Container(
-                                      color: AppColors.cardBackground.withOpacity(0.4),
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                        vertical: 6,
+                              /// ---- Bottom Blur Overlay ----
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: SizedBox(
+                                  height: 70, // limit blur area for performance
+                                  child: ClipRect(
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                        sigmaX: 15, // reduced for smoothness
+                                        sigmaY: 15,
                                       ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            AppLocalizations.of(context)!
-                                                .translate(item["message"] ?? ""),
-                                            style: GoogleFonts.inter(
-                                              color: AppColors.textBlack,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
+                                      child: Container(
+                                        color: AppColors.cardBackground
+                                            .withOpacity(0.45),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 8,
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.translate(
+                                                item["message"] ?? "",
+                                              ),
+                                              style: GoogleFonts.inter(
+                                                color: AppColors.textBlack,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 8),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  color: AppColors.scaffoldBackground,
-                                                  borderRadius: BorderRadius.circular(20),
-                                                ),
-                                                padding: const EdgeInsets.symmetric(
-                                                  horizontal: 12,
-                                                  vertical: 6,
-                                                ),
-                                                child: Text(
-                                                  "${item["point"]} ${AppLocalizations.of(context)!.translate('points')}",
-                                                  style: GoogleFonts.inter(
-                                                    color: const Color(0xFF083F8B),
-                                                    fontSize: 11,
-                                                    fontWeight: FontWeight.bold,
+                                            const SizedBox(height: 6),
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors
+                                                        .scaffoldBackground,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          20,
+                                                        ),
+                                                  ),
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 12,
+                                                        vertical: 6,
+                                                      ),
+                                                  child: Text(
+                                                    "${item["point"]} ${AppLocalizations.of(context)!.translate('points')}",
+                                                    style: GoogleFonts.inter(
+                                                      color: const Color(
+                                                        0xFF083F8B,
+                                                      ),
+                                                      fontSize: 11,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              const SizedBox(width: 10),
-                                              Expanded(
-                                                child: Text(
-                                                  item["name"] ?? "",
-                                                  style: GoogleFonts.inter(
-                                                    color: const Color(0XFF000000),
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w500,
-                                                    letterSpacing: 0.5,
+                                                const SizedBox(width: 10),
+                                                Expanded(
+                                                  child: Text(
+                                                    item["name"] ?? "",
+                                                    style: GoogleFonts.inter(
+                                                      color: const Color(
+                                                        0XFF000000,
+                                                      ),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      letterSpacing: 0.5,
+                                                    ),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-
                             ],
                           ),
                         ),

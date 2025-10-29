@@ -164,9 +164,8 @@ class _MerchantItemsState extends State<MerchantItems> {
                   ),
                 ),
                 child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
+                  padding: const EdgeInsets.fromLTRB(
+                     16,20,16,8
                   ),
                   itemCount: data.length,
                   itemBuilder: (context, index) {
@@ -176,7 +175,7 @@ class _MerchantItemsState extends State<MerchantItems> {
                         : '';
 
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.only(bottom: 12 , top: 0),
                       child: RewardMerchantCard(
                         image: item["image"],
                         title: item["message"],

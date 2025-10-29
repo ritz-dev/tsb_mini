@@ -15,7 +15,7 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ?  null : 'tsb_mini',
+      package: _isInPackage ?  'tsb_mini' : null,
     );
   }
 
@@ -24,13 +24,14 @@ class PackageAssets {
     double? width,
     double? height,
     Color? color,
+    
   }) {
     return SvgPicture.asset(
       path,
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ?  null : 'tsb_mini',
+      package: _isInPackage ?   'tsb_mini' : null,
     );
   }
 

@@ -120,6 +120,8 @@ class _RewardFilterButtonState extends State<RewardFilterButton> {
 
                   // -----------------------------
                   // Point Range Column
+                  // -----------------------------
+                  // Point Range Column
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -131,52 +133,54 @@ class _RewardFilterButtonState extends State<RewardFilterButton> {
                         ),
                       ),
                       const SizedBox(height: 6),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SizedBox(
-                          width: min(320, 320),
-                          child: SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                              trackHeight: 3,
-                              activeTrackColor: const Color(0XFF2E3192),
-                              inactiveTrackColor: Colors.grey.shade400,
-                              thumbShape: const RoundSliderThumbShape(
-                                enabledThumbRadius: 12,
-                                pressedElevation: 6,
-                              ),
-                              thumbColor: const Color(0XFF2E3192),
-                              overlayColor: const Color(0XFF2E3192),
-                              valueIndicatorShape:
-                                  const PaddleSliderValueIndicatorShape(),
-                              valueIndicatorColor: const Color(0XFF2E3192),
-                              valueIndicatorTextStyle: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+
+                      // Full-width slider (no need for horizontal scroll)
+                      SizedBox(
+                        width:
+                            MediaQuery.of(context).size.width -
+                            40,// full width minus padding
+                        child: SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            trackHeight: 3,
+                            activeTrackColor: const Color(0XFF2E3192),
+                            inactiveTrackColor: Colors.grey.shade400,
+                            thumbShape: const RoundSliderThumbShape(
+                              enabledThumbRadius: 12,
+                              pressedElevation: 6,
                             ),
-                            child: RangeSlider(
-                              values: RangeValues(_minValue, _maxValue),
-                              min: 0,
-                              max: 10000,
-                              divisions: 100,
-                              labels: RangeLabels(
-                                "${_minValue.toInt()} points",
-                                _maxValue >= 10000
-                                    ? "10000+ points"
-                                    : "${_maxValue.toInt()} points",
-                              ),
-                              onChanged: (values) {
-                                setState(() {
-                                  _minValue = values.start;
-                                  _maxValue = values.end;
-                                });
-                              },
+                            thumbColor: const Color(0XFF2E3192),
+                            overlayColor: const Color(0XFF2E3192),
+                            valueIndicatorShape:
+                                const PaddleSliderValueIndicatorShape(),
+                            valueIndicatorColor: const Color(0XFF2E3192),
+                            valueIndicatorTextStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
+                          ),
+                          child: RangeSlider(
+                            values: RangeValues(_minValue, _maxValue),
+                            min: 0,
+                            max: 10000,
+                            divisions: 100,
+                            labels: RangeLabels(
+                              "${_minValue.toInt()} points",
+                              _maxValue >= 10000
+                                  ? "10000+ points"
+                                  : "${_maxValue.toInt()} points",
+                            ),
+                            onChanged: (values) {
+                              setState(() {
+                                _minValue = values.start;
+                                _maxValue = values.end;
+                              });
+                            },
                           ),
                         ),
                       ),
                     ],
                   ),
+
 
                   const SizedBox(height: 20),
 

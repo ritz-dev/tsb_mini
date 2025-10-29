@@ -99,7 +99,7 @@ class _CategoryHeaderState extends State<CategoryHeader> {
                         fontWeight: isSelected
                             ? FontWeight.bold
                             : FontWeight.normal,
-                        color: const Color(0XFF083F8C),
+                        color: const Color(0XFF000000),
                         fontSize: 13,
                       ),
                       maxLines: 1,

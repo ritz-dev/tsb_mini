@@ -13,16 +13,16 @@ class TransferSuccessfulPage extends StatefulWidget {
   final int amount;
   final String transactionNo;
   final String transactionDate;
-  final String transactionPerson;
+  // final String transactionPerson;
   final String note;
 
   const TransferSuccessfulPage({
     super.key,
-    this.recipient = "Mr.Jason",
+    this.recipient = "Mr.John Doe",
     this.amount = 500,
     this.transactionNo = "TRF-20250828",
     this.transactionDate = "30 Aug 2025 12:30",
-    this.transactionPerson = "10*****0000",
+    // this.transactionPerson = "10000001111",
     this.note = "-",
   });
 
@@ -46,7 +46,7 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
       backgroundColor: const Color(0xFF0D47A1),
       appBar: CreditHomeAppBar(title: 'Transfer', enableBack: true),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
@@ -64,7 +64,7 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
                 padding: const EdgeInsets.only(top: 20),
                 child: Column(
                   children: [
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 0),
                     PackageAssets.image("assets/image/success_icon.png"),
                     const SizedBox(height: 18),
                     Text(
@@ -106,14 +106,14 @@ class _TransferSuccessfulPageState extends State<TransferSuccessfulPage> {
                                     color: AppColors.textBlack,
                                   ),
                                 ),
-                                Text(
-                                  widget.transactionPerson, // ID
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: AppColors.textGrey,
-                                  ),
-                                ),
+                                // Text(
+                                //   widget.transactionPerson, // ID
+                                //   style: GoogleFonts.inter(
+                                //     fontWeight: FontWeight.w400,
+                                //     fontSize: 14,
+                                //     color: AppColors.textGrey,
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
@@ -237,7 +237,7 @@ class _TransferInfoRow extends StatelessWidget {
                 Text(
                   value ?? "",
                   style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     fontSize: 14,
                     color: AppColors.textBlack,
                   ),

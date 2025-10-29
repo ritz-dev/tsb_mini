@@ -4,6 +4,7 @@ import 'package:tsb_main/screen/pass_main.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
 import 'package:tsb_mini/frame/app_bar/credit_app_bar.dart';
 import 'package:tsb_mini/frame/app_bar/reward_sliver_app_bar.dart';
+import 'package:tsb_mini/frame/body/home/drink_slide.dart';
 import 'package:tsb_mini/frame/body/home/famous_merchant.dart';
 import 'package:tsb_mini/frame/body/home/food_slide.dart';
 import 'package:tsb_mini/frame/body/home/latest_reward_card.dart';
@@ -79,7 +80,9 @@ class _RewardPageState extends State<RewardPage> {
                           const SizedBox(height: 18),
                           const FamousMerchant(),
                           const SizedBox(height: 18),
-                          FoodSlideCard(title: localize.translate('food')),
+                          FoodSlideCard(title: localize.translate('food')), 
+                          const SizedBox(height: 18),
+                          DrinkSlide(title: localize.translate('drink')), 
                         ],
                       ),
                     ),

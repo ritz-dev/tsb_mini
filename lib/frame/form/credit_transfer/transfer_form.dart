@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_mini/frame/body/credit_transfer/confirm_transfer_sheet.dart';
 import 'package:tsb_mini/frame/body/credit_transfer/no_account_transfer.dart';
@@ -25,11 +26,11 @@ class _TransferFormState extends State<TransferForm> {
   final ScrollController controller = ScrollController();
 
   final int availableCredits =
-      3000; // <-- From CreditTransferHeader (mocked here)
+      6000; // <-- From CreditTransferHeader (mocked here)
 
   bool _isError = false;
 
-  final String noAccountData = "1000000000";
+  final String noAccountData = "";
 
     @override
   void initState() {
@@ -64,8 +65,13 @@ class _TransferFormState extends State<TransferForm> {
           const SizedBox(height: 12),
 
           // Personal ID input
+         // Personal ID input
           TextField(
             controller: _idController,
+            keyboardType: TextInputType.number, // shows numeric keyboard
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly, //allows only digits
+            ],
             style: GoogleFonts.inter(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -75,19 +81,13 @@ class _TransferFormState extends State<TransferForm> {
               hintText: "Please Enter Personal ID",
               hintStyle: GoogleFonts.inter(
                 fontSize: 12,
-                color: Color(0xFFA6A6A6),
+                color: const Color(0xFFA6A6A6),
                 fontWeight: FontWeight.w500,
               ),
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 14,
                 horizontal: 16,
               ),
-              // suffixIcon: IconButton(
-              //   icon: AppIcons.scanPngIcon(),
-              //   onPressed: () {
-              //     // Handle scan action
-              //   },
-              // ),
               suffixIcon: IconButton(
                 icon: AppIcons.scanPngIcon(),
                 onPressed: () async {
@@ -104,7 +104,6 @@ class _TransferFormState extends State<TransferForm> {
                   }
                 },
               ),
-
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: const BorderSide(color: Colors.grey),
@@ -116,12 +115,13 @@ class _TransferFormState extends State<TransferForm> {
               focusedBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 borderSide: BorderSide(
-                  color: Color(0xFF0A4DA2), // blue focus
+                  color: Color(0xFF0A4DA2), // blue focus border
                   width: 1.5,
                 ),
               ),
             ),
           ),
+
 
           const SizedBox(height: 14),
 

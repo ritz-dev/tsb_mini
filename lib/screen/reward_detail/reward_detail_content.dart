@@ -190,7 +190,7 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: LinearProgressIndicator(
-                            value: 190 / 200, // Progress percentage
+                            value: 200 / 200, // Progress percentage
                             backgroundColor: AppColors.divider,
                             valueColor: const AlwaysStoppedAnimation<Color>(
                               Color(0xFF083F8C),
@@ -203,7 +203,7 @@ class _RewardDetailContentState extends State<RewardDetailContent> {
             
                         // Text below the progress bar
                         Text(
-                          "190 / 200 points",
+                          "500 / 200 points",
                           style: GoogleFonts.inter(
                             fontSize: 13,
                             color: AppColors.textGrey,
