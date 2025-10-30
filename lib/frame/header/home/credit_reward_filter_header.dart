@@ -21,7 +21,7 @@ import 'package:tsb_mini/theme/icon_theme.dart';
 final List<Map<String, dynamic>> categories = [
   {"icon": "assets/category/all.svg", "name": "all"},
   {"icon": "assets/category/dr1.svg", "name": "drink"},
-  {"icon": "assets/category/fo1.svg", "name": "food"},
+  {"icon": "assets/category/food2.svg", "name": "food"},
   {"icon": "assets/category/Fashion.svg", "name": "shopping"},
   {"icon": "assets/category/Cloth.svg", "name": "fashion"},
 ];

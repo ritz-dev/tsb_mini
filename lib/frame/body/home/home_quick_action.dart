@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tsb_main/utils/localization/app_localizations.dart';
+import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/coupon/my_coupon_home_page.dart';
 import 'package:tsb_mini/screen/history/history_page.dart';
 import 'package:tsb_mini/screen/tier/credit_tier.dart';
@@ -19,8 +20,8 @@ class QuickActionMenu extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
         _QuickActionCard(
-            icon: SvgPicture.asset(
-              'assets/quick_icon/c1.svg',
+            icon: PackageAssets.svg(
+              'assets/quick_icon/coup1.svg',
               width: 38,
               height: 38,
               // color: const Color(0xFF083F8C),
@@ -34,7 +35,7 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: SvgPicture.asset(
+            icon: PackageAssets.svg(
               'assets/tier/d1.svg',
               width: 38,
               height: 38,
@@ -51,8 +52,8 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: SvgPicture.asset(
-              'assets/quick_icon/tr1.svg',
+            icon: PackageAssets.svg(
+              'assets/quick_icon/tran1.svg',
               width: 38,
               height: 38,
               // color: const Color(0xFF083F8C),
@@ -66,8 +67,8 @@ class QuickActionMenu extends StatelessWidget {
             },
           ),
           _QuickActionCard(
-            icon: SvgPicture.asset(
-              'assets/quick_icon/rc1.svg',
+            icon: PackageAssets.svg(
+              'assets/quick_icon/recent1.svg',
               width: 38,
               height: 38,
               // color: const Color(0xFF083F8C),
