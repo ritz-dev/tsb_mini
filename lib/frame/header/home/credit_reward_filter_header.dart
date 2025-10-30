@@ -10,7 +10,7 @@ final List<Map<String, dynamic>> categories = [
   {"icon": "assets/category/all.svg", "name": "all"},
   {"icon": "assets/category/dr1.svg", "name": "drink"},
   {"icon": "assets/category/food2.svg", "name": "food"},
-  {"icon": "assets/category/Fashion.svg", "name": "shopping"},
+  {"icon": "assets/category/fashion5.svg", "name": "shopping"},
   {"icon": "assets/category/Cloth.svg", "name": "fashion"},
 ];
 

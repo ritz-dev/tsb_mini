@@ -30,12 +30,13 @@ class _RewardCollectionState extends State<RewardCollection> {
   late int selectedIndex;
 
   final List<Map<String, dynamic>> categories = [
-    {"icon": AppIcons.allPngPath, "name": "All"},
-    {"icon": AppIcons.drinkPngPath, "name": "Drink"},
-    {"icon": AppIcons.foodPngPath, "name": "Food"},
-    {"icon": AppIcons.shoppingPngPath, "name": "Shopping"},
-    {"icon": AppIcons.fashionPngPath, "name": "Fashion"},
+    {"icon": "assets/category/all.svg", "name": "All"},
+    {"icon": "assets/category/dr1.svg", "name": "Drink"},
+    {"icon": "assets/category/food2.svg", "name": "Food"},
+    {"icon": "assets/category/fashion5.svg", "name": "Shopping"},
+    {"icon": "assets/category/Cloth.svg", "name": "Fashion"},
   ];
+
 
   final List<Map<String, dynamic>> data = [
     {
@@ -178,16 +179,21 @@ class _RewardCollectionState extends State<RewardCollection> {
   }
 
   void _filterData(String categoryName) {
-    setState(() {
-      if (categoryName == "All") {
-        filteredData = data;
-      } else {
-        filteredData = data
-            .where((item) => item["type"] == categoryName)
-            .toList();
-      }
-    });
-  }
+      setState(() {
+        if (categoryName.toLowerCase() == "all") {
+          filteredData = data;
+        } else {
+          filteredData = data
+              .where(
+                (item) =>
+                    (item["type"] as String).toLowerCase() ==
+                    categoryName.toLowerCase(),
+              )
+              .toList();
+        }
+      });
+    }
+
 
   String formatDate(String dateStr) {
     try {

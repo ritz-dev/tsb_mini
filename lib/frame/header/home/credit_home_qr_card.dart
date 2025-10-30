@@ -103,7 +103,7 @@ class CreditHomeQrCard extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: "3,000",
+                                    text: "6,000",
                                     style: GoogleFonts.inter(
                                       fontSize: 20,
                                       color: Colors.white,

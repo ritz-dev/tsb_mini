@@ -83,7 +83,9 @@ class _LatestRewardCardState extends State<LatestRewardCard> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RewardCollection(),
+                        builder: (context) => const RewardCollection(
+                          selectedIndex: 0,
+                        ),
                       ),
                     );
                   },

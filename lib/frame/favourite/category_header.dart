@@ -95,7 +95,7 @@ class _CategoryHeaderState extends State<CategoryHeader> {
                         ],
                       ),
                     ),
-                    child: PackageAssets.image(
+                    child: PackageAssets.svg(
                       category["icon"] ?? '',
                       width: 25,
                       height: 25,

@@ -21,11 +21,11 @@ class Favourite extends StatefulWidget {
 
 class _FavouriteState extends State<Favourite> {
   final List<Map<String, dynamic>> categories = [
-    {"icon": AppIcons.allPngPath, "name": "All"},
-    {"icon": AppIcons.drinkPngPath, "name": "Drink"},
-    {"icon": AppIcons.foodPngPath, "name": "Food"},
-    {"icon": AppIcons.shoppingPngPath, "name": "Shopping"},
-    {"icon": AppIcons.fashionPngPath, "name": "Fashion"},
+   {"icon": "assets/category/all.svg", "name": "All"},
+    {"icon": "assets/category/dr1.svg", "name": "Drink"},
+    {"icon": "assets/category/food2.svg", "name": "Food"},
+    {"icon": "assets/category/fashion5.svg", "name": "Shopping"},
+    {"icon": "assets/category/Cloth.svg", "name": "Fashion"},
   ];
 
   final List<Map<String, dynamic>> data = [
