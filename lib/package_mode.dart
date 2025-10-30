@@ -16,8 +16,8 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ? null : 'tsb_mini' ,
-      // package: _isInPackage ? 'tsb_mini' : null,
+      // package: _isInPackage ? null : 'tsb_mini' ,
+      package: _isInPackage ? 'tsb_mini' : null,
 
     );
   }
@@ -36,8 +36,8 @@ class PackageAssets {
       height: height,
       fit: fit ?? BoxFit.contain, // safely apply default if null
       color: color,
-      package: _isInPackage ? null : 'tsb_mini' ,
-      // package: _isInPackage ? 'tsb_mini' : null,
+      // package: _isInPackage ? null : 'tsb_mini' ,
+      package: _isInPackage ? 'tsb_mini' : null,
     );
   }
 

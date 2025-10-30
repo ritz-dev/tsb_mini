@@ -597,12 +597,12 @@ class RewardCouponCard extends StatelessWidget {
                              Material(
                                 color: Colors.transparent,
                                 child: InkWell(
-                                  borderRadius: BorderRadius.circular(6),
+                                borderRadius: BorderRadius.circular(6),
                                 onTap: () {
                                   // === Show QR modal ===
                                   showModalBottomSheet(
                                     context: context,
-                                    isScrollControlled: true,
+                                    isScrollControlled: false,
                                     enableDrag: true,
                                     useSafeArea: true,
                                     backgroundColor: Colors.transparent,

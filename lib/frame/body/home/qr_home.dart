@@ -9,10 +9,10 @@ class QrHome extends StatefulWidget {
   const QrHome({super.key, this.onBack});
 
   @override
-  State<QrHome> createState() => _FrostedQrHomeState();
+  State<QrHome> createState() => _QrHomeState();
 }
 
-class _FrostedQrHomeState extends State<QrHome> {
+class _QrHomeState extends State<QrHome> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,138 +32,125 @@ class _FrostedQrHomeState extends State<QrHome> {
   void _showQrCode(BuildContext context, {bool keepBottomNavVisible = false}) {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true,
-      enableDrag: true, // let user swipe it down
+      isScrollControlled: false,
+      enableDrag: true, // allow drag down
       useSafeArea: true,
       backgroundColor: Colors.transparent,
       barrierColor: keepBottomNavVisible
           ? AppColors.barrierBackgroundColor
           : AppColors.barrierBackgroundColor.withOpacity(0.7),
-      transitionAnimationController: AnimationController(
-        vsync: Navigator.of(context),
-        duration: const Duration(milliseconds: 400), // smoother in
-        reverseDuration: const Duration(milliseconds: 350), // smoother out
-      ),
       builder: (context) {
-        return DraggableScrollableSheet(
-          expand: false,
-          initialChildSize: 0.45,
-          minChildSize: 0.3,
-          maxChildSize: 0.9,
-          builder: (context, scrollController) {
-            return Container(
-              decoration: const BoxDecoration(
-                color: AppColors.cardBackground,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(43),
-                  topRight: Radius.circular(43),
-                ),
+        return _DragDownOnlySheet(
+          child: Container(
+            width: double.infinity, //  full screen width
+            height: MediaQuery.of(context).size.height * 0.45,
+            decoration: const BoxDecoration(
+              color: AppColors.cardBackground,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(43),
+                topRight: Radius.circular(43),
               ),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    bottom: MediaQuery.of(context).viewInsets.bottom,
-                    top: 0,
-                  ),
-                  child: _qrBuild(context), // your existing content
-                ),
-              ),
-            );
-          },
+            ),
+            child: _qrBuild(context),
+          ),
         );
       },
     );
   }
 
   Widget _qrBuild(BuildContext context) {
-    return Container(
-      height: 350,
-      decoration: const BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(43),
-          topRight: Radius.circular(43),
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: 20,
-          right: 20,
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          top: 0,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10, top: 20),
-                child: Text(
-                  'Jonh Doe (10000001100)',
-                  style: GoogleFonts.inter(
-                    fontSize: 18,
-                    color: Color(0XFF262628),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Text(
-                  'Scan My QR',
-                  style: GoogleFonts.inter(
-                    fontSize: 18,
-                    color: Color(0XFF083F8C),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: PackageAssets.image(
-                  "assets/image/qr_scan.png", // <-- replace with your own image
-                  height: 150,
-                  width: 150,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              _actionButtons(),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // drag indicator bar
+          Container(
+            width: 40,
+            height: 4,
+            margin: const EdgeInsets.only(bottom: 18),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
+            ),
           ),
-        ),
+          Text(
+            'John Doe (10000001100)',
+            style: GoogleFonts.inter(
+              fontSize: 18,
+              color: const Color(0XFF262628),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Scan My QR',
+            style: GoogleFonts.inter(
+              fontSize: 18,
+              color: const Color(0XFF083F8C),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 25),
+          PackageAssets.image(
+            "assets/image/qr_scan.png",
+            height: 150,
+            width: 150,
+            fit: BoxFit.cover,
+          ),
+          const SizedBox(height: 25),
+          _actionButtons(),
+        ],
       ),
     );
   }
 
   Widget _actionButtons() {
-    return Center(
-      child: SizedBox(
-        width: 150, // Short width for the button
-        child: ElevatedButton(
-          onPressed: () {
-            // Add your submit/save image logic here
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF083F8C), // Blue color
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20), // Rounded corners
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            elevation: 0,
+    return SizedBox(
+      width: 150,
+      child: ElevatedButton(
+        onPressed: () {
+          // Add your save image logic here
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF083F8C),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
           ),
-          child: Text(
-            'Save Image',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          elevation: 0,
+        ),
+        child: Text(
+          'Save Image',
+          style: GoogleFonts.inter(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Custom wrapper to allow drag down only (no upward stretch)
+class _DragDownOnlySheet extends StatelessWidget {
+  final Widget child;
+
+  const _DragDownOnlySheet({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      // Detect downward drag → close
+      onVerticalDragUpdate: (details) {
+        if (details.primaryDelta! > 5) {
+          Navigator.of(context).pop();
+        }
+      },
+      // Ignore upward drag (no stretching)
+      behavior: HitTestBehavior.opaque,
+      child: child,
     );
   }
 }
