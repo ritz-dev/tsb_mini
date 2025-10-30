@@ -61,41 +61,43 @@ class _RewardPageState extends State<RewardPage> {
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
-            child: CustomScrollView(
-              physics: const ClampingScrollPhysics(), // Smooth, no bounce
-              slivers: [
-                const RewardAppBar(),
-                const RewardFilterHeader(),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                  sliver: SliverToBoxAdapter(
-                    child: AnimatedSmoothScrollWrapper(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 18),
-                          LatestRewardCard(
-                            title: localize.translate('latest_rewards'),
-                          ),
-                          const SizedBox(height: 18),
-                          const FamousMerchant(),
-                          const SizedBox(height: 18),
-                          FoodSlideCard(title: localize.translate('food')), 
-                          const SizedBox(height: 18),
-                          DrinkSlide(title: localize.translate('drink')), 
-                        ],
-                      ),
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: AnimatedSmoothScrollWrapper(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //  Previously RewardAppBar (now just a widget)
+                    const RewardAppBar(),
+
+                    //  Previously RewardFilterHeader
+                    const RewardFilterHeader(),
+
+                    const SizedBox(height: 8),
+
+                    // Main content (previously inside SliverPadding)
+                    LatestRewardCard(
+                      title: localize.translate('latest_rewards'),
                     ),
-                  ),
+                    const SizedBox(height: 8),
+
+                    const FamousMerchant(),
+                    const SizedBox(height: 8),
+
+                    FoodSlideCard(title: localize.translate('food')),
+                    const SizedBox(height: 8),
+
+                    DrinkSlide(title: localize.translate('drink')),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
       ),
-     bottomNavigationBar: SafeArea(
+      bottomNavigationBar: SafeArea(
         child: Container(
-          color: Colors.white, // Makes bottom bar area solid white
+          color: Colors.white,
           child: BottomNavigationFrame(
             selectedIndex: _selectedIndex,
             onItemTapped: _onItemTapped,
@@ -103,7 +105,6 @@ class _RewardPageState extends State<RewardPage> {
           ),
         ),
       ),
-
     );
   }
 }
@@ -131,16 +132,13 @@ class _AnimatedSmoothScrollWrapperState
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 001), // smooth transition speed
+      duration: const Duration(milliseconds: 300), // smoother fade
     );
 
-    _fadeAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.ease, // smooth easing
-    );
+    _fadeAnimation = CurvedAnimation(parent: _controller, curve: Curves.ease);
 
     _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.01),
+      begin: const Offset(0, 0.02),
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
 

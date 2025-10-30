@@ -85,7 +85,9 @@ class _FoodSlideCardState extends State<FoodSlideCard> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RewardCollection(),
+                        builder: (context) => const RewardCollection(
+                          selectedIndex: 2,
+                        ),
                       ),
                     );
                   },

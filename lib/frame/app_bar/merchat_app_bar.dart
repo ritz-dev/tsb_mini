@@ -56,6 +56,10 @@ class MerchantAppBar extends StatelessWidget {
           ).image, // <-- important: access the .image property
           fit: BoxFit.cover,
         ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        )
       ),
       child: SafeArea(
         bottom: false, // prevents double padding

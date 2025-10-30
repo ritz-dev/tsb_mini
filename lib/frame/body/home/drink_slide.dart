@@ -84,7 +84,9 @@ class _DrinkSlideState extends State<DrinkSlide> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RewardCollection(),
+                        builder: (context) => const RewardCollection(
+                            selectedIndex: 1,
+                        ),
                       ),
                     );
                   },

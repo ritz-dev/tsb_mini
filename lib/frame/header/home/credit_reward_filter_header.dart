@@ -5,18 +5,6 @@ import 'package:tsb_mini/frame/body/home/home_quick_action.dart';
 import 'package:tsb_mini/package_mode.dart';
 import 'package:tsb_mini/screen/reward/latest_reward_collection.dart';
 import 'package:tsb_mini/theme/color_theme.dart';
-import 'package:tsb_mini/theme/icon_theme.dart';
-
-// Example categories (icon path + name)
-// final List<Map<String, dynamic>> categories = [
-//   {"icon": AppIcons.allPngPath, "name": "all"},
-//   {"icon": AppIcons.drinkPngPath, "name": "drink"},
-//   {"icon": AppIcons.foodPngPath, "name": "food"},
-//   {"icon": AppIcons.shoppingPngPath, "name": "shopping"},
-//   {"icon": AppIcons.fashionPngPath, "name": "fashion"},
-// ];
-
-
 
 final List<Map<String, dynamic>> categories = [
   {"icon": "assets/category/all.svg", "name": "all"},
@@ -31,74 +19,35 @@ class RewardFilterHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: _FilterHeaderDelegate(),
-    );
-  }
-}
-
-class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  double get minExtent => 220;
-
-  @override
-  double get maxExtent => 220;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    final double currentExtent = (maxExtent - shrinkOffset).clamp(
-      minExtent,
-      maxExtent,
-    );
-
-    return Material(
-      color: Colors.transparent,
-      elevation: 0,
-      child: SizedBox(
-        height: currentExtent,
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 0 , bottom: 15),
+            child: QuickActionMenu(),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10 , right: 10),
+            child: const Divider(height: 0.5 , color: Color.fromARGB(40, 167, 167, 167)),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, top: 5),
+            child: SizedBox(
+              height: 90,
+              child: _CategorySelector(categories: categories),
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 0),
-                child: QuickActionMenu(),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, top: 5),
-                child: SizedBox(
-                  height: 90,
-                  child: _CategorySelector(categories: categories),
-                ),
-              ),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
 }
 
 class _CategorySelector extends StatefulWidget {
-
-  final List<Map<String, dynamic>> categories; 
+  final List<Map<String, dynamic>> categories;
 
   const _CategorySelector({required this.categories});
 
@@ -128,19 +77,15 @@ class _CategorySelectorState extends State<_CategorySelector> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => RewardCollection(
-                  selectedIndex: index, //  Pass tapped category index
-                ),
+                builder: (_) => RewardCollection(selectedIndex: index),
               ),
             );
           },
-
           child: SizedBox(
             width: 80,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Icon area (no animation)
                 Container(
                   margin: const EdgeInsets.only(bottom: 2),
                   padding: const EdgeInsets.all(12),
@@ -163,8 +108,6 @@ class _CategorySelectorState extends State<_CategorySelector> {
                     color: Colors.white,
                   ),
                 ),
-
-                // Text area (only animated color transition)
                 Flexible(
                   child: AnimatedDefaultTextStyle(
                     duration: const Duration(milliseconds: 250),

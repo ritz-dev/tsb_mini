@@ -5,8 +5,14 @@ import 'package:tsb_mini/theme/color_theme.dart';
 class CategoryHeader extends StatefulWidget {
   final List<Map<String, dynamic>>? categories;
   final int selected;
+  final Function(int index, String name)? onCategorySelected;
 
-  const CategoryHeader({super.key, this.categories, this.selected = 0});
+  const CategoryHeader({
+    super.key,
+    this.categories,
+    this.selected = 0,
+    this.onCategorySelected,
+  });
 
   @override
   State<CategoryHeader> createState() => _CategoryHeaderState();
@@ -25,20 +31,29 @@ class _CategoryHeaderState extends State<CategoryHeader> {
   Widget build(BuildContext context) {
     final categories = widget.categories ?? [];
 
+    // Show "No Data Found" image if no categories
     if (categories.isEmpty) {
-      return const SizedBox(
-        height: 70,
-        child: Center(child: Text("No categories")),
+      return Container(
+        height: 200,
+        color: Colors.white,
+        alignment: Alignment.center,
+        child: PackageAssets.image(
+          "assets/image/NoDataFound.png",
+          width: 182,
+          height: 169,
+          fit: BoxFit.contain,
+        ),
       );
     }
 
+    //  Normal category list
     return Container(
       height: 120,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20), // rounded top left
-          topRight: Radius.circular(20), // rounded top right
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
         boxShadow: [
           BoxShadow(
@@ -58,9 +73,8 @@ class _CategoryHeaderState extends State<CategoryHeader> {
 
           return GestureDetector(
             onTap: () {
-              setState(() {
-                selectedIndex = index;
-              });
+              setState(() => selectedIndex = index);
+              widget.onCategorySelected?.call(index, category["name"]);
             },
             child: Container(
               width: 80,
@@ -68,7 +82,6 @@ class _CategoryHeaderState extends State<CategoryHeader> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Category Icon with gradient background
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -91,7 +104,6 @@ class _CategoryHeaderState extends State<CategoryHeader> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  // Category Name
                   Flexible(
                     child: Text(
                       category["name"] ?? '',
@@ -107,7 +119,6 @@ class _CategoryHeaderState extends State<CategoryHeader> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  // Animated Underline
                   const SizedBox(height: 4),
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 250),

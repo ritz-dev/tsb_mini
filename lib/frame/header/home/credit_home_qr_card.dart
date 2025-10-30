@@ -10,7 +10,7 @@ class CreditHomeQrCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 10, left: 20, right: 20 , bottom: 10),
+        padding: const EdgeInsets.only(top: 10, left: 20, right: 20 , bottom: 0),
         child: Container(
           height: 150,
           width: double.infinity,
