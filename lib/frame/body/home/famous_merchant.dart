@@ -14,16 +14,13 @@ class FamousMerchant extends StatefulWidget {
 
 class _FamousMerchantState extends State<FamousMerchant> {
   final List<Map<String, dynamic>> merchants = [
-    {"image": "assets/home_images/truesg.png"},
-    {"image": "assets/home_images/kfc.png"},
-    {"image": "assets/home_images/tm.png"},
-    {"image": "assets/home_images/m.png"},
-    {"image": "assets/home_images/cafe_amazon.png"},
-    {"image": "assets/home_images/truesg.png"},
-    {"image": "assets/home_images/kfc.png"},
-    {"image": "assets/home_images/tm.png"},
-    {"image": "assets/home_images/m.png"},
-    {"image": "assets/home_images/cafe_amazon.png"},
+    {"image": "assets/merchant_image/true5g01.png"},
+    {"image": "assets/merchant_image/kfc01.png"},
+    {"image": "assets/merchant_image/starbucks01.png"},
+    {"image": "assets/merchant_image/mcdonald01.png"},
+    {"image": "assets/merchant_image/cafe_amazon01.png"},
+    {"image": "assets/merchant_image/nike01.png"},
+    {"image": "assets/merchant_image/adidas01.png"},
   ];
 
   @override

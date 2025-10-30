@@ -19,35 +19,40 @@ class _MerchantPagetState extends State<MerchantPage> {
 
   // At the top-level (outside any class)
   List<Map<String, dynamic>> merchants = [
-    {"name": "True 5G", "image": "assets/home_images/truesg.png"},
-    {"name": "KFC", "image": "assets/home_images/kfc.png"},
-    {"name": "Starbucks", "image": "assets/home_images/tm.png"},
-    {"name": "McDonald's", "image": "assets/home_images/m.png"},
-    {"name": "Cafe Amazon", "image": "assets/home_images/cafe_amazon.png"},
-    {"name": "Adidas", "image": "assets/home_images/adidas.png"},
-    {"name": "NIKE", "image": "assets/home_images/nike.png"},
-    {"name": "True 5G", "image": "assets/home_images/truesg.png"},
-    {"name": "KFC", "image": "assets/home_images/kfc.png"},
-    {"name": "Starbucks", "image": "assets/home_images/tm.png"},
-    {"name": "McDonald's", "image": "assets/home_images/m.png"},
-    {"name": "Cafe Amazon", "image": "assets/home_images/cafe_amazon.png"},
-    {"name": "Adidas", "image": "assets/home_images/adidas.png"},
-    {"name": "NIKE", "image": "assets/home_images/nike.png"},
-    {"name": "True 5G", "image": "assets/home_images/truesg.png"},
-    {"name": "KFC", "image": "assets/home_images/kfc.png"},
-    {"name": "Starbucks", "image": "assets/home_images/tm.png"},
-    {"name": "McDonald's", "image": "assets/home_images/m.png"},
-    {"name": "Cafe Amazon", "image": "assets/home_images/cafe_amazon.png"},
-    {"name": "Adidas", "image": "assets/home_images/adidas.png"},
-    {"name": "NIKE", "image": "assets/home_images/nike.png"},
-    {"name": "True 5G", "image": "assets/home_images/truesg.png"},
-    {"name": "KFC", "image": "assets/home_images/kfc.png"},
-    {"name": "Starbucks", "image": "assets/home_images/tm.png"},
-    {"name": "McDonald's", "image": "assets/home_images/m.png"},
-    {"name": "Cafe Amazon", "image": "assets/home_images/cafe_amazon.png"},
-    {"name": "Adidas", "image": "assets/home_images/adidas.png"},
-    {"name": "NIKE", "image": "assets/home_images/nike.png"},
-  ];
+    
+      
+    {"name": "True 5G", "image": "assets/merchant_image/true5g01.png"},
+    {"name": "KFC", "image": "assets/merchant_image/kfc01.png"},
+    {"name": "Starbucks", "image": "assets/merchant_image/starbucks01.png"},
+    {"name": "McDonald's", "image": "assets/merchant_image/mcdonald01.png"},
+    {"name": "Cafe Amazon", "image": "assets/merchant_image/cafe_amazon01.png"},
+    {"name": "NIKE", "image": "assets/merchant_image/nike01.png"},
+    {"name": "Adidas", "image": "assets/merchant_image/adidas01.png"},
+   
+    {"name": "True 5G", "image": "assets/merchant_image/true5g01.png"},
+    {"name": "KFC", "image": "assets/merchant_image/kfc01.png"},
+    {"name": "Starbucks", "image": "assets/merchant_image/starbucks01.png"},
+    {"name": "McDonald's", "image": "assets/merchant_image/mcdonald01.png"},
+    {"name": "Cafe Amazon", "image": "assets/merchant_image/cafe_amazon01.png"},
+    {"name": "NIKE", "image": "assets/merchant_image/nike01.png"},
+    {"name": "Adidas", "image": "assets/merchant_image/adidas01.png"},
+    
+     {"name": "True 5G", "image": "assets/merchant_image/true5g01.png"},
+    {"name": "KFC", "image": "assets/merchant_image/kfc01.png"},
+    {"name": "Starbucks", "image": "assets/merchant_image/starbucks01.png"},
+    {"name": "McDonald's", "image": "assets/merchant_image/mcdonald01.png"},
+    {"name": "Cafe Amazon", "image": "assets/merchant_image/cafe_amazon01.png"},
+    {"name": "NIKE", "image": "assets/merchant_image/nike01.png"},
+    {"name": "Adidas", "image": "assets/merchant_image/adidas01.png"},
+    
+     {"name": "True 5G", "image": "assets/merchant_image/true5g01.png"},
+    {"name": "KFC", "image": "assets/merchant_image/kfc01.png"},
+    {"name": "Starbucks", "image": "assets/merchant_image/starbucks01.png"},
+    {"name": "McDonald's", "image": "assets/merchant_image/mcdonald01.png"},
+    {"name": "Cafe Amazon", "image": "assets/merchant_image/cafe_amazon01.png"},
+    {"name": "NIKE", "image": "assets/merchant_image/nike01.png"},
+    {"name": "Adidas", "image": "assets/merchant_image/adidas01.png"},
+];
 
   @override
   void initState() {
