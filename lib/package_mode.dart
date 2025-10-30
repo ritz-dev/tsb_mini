@@ -16,14 +16,14 @@ class PackageAssets {
       width: width,
       height: height,
       color: color,
-      package: _isInPackage ? 'tsb_mini' : null,
+      package: _isInPackage ? null : 'tsb_mini',
     );
   }
 
   /// For vector SVG assets (.svg)
   static SvgPicture svg(
     String path, {
-    BoxFit? fit, // ✅ same style as Image
+    BoxFit? fit, // same style as Image
     double? width,
     double? height,
     Color? color,
@@ -32,9 +32,9 @@ class PackageAssets {
       path,
       width: width,
       height: height,
-      fit: fit ?? BoxFit.contain, // ✅ safely apply default if null
+      fit: fit ?? BoxFit.contain, // safely apply default if null
       color: color,
-      package: _isInPackage ? 'tsb_mini' : null,
+      package: _isInPackage ? null : 'tsb_mini',
     );
   }
 
