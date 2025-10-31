@@ -601,88 +601,132 @@ class RewardCouponCard extends StatelessWidget {
                                 onTap: () {
                                   // === Show QR modal ===
                                   showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: false,
-                                    enableDrag: true,
-                                    useSafeArea: true,
-                                    backgroundColor: Colors.transparent,
-                                    barrierColor: AppColors.barrierBackgroundColor.withOpacity(0.7),
-                                    builder: (context) {
-                                      return DraggableScrollableSheet(
-                                        expand: false,
-                                        initialChildSize: 0.45,
-                                        minChildSize: 0.3,
-                                        maxChildSize: 0.9,
-                                        builder: (context, scrollController) {
-                                          return Container(
-                                            width: double.infinity,
-                                            decoration: const BoxDecoration(
-                                              color: AppColors.cardBackground,
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(43),
-                                                topRight: Radius.circular(43),
+                                      context: context,
+                                      isScrollControlled: false,
+                                      enableDrag:
+                                          true, // allows swipe down to close
+                                      useSafeArea: true,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: AppColors
+                                          .barrierBackgroundColor
+                                          .withOpacity(0.7),
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          behavior: HitTestBehavior.opaque,
+                                          onVerticalDragUpdate: (details) {
+                                            // Only allow dragging downward to close
+                                            if (details.primaryDelta != null &&
+                                                details.primaryDelta! > 10) {
+                                              Navigator.of(context).pop();
+                                            }
+                                          },
+                                          child: Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Container(
+                                              width: double
+                                                  .infinity, // Full screen width
+                                              decoration: const BoxDecoration(
+                                                color: AppColors.cardBackground,
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(43),
+                                                  topRight: Radius.circular(43),
+                                                ),
                                               ),
-                                            ),
-                                            child: SingleChildScrollView(
-                                              controller: scrollController,
                                               child: Padding(
                                                 padding: EdgeInsets.only(
                                                   left: 20,
                                                   right: 20,
-                                                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                                                  top: 0,
+                                                  bottom:
+                                                      MediaQuery.of(
+                                                        context,
+                                                      ).viewInsets.bottom +
+                                                      20,
+                                                  top: 20,
                                                 ),
                                                 child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  mainAxisSize: MainAxisSize
+                                                      .min, // shrink to fit content
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
                                                   children: [
-                                                    // === Reward name with tooltip (centered on screen) ===
+                                                    // === Reward name with tooltip ===
                                                     Padding(
-                                                      padding: const EdgeInsets.only(bottom: 6, top: 20),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                            bottom: 6,
+                                                          ),
                                                       child: GestureDetector(
                                                         onTap: () {
-                                                          final overlay = Overlay.of(context);
+                                                          final overlay =
+                                                              Overlay.of(
+                                                                context,
+                                                              );
                                                           if (overlay != null) {
-                                                            late OverlayEntry entry;
+                                                            late OverlayEntry
+                                                            entry;
                                                             entry = OverlayEntry(
                                                               builder: (context) => Stack(
                                                                 children: [
-                                                                  // Dim background (optional)
                                                                   Positioned.fill(
                                                                     child: GestureDetector(
-                                                                      onTap: () => entry.remove(),
+                                                                      onTap: () =>
+                                                                          entry
+                                                                              .remove(),
                                                                       child: Container(
-                                                                        color: Colors.black.withOpacity(0.1),
+                                                                        color: Colors
+                                                                            .black
+                                                                            .withOpacity(
+                                                                              0.1,
+                                                                            ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                  // Centered tooltip
                                                                   Center(
                                                                     child: Material(
-                                                                      color: Colors.transparent,
+                                                                      color: Colors
+                                                                          .transparent,
                                                                       child: Container(
-                                                                        margin: const EdgeInsets.symmetric(horizontal: 30),
+                                                                        margin: const EdgeInsets.symmetric(
+                                                                          horizontal:
+                                                                              30,
+                                                                        ),
                                                                         padding: const EdgeInsets.symmetric(
-                                                                          horizontal: 16,
-                                                                          vertical: 10,
+                                                                          horizontal:
+                                                                              16,
+                                                                          vertical:
+                                                                              10,
                                                                         ),
                                                                         decoration: BoxDecoration(
-                                                                          color: const Color(0xFF083F8C),
-                                                                          borderRadius: BorderRadius.circular(12),
+                                                                          color: const Color(
+                                                                            0xFF083F8C,
+                                                                          ),
+                                                                          borderRadius: BorderRadius.circular(
+                                                                            12,
+                                                                          ),
                                                                           boxShadow: [
                                                                             BoxShadow(
-                                                                              color: Colors.black.withOpacity(0.2),
+                                                                              color: Colors.black.withOpacity(
+                                                                                0.2,
+                                                                              ),
                                                                               blurRadius: 8,
-                                                                              offset: const Offset(0, 3),
+                                                                              offset: const Offset(
+                                                                                0,
+                                                                                3,
+                                                                              ),
                                                                             ),
                                                                           ],
                                                                         ),
                                                                         child: Text(
                                                                           title,
-                                                                          textAlign: TextAlign.center,
+                                                                          textAlign:
+                                                                              TextAlign.center,
                                                                           style: GoogleFonts.inter(
-                                                                            fontSize: 16,
-                                                                            color: Colors.white,
-                                                                            fontWeight: FontWeight.w500,
+                                                                            fontSize:
+                                                                                16,
+                                                                            color:
+                                                                                Colors.white,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
                                                                           ),
                                                                         ),
                                                                       ),
@@ -692,22 +736,38 @@ class RewardCouponCard extends StatelessWidget {
                                                               ),
                                                             );
 
-                                                            overlay.insert(entry);
-                                                            Future.delayed(const Duration(seconds: 2))
-                                                                .then((_) => entry.remove());
+                                                            overlay.insert(
+                                                              entry,
+                                                            );
+                                                            Future.delayed(
+                                                              const Duration(
+                                                                seconds: 2,
+                                                              ),
+                                                            ).then(
+                                                              (_) => entry
+                                                                  .remove(),
+                                                            );
                                                           }
                                                         },
                                                         child: Text(
                                                           title.length > 25
                                                               ? '${title.substring(0, 25)}...'
                                                               : title,
-                                                          textAlign: TextAlign.center,
-                                                          style: GoogleFonts.inter(
-                                                            fontSize: 18,
-                                                            color: const Color(0XFF262628),
-                                                            fontWeight: FontWeight.w700,
-                                                          ),
-                                                          overflow: TextOverflow.ellipsis,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style:
+                                                              GoogleFonts.inter(
+                                                                fontSize: 18,
+                                                                color:
+                                                                    const Color(
+                                                                      0XFF262628,
+                                                                    ),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              ),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           maxLines: 1,
                                                         ),
                                                       ),
@@ -715,31 +775,45 @@ class RewardCouponCard extends StatelessWidget {
 
                                                     // === Merchant name ===
                                                     Padding(
-                                                      padding: const EdgeInsets.only(bottom: 20),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                            bottom: 20,
+                                                          ),
                                                       child: Text(
                                                         merchant,
-                                                        textAlign: TextAlign.center,
-                                                        style: GoogleFonts.inter(
-                                                          fontSize: 16,
-                                                          color: const Color(0XFF083F8C),
-                                                          fontWeight: FontWeight.w600,
-                                                        ),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
+                                                            GoogleFonts.inter(
+                                                              fontSize: 16,
+                                                              color:
+                                                                  const Color(
+                                                                    0XFF083F8C,
+                                                                  ),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
                                                       ),
                                                     ),
 
                                                     // === QR Image ===
-                                                   Padding(
-                                                      padding: const EdgeInsets.only(top: 20),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                            top: 10,
+                                                            bottom: 10,
+                                                          ),
                                                       child: GestureDetector(
                                                         onTap: () {
-                                                          // Close the bottom sheet first
-                                                          Navigator.pop(context);
-
-                                                          // Navigate to your target page
+                                                          Navigator.pop(
+                                                            context,
+                                                          );
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) => MyCouponPage(),
+                                                              builder: (context) =>
+                                                                  MyCouponPage(),
                                                             ),
                                                           );
                                                         },
@@ -751,44 +825,15 @@ class RewardCouponCard extends StatelessWidget {
                                                         ),
                                                       ),
                                                     ),
-
-                                                    // === Save Image Button ===
-                                                    // Center(
-                                                    //   child: SizedBox(
-                                                    //     width: 150,
-                                                    //     child: ElevatedButton(
-                                                    //       onPressed: () {
-                                                    //         // Add save image logic
-                                                    //       },
-                                                    //       style: ElevatedButton.styleFrom(
-                                                    //         // backgroundColor: const Color(0xFF083F8C),
-                                                    //         shape: RoundedRectangleBorder(
-                                                    //           borderRadius: BorderRadius.circular(20),
-                                                    //         ),
-                                                    //         padding: const EdgeInsets.symmetric(vertical: 5),
-                                                    //         elevation: 0,
-                                                    //       ),
-                                                    //       child: Text(
-                                                    //         '',
-                                                    //         style: GoogleFonts.inter(
-                                                    //           fontSize: 16,
-                                                    //           fontWeight: FontWeight.w600,
-                                                    //           color: Colors.white,
-                                                    //         ),
-                                                    //       ),
-                                                    //     ),
-                                                    //   ),
-                                                    // ),
                                                   ],
                                                 ),
                                               ),
                                             ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  );
-                                },
+                                          ),
+                                        );
+                                      },
+                                    );
+                                   },
 
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(

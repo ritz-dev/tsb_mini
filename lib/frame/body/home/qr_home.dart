@@ -9,10 +9,10 @@ class QrHome extends StatefulWidget {
   const QrHome({super.key, this.onBack});
 
   @override
-  State<QrHome> createState() => _QrHomeState();
+  State<QrHome> createState() => _FrostedQrHomeState();
 }
 
-class _QrHomeState extends State<QrHome> {
+class _FrostedQrHomeState extends State<QrHome> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,25 +33,47 @@ class _QrHomeState extends State<QrHome> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: false,
-      enableDrag: true, // allow drag down
+      enableDrag: true, // allows drag down to dismiss
       useSafeArea: true,
       backgroundColor: Colors.transparent,
       barrierColor: keepBottomNavVisible
           ? AppColors.barrierBackgroundColor
           : AppColors.barrierBackgroundColor.withOpacity(0.7),
+      transitionAnimationController: AnimationController(
+        vsync: Navigator.of(context),
+        duration: const Duration(milliseconds: 400),
+        reverseDuration: const Duration(milliseconds: 350),
+      ),
       builder: (context) {
-        return _DragDownOnlySheet(
-          child: Container(
-            width: double.infinity, //  full screen width
-            height: MediaQuery.of(context).size.height * 0.45,
-            decoration: const BoxDecoration(
-              color: AppColors.cardBackground,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(43),
-                topRight: Radius.circular(43),
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onVerticalDragUpdate: (details) {
+            // Drag down to close only
+            if (details.primaryDelta != null && details.primaryDelta! > 10) {
+              Navigator.of(context).pop();
+            }
+          },
+          child: Align(
+            alignment: Alignment.bottomCenter, // keep it bottom-aligned
+            child: Container(
+              width: double.infinity, // ✅ full width of screen
+              decoration: const BoxDecoration(
+                color: AppColors.cardBackground,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(43),
+                  topRight: Radius.circular(43),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                  top: 20,
+                ),
+                child: _qrBuild(context), // your sheet content
               ),
             ),
-            child: _qrBuild(context),
           ),
         );
       },
@@ -59,98 +81,91 @@ class _QrHomeState extends State<QrHome> {
   }
 
   Widget _qrBuild(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // drag indicator bar
-          Container(
-            width: 40,
-            height: 4,
-            margin: const EdgeInsets.only(bottom: 18),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(2),
-            ),
+    return Container(
+      height: 350,
+      decoration: const BoxDecoration(
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(43),
+          topRight: Radius.circular(43),
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          top: 0,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10, top: 20),
+                child: Text(
+                  'Jonh Doe (10000001100)',
+                  style: GoogleFonts.inter(
+                    fontSize: 18,
+                    color: Color(0XFF262628),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Text(
+                  'Scan My QR',
+                  style: GoogleFonts.inter(
+                    fontSize: 18,
+                    color: Color(0XFF083F8C),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: PackageAssets.image(
+                  "assets/image/qr_scan.png", // <-- replace with your own image
+                  height: 150,
+                  width: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              _actionButtons(),
+            ],
           ),
-          Text(
-            'John Doe (10000001100)',
-            style: GoogleFonts.inter(
-              fontSize: 18,
-              color: const Color(0XFF262628),
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'Scan My QR',
-            style: GoogleFonts.inter(
-              fontSize: 18,
-              color: const Color(0XFF083F8C),
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 25),
-          PackageAssets.image(
-            "assets/image/qr_scan.png",
-            height: 150,
-            width: 150,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(height: 25),
-          _actionButtons(),
-        ],
+        ),
       ),
     );
   }
 
   Widget _actionButtons() {
-    return SizedBox(
-      width: 150,
-      child: ElevatedButton(
-        onPressed: () {
-          // Add your save image logic here
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF083F8C),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+    return Center(
+      child: SizedBox(
+        width: 150, // Short width for the button
+        child: ElevatedButton(
+          onPressed: () {
+            // Add your submit/save image logic here
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF083F8C), // Blue color
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20), // Rounded corners
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            elevation: 0,
           ),
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          elevation: 0,
-        ),
-        child: Text(
-          'Save Image',
-          style: GoogleFonts.inter(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
+          child: Text(
+            'Save Image',
+            style: GoogleFonts.inter(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
-    );
-  }
-}
-
-/// Custom wrapper to allow drag down only (no upward stretch)
-class _DragDownOnlySheet extends StatelessWidget {
-  final Widget child;
-
-  const _DragDownOnlySheet({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      // Detect downward drag → close
-      onVerticalDragUpdate: (details) {
-        if (details.primaryDelta! > 5) {
-          Navigator.of(context).pop();
-        }
-      },
-      // Ignore upward drag (no stretching)
-      behavior: HitTestBehavior.opaque,
-      child: child,
     );
   }
 }
